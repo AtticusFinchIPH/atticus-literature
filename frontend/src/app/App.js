@@ -4,12 +4,14 @@ import { useSelector } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 import { ThemeProvider } from '@material-ui/styles';
 import translation from '../locales';
-import theme from '../utils/theme';
+import { lightTheme, darkTheme } from '../utils/theme';
 import NavBar from './features/NavBar';
 import Home from './pages/Home';
 
 function App() {
   const language = useSelector(state => state.language);
+  const isDarkMode = useSelector(state => state.isDarkMode);
+  const theme = isDarkMode ? darkTheme : lightTheme;
   return (
     <BrowserRouter>
       <IntlProvider locale={language} messages={translation[language]}>
