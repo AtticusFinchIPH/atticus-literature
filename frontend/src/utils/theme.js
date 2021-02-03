@@ -17,10 +17,13 @@ const lightTheme = createMuiTheme({
       contrastText: "#000"
     },
     navBar: {
-      main: "#3f51b5",
+      main: "#ffffff",
     },
     background: {
       main: "#3f51b5",
+    },
+    text: {
+      main: "#000",
     }
   }
 });
@@ -44,6 +47,9 @@ const darkTheme = createMuiTheme({
     },
     background: {
       main: "#3f51b5",
+    },
+    text: {
+      main: "#fff",
     }
   }
 });

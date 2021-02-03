@@ -24,13 +24,15 @@ const useStyle = makeStyles((theme) => ({
         flexGrow: 1,
     },
     appBar: {
-        backgroundColor: theme.palette.navBar.main
+        backgroundColor: theme.palette.navBar.main,
+        color: theme.palette.text.main,
     },
     menuButton: {
         marginRight: theme.spacing(2),
     },
     title: {
         display: 'block',
+        fontFamily: 'Playfair Display',
     },
     search: {
         position: 'relative',
