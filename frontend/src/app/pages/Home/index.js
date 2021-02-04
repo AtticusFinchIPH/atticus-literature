@@ -1,12 +1,20 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import Swiper from 'react-id-swiper';
 import { makeStyles } from "@material-ui/styles";
 import { Box, Container, Hidden, Paper, Typography } from "@material-ui/core";
 import coverDesktop from '../../../images/cover-desktop.jpg';
 import coverMobile from '../../../images/cover-mobile.jpg';
 
+import book1 from '../../../images/And-Then-There-Was-None.jpg';
+import book2 from '../../../images/Bach-Da-Hanh.jpg';
+import book3 from '../../../images/Harry-Potter-P1.jpg';
+import book4 from '../../../images/Harry-Potter-P2.jpg';
+import book5 from '../../../images/The-Hobbit.jpg';
+
 const useStyle = makeStyles((theme) => ({
     container: {
+        backgroundColor: theme.palette.background.main,
         [theme.breakpoints.up('lg')]: {
             paddingLeft: theme.spacing(5),
             paddingRight: theme.spacing(5),
@@ -52,6 +60,43 @@ const useStyle = makeStyles((theme) => ({
     }
 }))
 
+const CoverflowEffect = () => {
+    const params = {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: true
+      },
+      pagination: {
+        el: '.swiper-pagination'
+      }
+    }
+    const swiperSlide = (book) => {
+        return {
+            backgroundImage: `url(${book})`,
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center', 
+            height: '300px', width: '200px'
+        }
+    }
+    return (
+      <Swiper {...params}>
+        <div className="swiper-slide" style={swiperSlide(book1)}></div>
+        <div className="swiper-slide" style={swiperSlide(book2)}></div>
+        <div className="swiper-slide" style={swiperSlide(book3)}></div>
+        <div className="swiper-slide" style={swiperSlide(book4)}></div>
+        <div className="swiper-slide" style={swiperSlide(book5)}></div>
+      </Swiper>
+    )
+};
+
 const Home = () => {
     const classes = useStyle();
     return(
@@ -79,6 +124,7 @@ const Home = () => {
                 </Box>
             </Paper>
             <FormattedMessage id='home' defaultMessage="" />
+            <CoverflowEffect />
         </Container>
     )
 }

@@ -1,6 +1,11 @@
 
 import { createMuiTheme } from "@material-ui/core/styles";
 
+const LIGHT_WHITE = "#fff";
+const DARK_BLACK = "#000";
+const LIGHT_GRAYISH_BLUE = "hsl(220, 16%, 96%)";
+const DARK_GRAY = "#303030";
+
 const lightTheme = createMuiTheme({
   type: "light",
   palette: {
@@ -17,13 +22,13 @@ const lightTheme = createMuiTheme({
       contrastText: "#000"
     },
     navBar: {
-      main: "#ffffff",
+      main: LIGHT_WHITE,
     },
     background: {
-      main: "#3f51b5",
+      main: LIGHT_GRAYISH_BLUE,
     },
     text: {
-      main: "#000",
+      main: DARK_BLACK,
     }
   }
 });
@@ -43,13 +48,13 @@ const darkTheme = createMuiTheme({
       contrastText: "#000"
     },
     navBar: {
-      main: "#303030",
+      main: DARK_BLACK,
     },
     background: {
-      main: "#3f51b5",
+      main: DARK_GRAY,
     },
     text: {
-      main: "#fff",
+      main: LIGHT_WHITE,
     }
   }
 });
