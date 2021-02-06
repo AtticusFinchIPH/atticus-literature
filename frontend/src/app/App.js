@@ -6,6 +6,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import translation from '../locales';
 import { lightTheme, darkTheme } from '../utils/theme';
 import NavBar from './features/NavBar';
+import CopyRight from './features/CopyRight';
 import Home from './pages/Home';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Home} />
           </Switch>
+          <CopyRight />
         </ThemeProvider>
         </IntlProvider>
     </BrowserRouter>
