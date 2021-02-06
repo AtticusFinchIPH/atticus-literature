@@ -8,6 +8,7 @@ const FONT_F_QUICKSAND = 'Quicksand';
 const LIGHT_WHITE = "#fff";
 const DARK_BLACK = "#000";
 const LIGHT_GRAYISH_BLUE = "hsl(220, 16%, 96%)";
+const LIGHT_WHITE_BLUE = "hsl(220, 16%, 50%)";
 const DARK_GRAY = "#303030";
 const DARK_BLUE = 'rgb(14,52,90)';
 
@@ -49,6 +50,7 @@ const lightTheme = createMuiTheme({
     },
     icon: {
       main: DARK_BLUE,
+      hover: LIGHT_WHITE_BLUE,
     },
   }
 });
@@ -70,6 +72,7 @@ const darkTheme = createMuiTheme({
     },
     icon: {
       main: LIGHT_WHITE,
+      hover: LIGHT_WHITE_BLUE,
     },
   }
 });

@@ -129,6 +129,11 @@ const useStyle = makeStyles((theme) => ({
     cardActions: {
         display: 'block',
     },
+    iconButton: {
+        '&:hover': {
+            backgroundColor: theme.palette.icon.hover,
+        },
+    },
     icon: {
         color: LIGHT_WHITE,
     },
@@ -162,10 +167,10 @@ const CardItem = (props) => {
                 <Typography variant='body1' component='p'>{props.item.title}</Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
-                <IconButton aria-label="Add to favorites">
+                <IconButton className={classes.iconButton} aria-label="Add to favorites">
                     <FavoriteBorderOutlinedIcon className={classes.icon}/>
                 </IconButton>
-                <IconButton aria-label="Add to cart">
+                <IconButton className={classes.iconButton} aria-label="Add to cart">
                     <AddShoppingCartIcon className={classes.icon} />
                 </IconButton>
             </CardActions>
