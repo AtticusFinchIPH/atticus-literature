@@ -14,7 +14,11 @@ const en = defineMessages({
 
     bestsellers: 'Bestsellers',
     this_month: 'This Month\'s',
-    recommended_books: 'Recommended Books',
+    recommended_books: 'Recommendeds',
+    favorite_author: 'Favorite Author',
+
+    const_auth_quote: '"I wanna create a masterpiece just to satisfy myself. I hope my current working project will shotly fulfill that wish."',
+    const_auth_present: 'Author of the best-selling books "A life of a developer", "That impressive website changed my philosophy", "What is life\'s purpose without code?".\n At present, he is still in the process of perfecting himself and devoting to his writing career.',
 })
 
 export default en;

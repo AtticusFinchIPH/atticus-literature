@@ -5,16 +5,17 @@ import Swiper from 'react-id-swiper';
 import clsx from 'clsx';
 import { makeStyles } from "@material-ui/styles";
 import { 
-    Box, Container, Hidden, Paper, Typography, IconButton,
-    Card, CardMedia, CardContent, CardActions, Fade,
+    Box, Container, Hidden, Paper, Typography, IconButton, Avatar,
+    Card, CardMedia, CardContent, CardActions, Fade, Grid,
 } from "@material-ui/core";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
-import { FONT_F_DANCING_SCRIPT, FONT_F_PLAYFAIR, LIGHT_WHITE } from '../../../utils/theme';
+import { FONT_F_DANCING_SCRIPT, FONT_F_PLAYFAIR, LIGHT_WHITE, LIGHT_WHITE_BLUE } from '../../../utils/theme';
 import coverDesktop from '../../../images/cover-desktop.jpg';
 import coverMobile from '../../../images/cover-mobile.jpg';
+import authorAvatar from '../../../images/author-avatar.jpg';
 import data from '../../../data_sample';
 
 const CARD_ITEM_HEIGHT = '450px';
@@ -25,6 +26,7 @@ const useStyle = makeStyles((theme) => ({
         position: 'relative',
         backgroundColor: theme.palette.background.main,
         color: theme.palette.text.main,
+        whiteSpace: 'pre-line',
         [theme.breakpoints.up('lg')]: {
             paddingLeft: theme.spacing(5),
             paddingRight: theme.spacing(5),
@@ -90,12 +92,13 @@ const useStyle = makeStyles((theme) => ({
         width: '100%',
         left: '50%',
         transform: 'translateX(-50%)',
-        bottom: 0,
+        bottom: theme.spacing(70.25),
         [theme.breakpoints.up('lg')]: {
             width: 'calc(100% - 80px)',
         },
         [theme.breakpoints.down('sm')]: {
-            height: theme.spacing(147.5),
+            height: theme.spacing(140.5),
+            bottom: theme.spacing(140.5),
         },
         [theme.breakpoints.between('sm', 'md')]: {
             height: theme.spacing(141),
@@ -146,7 +149,43 @@ const useStyle = makeStyles((theme) => ({
         width: '184px', // CARD_ITEM_WIDTH - padding*2
         cursor: 'pointer',
         color: '#000',
-    }
+    },
+    author: {
+        [theme.breakpoints.up('md')]: {
+            height: theme.spacing(70.25),
+        },
+        [theme.breakpoints.down('sm')]: {
+            height: theme.spacing(140.5),
+        },
+    },
+    authorAvatar: {
+        display: 'inline-block',
+        width: theme.spacing(30),
+        height: theme.spacing(30),
+        boxShadow: `0 10px 10px 0 ${LIGHT_WHITE_BLUE}`,
+    },
+    authorName: {
+        paddingTop: theme.spacing(3.78),
+        paddingBottom: theme.spacing(3.78),
+        fontFamily: FONT_F_PLAYFAIR,
+    },
+    authorQuote: {
+        [theme.breakpoints.up('md')]: {
+            textAlign: 'left',
+        },
+        [theme.breakpoints.down('sm')]: {
+            textAlign: 'justify',
+        },
+        paddingBottom: '15px',
+    },
+    authorPresent: {
+        [theme.breakpoints.up('md')]: {
+            textAlign: 'right',
+        },
+        [theme.breakpoints.down('sm')]: {
+            textAlign: 'justify',
+        },
+    },
 }))
 
 const CardItem = (props) => {
@@ -339,6 +378,32 @@ const Home = () => {
                     />
                 </Container>
             </Hidden>
+            <Container className={clsx(classes.section, classes.author)} maxWidth='xl'>
+                <Box className={classes.sectionTitle}>
+                    <Typography variant="body1" component="h3" style={{fontFamily: FONT_F_PLAYFAIR}}>
+                        <FormattedMessage id='this_month' defaultMessage="This month's" />
+                    </Typography>
+                    <Typography variant="h3" component="h3" style={{fontFamily: FONT_F_PLAYFAIR}}>
+                        <FormattedMessage id='favorite_author' defaultMessage="Favorite Author" />
+                    </Typography>
+                </Box>
+                <Container maxWidth='md'>
+                    <Grid container spacing={3}>
+                        <Grid item xs={12} md={6} style={{textAlign: 'center'}}>
+                            <Avatar className={classes.authorAvatar} alt="Author Avatar" src={authorAvatar} variant="rounded" />
+                            <Typography className={classes.authorName} variant="h3" component="h4">Trần Văn Đức</Typography>
+                        </Grid>
+                        <Grid item xs={12} md={6}>
+                            <Typography className={classes.authorQuote}  variant="subtitle1" component="p">
+                                <i><FormattedMessage id="const_auth_quote" defaultMessage="Author Quote"></FormattedMessage></i>
+                            </Typography>
+                            <Typography className={classes.authorPresent}  variant="h5" component="p">
+                                <FormattedMessage id="const_auth_present" defaultMessage="Author Presentation"></FormattedMessage>
+                            </Typography>
+                        </Grid>
+                    </Grid>  
+                </Container>              
+            </Container>
         </Container>
     )
 }
