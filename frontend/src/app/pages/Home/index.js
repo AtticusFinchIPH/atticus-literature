@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Swiper from 'react-id-swiper';
 import clsx from 'clsx';
 import { makeStyles } from "@material-ui/styles";
 import { 
     Box, Container, Hidden, Paper, Typography, IconButton,
-    Card, CardMedia, CardContent, CardActions,
+    Card, CardMedia, CardContent, CardActions, Fade,
 } from "@material-ui/core";
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
-import { FONT_F_DANCING_SCRIPT, FONT_F_PLAYFAIR, } from '../../../utils/theme';
+import { FONT_F_DANCING_SCRIPT, FONT_F_PLAYFAIR, LIGHT_WHITE } from '../../../utils/theme';
 import coverDesktop from '../../../images/cover-desktop.jpg';
 import coverMobile from '../../../images/cover-mobile.jpg';
 import data from '../../../data_sample';
@@ -20,6 +22,7 @@ const CARD_ITEM_WIDTH = '200px';
 
 const useStyle = makeStyles((theme) => ({
     container: {
+        position: 'relative',
         backgroundColor: theme.palette.background.main,
         color: theme.palette.text.main,
         [theme.breakpoints.up('lg')]: {
@@ -59,22 +62,48 @@ const useStyle = makeStyles((theme) => ({
     coverQuote: {
         fontFamily: FONT_F_DANCING_SCRIPT,
         [theme.breakpoints.up('xs')]: {
-            color: '#fff',
+            color: LIGHT_WHITE,
         },
         [theme.breakpoints.down('xs')]: {
             color: '#000',
         },
     },
     section: {
+        position: 'relative',
         paddingLeft: '0',
         paddingBottom: theme.spacing(3),
         paddingRight: '0',
         paddingTop: theme.spacing(6),
         textAlign: 'center',
+        [theme.breakpoints.up('sm')]: {
+            width: '90%',
+        },
     },
     sectionTitle: {
         paddingBottom: theme.spacing(6),
         fontFamily: FONT_F_PLAYFAIR,
+    },
+    sectionBack: {
+        position: 'absolute',
+        backgroundColor: theme.palette.sectionBack.main,
+        height: theme.spacing(118.75),
+        width: '100%',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        bottom: 0,
+        [theme.breakpoints.up('lg')]: {
+            width: 'calc(100% - 80px)',
+        },
+        [theme.breakpoints.down('sm')]: {
+            height: theme.spacing(147.5),
+        },
+        [theme.breakpoints.between('sm', 'md')]: {
+            height: theme.spacing(141),
+        },
+        borderRadius: theme.spacing(1),
+    },
+    recommendeds: {
+        color: LIGHT_WHITE,
     },
     cardItem: {
         height: CARD_ITEM_HEIGHT,
@@ -95,9 +124,13 @@ const useStyle = makeStyles((theme) => ({
     cardContent: {
         height: theme.spacing(6),
         paddingBottom: '0',
+        color: LIGHT_WHITE,
     },
     cardActions: {
         display: 'block',
+    },
+    icon: {
+        color: LIGHT_WHITE,
     },
     quickView: {
         position: 'absolute',
@@ -107,6 +140,7 @@ const useStyle = makeStyles((theme) => ({
         background: 'rgba(255, 255, 255, 0.75)',
         width: '184px', // CARD_ITEM_WIDTH - padding*2
         cursor: 'pointer',
+        color: '#000',
     }
 }))
 
@@ -129,26 +163,24 @@ const CardItem = (props) => {
             </CardContent>
             <CardActions className={classes.cardActions}>
                 <IconButton aria-label="Add to favorites">
-                    <FavoriteIcon />
+                    <FavoriteBorderOutlinedIcon className={classes.icon}/>
                 </IconButton>
                 <IconButton aria-label="Add to cart">
-                    <ShoppingCartIcon />
+                    <AddShoppingCartIcon className={classes.icon} />
                 </IconButton>
             </CardActions>
         </Card>
-        {
-            isShown && (
-                <Box className={classes.quickView} 
-                    onMouseEnter={() => setIsShown(true)}
-                    onMouseLeave={() => setIsShown(false)}
-                    onClick={redirect}
-                >
-                    <Typography>
-                        <FormattedMessage id='quick_view' defaultMessage='Quick view' />
-                    </Typography>
-                </Box>
-            )
-        }
+        <Fade in={isShown} timeout={{appear: 100, enter: 300, exit: 100}} unmountOnExit>
+            <Box className={classes.quickView} 
+                onMouseEnter={() => setIsShown(true)}
+                onMouseLeave={() => setIsShown(false)}
+                onClick={redirect}
+            >
+                <Typography>
+                    <FormattedMessage id='quick_view' defaultMessage='Quick view' />
+                </Typography>
+            </Box>       
+        </Fade>
         </>
     )
 }
@@ -158,17 +190,17 @@ const CoverflowEffect = (props) => {
         effect: 'coverflow',
         centeredSlides: true,
         slidesPerView: 'auto',
-        loop: true,
+        // loop: true,
         coverflowEffect: {
             rotate: 50,
             stretch: 0,
             depth: 100,
             modifier: 1,
             slideShadows: true
-      },
-      pagination: {
-        el: '.swiper-pagination'
-      },
+        },
+        pagination: {
+            el: '.swiper-pagination'
+        },
     }
     const swiperSlide = { height: CARD_ITEM_HEIGHT,  width: CARD_ITEM_WIDTH, }
     return (
@@ -191,7 +223,7 @@ const MutipleSlidesPerView = (props) => {
         slidesPerView: 1,
         spaceBetween: 30,
         freeMode: true,
-        loop: true,
+        // loop: true,
         direction: 'horizontal',
         mousewheel: true,
         grabCursor: true,
@@ -234,6 +266,7 @@ const MutipleSlidesPerView = (props) => {
 
 const Home = () => {
     const classes = useStyle();
+    const isDarkMode = useSelector(state => state.isDarkMode);
     return(
         <Container className={classes.container} maxWidth='xl'>
             <Paper className={classes.cover}>
@@ -258,6 +291,9 @@ const Home = () => {
                     </Hidden>
                 </Box>
             </Paper>
+            {
+                !isDarkMode && <Card className={classes.sectionBack}/>
+            }
             <Hidden xsDown>
                 <Container className={clsx(classes.section, classes.bestsellers)} maxWidth='xl'>
                     <Typography className={classes.sectionTitle} variant="h3" component="h3">

@@ -9,6 +9,7 @@ const LIGHT_WHITE = "#fff";
 const DARK_BLACK = "#000";
 const LIGHT_GRAYISH_BLUE = "hsl(220, 16%, 96%)";
 const DARK_GRAY = "#303030";
+const DARK_BLUE = 'rgb(14,52,90)';
 
 const commonTheme = {
   typography: {
@@ -42,7 +43,13 @@ const lightTheme = createMuiTheme({
     },
     text: {
       main: DARK_BLACK,
-    }
+    },
+    sectionBack: {
+      main: DARK_BLUE,
+    },
+    icon: {
+      main: DARK_BLUE,
+    },
   }
 });
 const darkTheme = createMuiTheme({
@@ -57,8 +64,19 @@ const darkTheme = createMuiTheme({
     },
     text: {
       main: LIGHT_WHITE,
-    }
+    },
+    sectionBack: {
+      main: DARK_BLUE,
+    },
+    icon: {
+      main: LIGHT_WHITE,
+    },
   }
 });
 
-export { lightTheme, darkTheme, FONT_F_DANCING_SCRIPT, FONT_F_PLAYFAIR, FONT_F_QUICKSAND };
+export { 
+  lightTheme, darkTheme, 
+  FONT_F_DANCING_SCRIPT, FONT_F_PLAYFAIR, FONT_F_QUICKSAND, 
+  LIGHT_WHITE, LIGHT_GRAYISH_BLUE,
+  DARK_GRAY, DARK_BLUE, DARK_BLACK,  
+};
