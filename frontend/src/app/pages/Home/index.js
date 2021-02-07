@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { makeStyles } from "@material-ui/styles";
 import { 
     Box, Container, Hidden, Paper, Typography, IconButton, Avatar,
-    Card, CardMedia, CardContent, CardActions, Fade, Grid,
+    Card, CardMedia, CardContent, CardActions, Fade, Grid, 
 } from "@material-ui/core";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
@@ -82,7 +82,7 @@ const useStyle = makeStyles((theme) => ({
         },
     },
     sectionTitle: {
-        paddingBottom: theme.spacing(6),
+        paddingBottom: theme.spacing(2),
         fontFamily: FONT_F_PLAYFAIR,
     },
     sectionBack: {
@@ -97,16 +97,20 @@ const useStyle = makeStyles((theme) => ({
             width: 'calc(100% - 80px)',
         },
         [theme.breakpoints.down('sm')]: {
-            height: theme.spacing(140.5),
+            height: theme.spacing(121.875),
             bottom: theme.spacing(140.5),
         },
         [theme.breakpoints.between('sm', 'md')]: {
-            height: theme.spacing(141),
+            height: theme.spacing(121.875),
         },
         borderRadius: theme.spacing(1),
     },
     recommendeds: {
         color: LIGHT_WHITE,
+    },
+    divider: {
+        width: theme.spacing(10),
+        marginBottom: theme.spacing(6),
     },
     cardItem: {
         height: CARD_ITEM_HEIGHT,
@@ -343,6 +347,7 @@ const Home = () => {
                     <Typography className={classes.sectionTitle} variant="h3" component="h3">
                         <FormattedMessage id='bestsellers' defaultMessage="Bestsellers" />
                     </Typography>
+                    <hr className={classes.divider}/>
                     <MutipleSlidesPerView 
                         render={(item, i) => <CardItem key={`bestsellers_xs_${i}`} item={item} />}
                         listItems={data.bestsellers}
@@ -352,6 +357,7 @@ const Home = () => {
                     <Typography className={clsx(classes.sectionTitle, classes.recommendeds)} variant="h3" component="h3">
                         <FormattedMessage id='recommended_books' defaultMessage="Recommended Books" />
                     </Typography>
+                    <hr className={classes.divider}/>
                     <MutipleSlidesPerView 
                         render={(item, i) => <CardItem key={`recommendeds_xs_${i}`} item={item} />}
                         listItems={data.recommendeds}    
@@ -363,6 +369,7 @@ const Home = () => {
                     <Typography className={classes.sectionTitle} variant="h3" component="h3">
                         <FormattedMessage id='bestsellers' defaultMessage="Bestsellers" />
                     </Typography>
+                    <hr className={classes.divider}/>
                     <CoverflowEffect 
                         render={(item, i) => <CardItem key={`bestsellers_sm_${i}`} item={item} />}
                         listItems={data.bestsellers}
@@ -372,6 +379,7 @@ const Home = () => {
                     <Typography className={clsx(classes.sectionTitle, classes.recommendeds)} variant="h3" component="h3">
                         <FormattedMessage id='recommended_books' defaultMessage="Recommended Books" />
                     </Typography>
+                    <hr className={classes.divider}/>
                     <CoverflowEffect 
                         render={(item, i) => <CardItem key={`recommendeds_sm_${i}`} item={item} />}
                         listItems={data.recommendeds}
@@ -387,6 +395,7 @@ const Home = () => {
                         <FormattedMessage id='favorite_author' defaultMessage="Favorite Author" />
                     </Typography>
                 </Box>
+                <hr className={classes.divider}/>
                 <Container maxWidth='md'>
                     <Grid container spacing={3}>
                         <Grid item xs={12} md={6} style={{textAlign: 'center'}}>
