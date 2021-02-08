@@ -19,6 +19,8 @@ const en = defineMessages({
 
     const_auth_quote: '"I wanna create a masterpiece just to satisfy myself. I hope my current working project will shotly fulfill that wish."',
     const_auth_present: 'Author of the best-selling books "A life of a developer", "That impressive website changed my philosophy", "What is life\'s purpose without code?".\n At present, he is still in the process of perfecting himself and devoting to his writing career.',
+
+    cart: 'Cart',
 })
 
 export default en;
