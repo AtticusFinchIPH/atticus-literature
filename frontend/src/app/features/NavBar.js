@@ -20,12 +20,10 @@ import useStyle from './NavBar.styles'; // Must be imported after all @material-
 
 const NavBar = withRouter(({history}) => {
     const classes = useStyle();
-    // const theme = useTheme();
     const [anchorAcc, setAnchorAcc] = useState(null);
     const isAccOpen = Boolean(anchorAcc);
     const [anchorLang, setAnchorLang] = useState(null);
     const isLangOpen = Boolean(anchorLang);
-    const language = useSelector(state => state.language);
     const isDarkMode = useSelector(state => state.isDarkMode);
     const dispatch = useDispatch();
 
