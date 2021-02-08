@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { withStyles, makeStyles, useTheme } from "@material-ui/styles";
 import { 
     Typography, CssBaseline,
-    AppBar, Toolbar, InputBase, Menu, MenuItem,
+    AppBar, Toolbar, Menu, MenuItem,
     IconButton, Badge, Hidden, 
 } from '@material-ui/core';
-import { fade } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
@@ -18,64 +16,11 @@ import LanguageIcon from '@material-ui/icons/Language';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/More';
 import { APPLY_VI, APPLY_EN, SWITCH_THEME } from '../../constants/globalConstants';
-
-const useStyle = makeStyles((theme) => ({
-    grow: {
-        flexGrow: 1,
-    },
-    appBar: {
-        backgroundColor: theme.palette.navBar.main,
-        color: theme.palette.text.main,
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    title: {
-        display: 'block',
-        fontFamily: 'Playfair Display',
-    },
-    search: {
-        position: 'relative',
-        borderRadius: theme.shape.borderRadius,
-        backgroundColor: fade(theme.palette.common.white, 0.15),
-        '&:hover': {
-          backgroundColor: fade(theme.palette.common.white, 0.25),
-        },
-        marginRight: theme.spacing(2),
-        marginLeft: 0,
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            marginLeft: theme.spacing(3),
-            width: 'auto',
-        },
-    },
-    searchIcon: {
-        padding: theme.spacing(0, 2),
-        height: '100%',
-        position: 'absolute',
-        pointerEvents: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    inputRoot: {
-        color: 'inherit',
-    },
-    inputInput: {
-        padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
-        paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('md')]: {
-            width: '20ch',
-        },
-    },
-}));
+import useStyle from './NavBar.styles'; // Must be imported after all @material-ui
 
 const NavBar = withRouter(({history}) => {
     const classes = useStyle();
-    const theme = useTheme();
+    // const theme = useTheme();
     const [anchorAcc, setAnchorAcc] = useState(null);
     const isAccOpen = Boolean(anchorAcc);
     const [anchorLang, setAnchorLang] = useState(null);

@@ -16,7 +16,7 @@ const BOOK_GENRES = {
     HUMOROUS: "humorous",
     POLITIC: "politic",
 }
-export default {
+const data_sample = {
     products: [
         {
             _id: "1",
@@ -388,3 +388,5 @@ export default {
         },
     ]
 }
+
+export default data_sample;
