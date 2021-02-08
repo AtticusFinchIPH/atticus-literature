@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { withRouter } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { 
     Typography, CssBaseline,
@@ -15,8 +15,9 @@ import MoonIcon from '@material-ui/icons/Brightness2';
 import LanguageIcon from '@material-ui/icons/Language';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/More';
-import { APPLY_VI, APPLY_EN, SWITCH_THEME } from '../../constants/globalConstants';
+import { APPLY_VI, APPLY_EN } from '../../constants/globalConstants';
 import useStyle from './NavBar.styles'; // Must be imported after all @material-ui
+import ThemeContext from '../../contexts/ThemeContext';
 import CartOpenContext from '../../contexts/CartOpenContext';
 
 const NavBar = withRouter(({history}) => {
@@ -25,8 +26,8 @@ const NavBar = withRouter(({history}) => {
     const isAccOpen = Boolean(anchorAcc);
     const [anchorLang, setAnchorLang] = useState(null);
     const isLangOpen = Boolean(anchorLang);
-    const isDarkMode = useSelector(state => state.isDarkMode);
-    const {isCartOpen, setCartOpen} = useContext(CartOpenContext);
+    const { isDarkMode, setDarkMode } = useContext(ThemeContext);
+    const { setCartOpen } = useContext(CartOpenContext);
     const dispatch = useDispatch();
 
     const handleLangOpen = (e) => {
@@ -53,7 +54,7 @@ const NavBar = withRouter(({history}) => {
     }
 
     const switchTheme = () => {
-        dispatch({type: SWITCH_THEME});
+        setDarkMode(!isDarkMode);
         handleMenuClose();
     }
 

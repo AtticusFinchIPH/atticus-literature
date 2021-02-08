@@ -5,6 +5,7 @@ import { IntlProvider } from 'react-intl';
 import { ThemeProvider } from '@material-ui/styles';
 import translation from '../locales';
 import { lightTheme, darkTheme } from '../utils/theme';
+import ThemeContext from '../contexts/ThemeContext';
 import CartOpenContext from '../contexts/CartOpenContext';
 import NavBar from './features/NavBar';
 import CartBar from './features/CartBar';
@@ -13,14 +14,16 @@ import Home from './pages/Home';
 
 function App() {
   const language = useSelector(state => state.language);
-  const isDarkMode = useSelector(state => state.isDarkMode);
+  const [isDarkMode, setDarkMode] = useState(false);
+  const themeValue = useMemo(() => ({isDarkMode, setDarkMode}), [isDarkMode, setDarkMode]);
   const theme = isDarkMode ? darkTheme : lightTheme;
   const [isCartOpen, setCartOpen] = useState(false);
   const cartOpenValue = useMemo(() => ({isCartOpen, setCartOpen}), [isCartOpen, setCartOpen]);
   return (
     <BrowserRouter>
       <IntlProvider locale={language} messages={translation[language]}>
-        <ThemeProvider theme={theme}>        
+        <ThemeProvider theme={theme}>   
+          <ThemeContext.Provider value={themeValue}>  
           <CartOpenContext.Provider value={cartOpenValue}>
 
             <NavBar />
@@ -31,6 +34,7 @@ function App() {
             <CopyRight />
 
           </CartOpenContext.Provider>
+          </ThemeContext.Provider>
         </ThemeProvider>
       </IntlProvider>
     </BrowserRouter>

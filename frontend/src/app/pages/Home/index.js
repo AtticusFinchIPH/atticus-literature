@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useContext, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import Swiper from 'react-id-swiper';
 import clsx from 'clsx';
@@ -11,6 +10,7 @@ import {
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import ThemeContext from '../../../contexts/ThemeContext';
 
 import { FONT_F_PLAYFAIR } from '../../../utils/theme';
 import authorAvatar from '../../../images/author-avatar.jpg';
@@ -141,7 +141,7 @@ const MutipleSlidesPerView = (props) => {
 
 const Home = () => {
     const classes = useStyle();
-    const isDarkMode = useSelector(state => state.isDarkMode);
+    const {isDarkMode} = useContext(ThemeContext);
     return(
         <Container className={classes.container} maxWidth='xl'>
             <Paper className={classes.cover}>

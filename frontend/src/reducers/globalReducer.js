@@ -1,6 +1,5 @@
 import { 
-    SWITCH_LANGUAGE, APPLY_VI, APPLY_EN, 
-    SWITCH_THEME 
+    SWITCH_LANGUAGE, APPLY_VI, APPLY_EN,
 } from '../constants/globalConstants';
 
 function langReducer(state = 'en', action) {
@@ -16,13 +15,4 @@ function langReducer(state = 'en', action) {
     }
 }
 
-function themeReducer(state = false, action) { // isDarkMode = false
-    switch(action.type) {
-        case SWITCH_THEME:
-            return !state;
-        default:
-            return state;
-    }
-}
-
-export { langReducer, themeReducer };
+export { langReducer };
