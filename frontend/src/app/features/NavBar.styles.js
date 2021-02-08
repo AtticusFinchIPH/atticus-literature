@@ -6,6 +6,7 @@ const useStyle = makeStyles((theme) => ({
         flexGrow: 1,
     },
     appBar: {
+        position: 'fixed',
         backgroundColor: theme.palette.navBar.main,
         color: theme.palette.text.main,
     },

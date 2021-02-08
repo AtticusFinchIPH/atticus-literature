@@ -13,12 +13,16 @@ const useStyle = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.main,
         color: theme.palette.text.main,
         whiteSpace: 'pre-line',
+        top: theme.spacing(7),
         [theme.breakpoints.up('lg')]: {
             paddingLeft: theme.spacing(5),
             paddingRight: theme.spacing(5),
         },
         [theme.breakpoints.down('md')]: {
             padding: 0,
+        },
+        [theme.breakpoints.up('sm')]: {
+            top: theme.spacing(8),
         },
     },
     cover: {
