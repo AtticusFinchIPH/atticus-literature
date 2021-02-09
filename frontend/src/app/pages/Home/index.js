@@ -1,4 +1,5 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Swiper from 'react-id-swiper';
 import clsx from 'clsx';
@@ -13,8 +14,8 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import ThemeContext from '../../../contexts/ThemeContext';
 
 import { FONT_F_PLAYFAIR } from '../../../utils/theme';
+import spinnerImage from '../../../images/infinitySpinner.gif';
 import authorAvatar from '../../../images/author-avatar.jpg';
-import data from '../../../data_sample';
 
 const CARD_ITEM_HEIGHT = '450px';
 const CARD_ITEM_WIDTH = '200px';
@@ -142,6 +143,10 @@ const MutipleSlidesPerView = (props) => {
 const Home = () => {
     const classes = useStyle();
     const {isDarkMode} = useContext(ThemeContext);
+    const bestsellerProducts = useSelector(state => state.bestsellerProducts);
+    const { bestsellers, loading: bestsellersLoading } = useMemo(() => bestsellerProducts, [bestsellerProducts]);
+    const recommendedProducts = useSelector(state => state.recommendedProducts);
+    const { recommendeds, loading: recommendedsLoading } = useMemo(() => recommendedProducts, [recommendedProducts]);
     return(
         <Container className={classes.container} maxWidth='xl'>
             <Paper className={classes.cover}>
@@ -170,47 +175,83 @@ const Home = () => {
                 !isDarkMode && <Card className={classes.sectionBack}/>
             }
             <Hidden xsDown>
-                <Container className={clsx(classes.section, classes.bestsellers)} maxWidth='xl'>
+                <Container className={[classes.section, classes.bestsellers]} maxWidth='xl'>
                     <Typography className={classes.sectionTitle} variant="h3" component="h3">
                         <FormattedMessage id='bestsellers' defaultMessage="Bestsellers" />
                     </Typography>
                     <hr className={classes.divider}/>
-                    <MutipleSlidesPerView 
-                        render={(item, i) => <CardItem key={`bestsellers_xs_${i}`} item={item} />}
-                        listItems={data.bestsellers}
-                    />
+                    {
+                        bestsellersLoading
+                        ? 
+                        <div className={classes.loading}>
+                            <p>Loading...</p>
+                            <img src={spinnerImage} alt="Loading..."/>
+                        </div>
+                        :
+                        <MutipleSlidesPerView 
+                            render={(item, i) => <CardItem key={`bestsellers_xs_${i}`} item={item} />}
+                            listItems={bestsellers}
+                        />
+                    }
                 </Container>
-                <Container className={classes.section} maxWidth='xl'>
-                    <Typography className={clsx(classes.sectionTitle, classes.recommendeds)} variant="h3" component="h3">
+                <Container className={[classes.section, classes.recommendeds]} maxWidth='xl'>
+                    <Typography className={classes.sectionTitle} variant="h3" component="h3">
                         <FormattedMessage id='recommended_books' defaultMessage="Recommended Books" />
                     </Typography>
                     <hr className={classes.divider}/>
-                    <MutipleSlidesPerView 
-                        render={(item, i) => <CardItem key={`recommendeds_xs_${i}`} item={item} />}
-                        listItems={data.recommendeds}    
-                    />
+                    {
+                        recommendedsLoading
+                        ?
+                        <div className={classes.loading}>
+                            <p>Loading...</p>
+                            <img src={spinnerImage} alt="Loading..."/>
+                        </div>
+                        :
+                        <MutipleSlidesPerView 
+                            render={(item, i) => <CardItem key={`recommendeds_xs_${i}`} item={item} />}
+                            listItems={recommendeds}    
+                        />
+                    }
                 </Container>
             </Hidden>
             <Hidden smUp>
-                <Container className={clsx(classes.section, classes.bestsellers)} maxWidth='xl'>
+                <Container className={[classes.section, classes.bestsellers]} maxWidth='xl'>
                     <Typography className={classes.sectionTitle} variant="h3" component="h3">
                         <FormattedMessage id='bestsellers' defaultMessage="Bestsellers" />
                     </Typography>
                     <hr className={classes.divider}/>
-                    <CoverflowEffect 
-                        render={(item, i) => <CardItem key={`bestsellers_sm_${i}`} item={item} />}
-                        listItems={data.bestsellers}
-                    />
+                    {
+                        bestsellersLoading
+                        ?
+                        <div className={classes.loading}>
+                            <p>Loading...</p>
+                            <img src={spinnerImage} alt="Loading..."/>
+                        </div>
+                        :
+                        <CoverflowEffect 
+                            render={(item, i) => <CardItem key={`bestsellers_sm_${i}`} item={item} />}
+                            listItems={bestsellers}
+                        />
+                    }
                 </Container>
-                <Container className={classes.section} maxWidth='xl'>
-                    <Typography className={clsx(classes.sectionTitle, classes.recommendeds)} variant="h3" component="h3">
+                <Container className={[classes.section, classes.recommendeds]} maxWidth='xl'>
+                    <Typography className={classes.sectionTitle} variant="h3" component="h3">
                         <FormattedMessage id='recommended_books' defaultMessage="Recommended Books" />
                     </Typography>
                     <hr className={classes.divider}/>
-                    <CoverflowEffect 
-                        render={(item, i) => <CardItem key={`recommendeds_sm_${i}`} item={item} />}
-                        listItems={data.recommendeds}
-                    />
+                    {
+                        recommendedsLoading
+                        ?
+                        <div className={classes.loading}>
+                            <p>Loading...</p>
+                            <img src={spinnerImage} alt="Loading..."/>
+                        </div>
+                        :
+                        <CoverflowEffect 
+                            render={(item, i) => <CardItem key={`recommendeds_sm_${i}`} item={item} />}
+                            listItems={recommendeds}
+                        />
+                    }
                 </Container>
             </Hidden>
             <Container className={clsx(classes.section, classes.author)} maxWidth='xl'>

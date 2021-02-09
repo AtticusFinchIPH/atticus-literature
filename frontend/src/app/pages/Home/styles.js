@@ -95,8 +95,19 @@ const useStyle = makeStyles((theme) => ({
         },
         borderRadius: theme.spacing(1),
     },
+    loading: {
+        position: 'relative',
+        transform: `translateY(${theme.spacing(11)}px)`,
+        [theme.breakpoints.up('lg')]: {
+            transform: `translateY(${theme.spacing(14.25)}px)`,
+        }
+    },
+    bestsellers: {
+        height: theme.spacing(81.375),
+    },
     recommendeds: {
         color: LIGHT_WHITE,
+        height: theme.spacing(81.375),
     },
     divider: {
         width: theme.spacing(10),
