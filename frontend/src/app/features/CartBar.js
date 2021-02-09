@@ -1,31 +1,31 @@
 import React, { useContext } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { makeStyles } from '@material-ui/core/styles';
-import { Drawer, IconButton } from '@material-ui/core';
+import { Drawer, IconButton, Typography } from '@material-ui/core';
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import CartOpenContext from '../../contexts/CartOpenContext';
 
-const useStyles = makeStyles(theme => ({
-    cartBbr: {
-        width: '100%',
-        backgroundColor: 'white'
-    }
-}));
+import useStyles from './CartBar.styles';
 
 const CartBar = () => {
-    const { isCartOpen, setCartOpen } = useContext(CartOpenContext);
-    console.log(isCartOpen)
     const classes = useStyles();
-    const handleDrawerClose = (e) => {
-        
-    }
+    const { isCartOpen, setCartOpen } = useContext(CartOpenContext);
     return(
-        <Drawer className={classes.cartbar} anchor='right' open={isCartOpen} onClose={e => setCartOpen(false)}>
+        <Drawer className={classes.cartbar} anchor='right' variant='temporary' open={isCartOpen} onClose={e => setCartOpen(false)}>
             <div className={classes.cartbarHeader}>
-                <IconButton onClick={handleDrawerClose} onClick={e => setCartOpen(false)}>
+                <IconButton className={classes.cartbarIconClose} onClick={e => setCartOpen(false)}>
                     <ChevronRightIcon />
                 </IconButton>
-                <FormattedMessage id='cart' defaultMessage='Cart' />
+                <div className={classes.cartbarTitle} >
+                    <Typography variant='h5' component='p'>
+                        <FormattedMessage id='cart' defaultMessage='Cart' />
+                    </Typography>
+                </div>
+            </div>
+            <div className={classes.cartbarContent}>
+
+            </div>
+            <div className={classes.cartbarCheck}>
+
             </div>
         </Drawer>
     )
