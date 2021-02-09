@@ -28,24 +28,29 @@ const CartBar = () => {
                     </Typography>
                 </div>
             </div>
-            <div className={classes.cartbarContent}>
-                {
-                    cartList?.length > 0
-                    ?
+            {
+                cartList?.length > 0
+                ?
+                <>
+                <div className={classes.cartbarContent}>
+
+                </div>
+                <div className={classes.cartbarCheck}>
+                    <button className={classes.cartbarCheckButton} onClick={checkCart}>
+                        <Typography variant='button' component='p'>
+                            <FormattedMessage id='cart_detail' defaultMessage='Cart detail' />
+                        </Typography>
+                    </button>
+                </div>
+                </>
+                :
+                <div className={classes.cartbarContent}>
                     <Typography variant='body1' component='p'>
                         <FormattedMessage id='cart_empty' defaultMessage='Your cart is empty' />
                     </Typography>
-                    :
-                    <></>
-                }
-            </div>
-            <div className={classes.cartbarCheck}>
-                <button className={classes.cartbarCheckButton} onClick={checkCart}>
-                    <Typography variant='button' component='p'>
-                        <FormattedMessage id='cart_detail' defaultMessage='Cart detail' />
-                    </Typography>
-                </button>
-            </div>
+
+                </div>      
+            }
         </Drawer>
     )
 }
