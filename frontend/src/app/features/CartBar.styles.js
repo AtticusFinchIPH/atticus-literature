@@ -19,6 +19,7 @@ const useStyles = makeStyles(theme => ({
         },
     },
     cartbarIconClose: {
+        position: 'absolute',
         color: LIGHT_WHITE,
         '&:hover': {
             backgroundColor: fade(theme.palette.common.white, 0.25),
@@ -27,7 +28,6 @@ const useStyles = makeStyles(theme => ({
     cartbarTitle: {
         flexGrow: 1,
         textAlign: 'center',
-        transform: 'translateX(-24px)', // half cartbarIconClose width
     },
     cartbarContent: {
 
