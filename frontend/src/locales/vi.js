@@ -21,6 +21,8 @@ const vi = defineMessages({
     const_auth_present: 'Tác giả các tiểu thuyết ăn khách "Cuộc đời của một developer", "Ấn tượng khó phai từ trang web ấy", "Đời là chi nếu không code?".\n Hiện anh vẫn đang trong quá trình hoàn thiện bản thân và cống hiến hết mình cho sự nghiệp viết lách.',
     
     cart: 'Giỏ hàng',
+    cart_empty: 'Giỏ hàng hiện đang trống',
+    cart_detail: 'Xem chi tiết',
 })
 
 export default vi;

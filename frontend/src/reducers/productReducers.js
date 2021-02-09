@@ -5,6 +5,7 @@ import {
     GET_RECOMMENDED_REQUEST,
     GET_RECOMMENDED_SUCCESS,
     GET_RECOMMENDED_FAIL,
+    GET_CART_REQUEST,
 } from '../constants/productConstants';
 
 const bestsellersReducer = (state = {}, action) => {
@@ -33,4 +34,13 @@ const recommendedsReducer = (state = {}, action) => {
     }
 }
 
-export { bestsellersReducer, recommendedsReducer }
+const cartReducer = (state = {}, action) => {
+    switch (action.type) {
+        case GET_CART_REQUEST: 
+            return { ...state, loading: true };
+        default:
+            return state;
+    }
+}
+
+export { bestsellersReducer, recommendedsReducer, cartReducer }
