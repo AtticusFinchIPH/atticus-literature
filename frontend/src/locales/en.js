@@ -22,7 +22,7 @@ const en = defineMessages({
 
     cart: 'Cart',
     cart_empty: 'Your cart is empty',
-    cart_detail: 'Cart detail',
+    cart_save_proceed: 'Save & Proceed',
     subtotal: 'Subtotal',
 })
 

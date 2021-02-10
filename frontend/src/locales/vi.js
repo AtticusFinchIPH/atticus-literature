@@ -22,7 +22,7 @@ const vi = defineMessages({
     
     cart: 'Giỏ hàng',
     cart_empty: 'Giỏ hàng hiện đang trống',
-    cart_detail: 'Xem chi tiết',
+    cart_save_proceed: 'Lưu & Tiếp tục',
     subtotal: 'Tổng',
 })
 

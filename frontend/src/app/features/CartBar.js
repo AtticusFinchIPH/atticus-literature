@@ -139,7 +139,7 @@ const CartBar = () => {
                 <div className={classes.cartbarCheck}>
                     <button className={classes.cartbarCheckButton} onClick={checkCart}>
                         <Typography variant='button' component='p'>
-                            <FormattedMessage id='cart_detail' defaultMessage='Cart detail' />
+                            <FormattedMessage id='cart_save_proceed' defaultMessage='Save & Proceed' />
                         </Typography>
                     </button>
                 </div>
