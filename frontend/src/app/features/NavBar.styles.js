@@ -5,6 +5,11 @@ const useStyle = makeStyles((theme) => ({
     grow: {
         flexGrow: 1,
     },
+    link: {
+        display: 'block',
+        textDecoration: 'none',
+        color: theme.palette.text.main,
+    },
     appBar: {
         position: 'fixed',
         backgroundColor: theme.palette.navBar.main,

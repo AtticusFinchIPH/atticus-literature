@@ -1,6 +1,6 @@
 import React, { useContext, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { isMobileOnly } from 'react-device-detect';
@@ -117,15 +117,19 @@ const NavBar = withRouter(({history}) => {
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="open drawer" >
                         <MenuIcon />
                     </IconButton>
-                    <Hidden xsDown>    
-                        <Typography className={classes.title} variant="h6" noWrap>
-                            Atticus Literature
-                        </Typography>
+                    <Hidden xsDown>  
+                        <Link to='/' className={classes.link}>
+                            <Typography className={classes.title} variant="h6" noWrap>
+                                Atticus Literature
+                            </Typography>
+                        </Link>  
                     </Hidden>
-                    <Hidden smUp>    
-                        <Typography className={classes.title} variant="h6" noWrap>
-                           AL
-                        </Typography>
+                    <Hidden smUp>  
+                        <Link to='/' className={classes.link}>  
+                            <Typography className={classes.title} variant="h6" noWrap>
+                                AL
+                            </Typography>
+                        </Link>
                     </Hidden>
                     {/* <div className={classes.search}>
                         <div className={classes.searchIcon}>
