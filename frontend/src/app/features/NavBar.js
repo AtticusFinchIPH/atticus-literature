@@ -33,7 +33,7 @@ const NavBar = withRouter(({history}) => {
     const cart = useSelector(state => state.cart);
     const cartQuantity = useMemo(() => {
         const { cartList } = cart;
-        return cartList.length;
+        return cartList.reduce((total, item) => total + item.quantity, 0);
     }, [cart])
     const dispatch = useDispatch();
 

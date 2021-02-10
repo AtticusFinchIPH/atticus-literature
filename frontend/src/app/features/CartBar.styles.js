@@ -82,7 +82,6 @@ const useStyles = makeStyles(theme => ({
     quantityActions: {
         display: 'flex',
         alignItems: 'center',
-        // border: 'hsl(220, 16%, 50%) solid 1px',
     },
     actionIcon: {
         padding: '3px'
@@ -90,6 +89,7 @@ const useStyles = makeStyles(theme => ({
     cartbarSubtotal: {
         height: theme.spacing(14.25),
         width: theme.spacing(32),
+        paddingTop: theme.spacing(1.5),
     },
     cartbarCheck: {
         display: 'flex',

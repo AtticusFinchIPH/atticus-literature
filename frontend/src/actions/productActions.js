@@ -1,31 +1,21 @@
 import {
-    ADD_CART_REQUEST,
-    ADD_CART_SUCCESS,
-    ADD_CART_FAIL,
+    ADD_CART_LOCAL,
+    UPDATE_CART_LOCAL,
+    REMOVE_CART_LOCAL,
+    SAVE_CART_SUCCESS,
+    SAVE_CART_FAIL,
 } from '../constants/productConstants';
 
 const addToCart = (product) => async (dispatch, getState) => {
-    try {
-        dispatch({ type: ADD_CART_REQUEST, payload: {product} });
-    } catch (error) {
-        dispatch({ type: ADD_CART_FAIL, payload:  error.response?.data?.msg || error.message });
-    }
+    dispatch({ type: ADD_CART_LOCAL, payload: {product} });
 }
 
-const removeFromCart = (productId) => async (dispatch, getState) => {
-    try {
-        
-    } catch (error) {
-        
-    }
+const updateLocalCart = (product) => async (dispatch, getState) => {
+    dispatch({ type: UPDATE_CART_LOCAL, payload: {product} });
 }
 
-const updateCart = (product, quantity) => async (dispatch, getState) => {
-    try {
-        
-    } catch (error) {
-        
-    }
+const removeFromLocalCart = (productId) => async (dispatch, getState) => {
+    dispatch({ type: REMOVE_CART_LOCAL, payload: {productId} });
 }
 
-export { addToCart, removeFromCart, updateCart }
+export { addToCart, updateLocalCart, removeFromLocalCart }

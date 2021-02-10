@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { isMobileOnly } from 'react-device-detect';
 import clsx from 'clsx';
+import BigNumber from 'bignumber.js';
 import { Card, Drawer, GridList, GridListTile, IconButton, Typography } from '@material-ui/core';
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import CartOpenContext from '../../contexts/CartOpenContext';
@@ -11,6 +12,7 @@ import MinusIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 
 import useStyles from './CartBar.styles';
+import { updateLocalCart, removeFromLocalCart } from '../../actions/productActions';
 
 const CARD_ITEM_HEIGHT = '120px';
 const CARD_ITEM_WIDTH = '100%'
@@ -47,6 +49,21 @@ const CardItem = (props) => {
             priceDeclare = `$ ${item.price}`;
             break;
     }
+    const dispatch = useDispatch();
+    const minusQuantity = () => {
+        if(item.quantity == 1) return;
+        else {
+            const product = {...item, quantity: item.quantity-1};
+            dispatch(updateLocalCart(product));
+        }
+    }
+    const addQuantity = () => {
+        const product = {...item, quantity: item.quantity+1};
+        dispatch(updateLocalCart(product));
+    }
+    const removeItem = () => {
+        dispatch(removeFromLocalCart(item._id));
+    }
     return (
         <GridListTile style={{
             height: CARD_ITEM_HEIGHT,
@@ -61,15 +78,15 @@ const CardItem = (props) => {
                     </div>
                     <div className={classes.cartItemActions}>
                         <div className={classes.quantityActions}>
-                            <IconButton className={clsx(classes.actionIcon, item.quantity === 1 && classes.disable)} >
+                            <IconButton onClick={minusQuantity} className={clsx(classes.actionIcon, item.quantity == 1 && classes.disable)} >
                                 <MinusIcon fontSize='small' />
                             </IconButton>
                             <Typography variant='body1' component='p'>{item.quantity}</Typography>
-                            <IconButton  className={classes.actionIcon} >
+                            <IconButton  onClick={addQuantity} className={classes.actionIcon} >
                                 <AddIcon fontSize='small' />
                             </IconButton>
                         </div>
-                        <IconButton className={classes.actionIcon}>
+                        <IconButton  onClick={removeItem} className={classes.actionIcon}>
                             <RemoveIcon fontSize='small' />
                         </IconButton>
                     </div>
@@ -84,6 +101,9 @@ const CartBar = () => {
     const { isCartOpen, setCartOpen } = useContext(CartOpenContext);
     const cart = useSelector(state => state.cart);
     const { cartList } = cart;
+    // Assume the currency of all items is USD
+    let subtotal = new BigNumber(cartList.reduce((total, item) => total + item.quantity*item.price , 0));
+    const subtotalDeclare = `$ ${subtotal.decimalPlaces(2)}`;
     const checkCart = () => {
 
         setCartOpen(false);
@@ -113,6 +133,7 @@ const CartBar = () => {
                         <Typography variant='h5' component='p'>
                             <FormattedMessage id='subtotal' defaultMessage='Subtotal' /><span> :</span>
                         </Typography>
+                        <Typography variant='h4' component='p'>{subtotalDeclare}</Typography>
                     </div>
                 </div>
                 <div className={classes.cartbarCheck}>

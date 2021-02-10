@@ -5,7 +5,7 @@ import { langReducer } from './reducers/globalReducer';
 import { bestsellersReducer, cartReducer, recommendedsReducer } from './reducers/productReducers';
 import data from './data_sample';
 
-const cartList = Cookie.getJSON('cart') || [];
+const cartList = Cookie.getJSON('cartList') || [];
 
 const initialState = {
     language: navigator.language === 'vi' ? 'vi' : 'en',
