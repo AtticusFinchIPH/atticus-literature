@@ -1,11 +1,83 @@
 import React, { useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { Drawer, IconButton, Typography } from '@material-ui/core';
+import { isMobileOnly } from 'react-device-detect';
+import clsx from 'clsx';
+import { Card, Drawer, GridList, GridListTile, IconButton, Typography } from '@material-ui/core';
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import CartOpenContext from '../../contexts/CartOpenContext';
+import RemoveIcon from '@material-ui/icons/HighlightOff';
+import MinusIcon from '@material-ui/icons/Remove';
+import AddIcon from '@material-ui/icons/Add';
 
 import useStyles from './CartBar.styles';
+
+const CARD_ITEM_HEIGHT = '120px';
+const CARD_ITEM_WIDTH = '100%'
+
+const Scrollbar = (props) => {
+    const classes = useStyles();
+    return (
+      <GridList className={classes.cartbarScroll} >
+        {
+            props.listItems.map((item, i) => {
+                const addClasses = {};
+                addClasses.borderBottom = i === props.listItems.length-1 ? false : true;
+                return props.render(item, i, addClasses);
+            })
+        }
+      </GridList>
+    )
+};
+
+const CardItem = (props) => {
+    const classes = useStyles();
+    const item = props.item;
+    const addClasses = props.addClasses;
+    const {borderBottom} = addClasses;
+    let priceDeclare;
+    switch (item.currency) {
+        case 'usd':
+            priceDeclare = `$ ${item.price}`;
+            break;
+        case 'vnd':
+            priceDeclare = `${item.price} vnđ`;
+            break;
+        default:
+            priceDeclare = `$ ${item.price}`;
+            break;
+    }
+    return (
+        <GridListTile style={{
+            height: CARD_ITEM_HEIGHT,
+            width: CARD_ITEM_WIDTH,
+        }}>
+            <Card className={classes.cartbarItem}>
+                <div className={classes.cartItemMedia} style={{backgroundImage: `url(${item.image}`}}></div>
+                <div className={clsx(classes.cardItemContent, borderBottom && classes.borderBottom)}>
+                    <div className={classes.cartItemInfo}>
+                        <Typography variant='body2' component='p'>{item.title}</Typography>
+                        <Typography variant='h6' component='p'>{priceDeclare}</Typography>
+                    </div>
+                    <div className={classes.cartItemActions}>
+                        <div className={classes.quantityActions}>
+                            <IconButton className={clsx(classes.actionIcon, item.quantity === 1 && classes.disable)} >
+                                <MinusIcon fontSize='small' />
+                            </IconButton>
+                            <Typography variant='body1' component='p'>{item.quantity}</Typography>
+                            <IconButton  className={classes.actionIcon} >
+                                <AddIcon fontSize='small' />
+                            </IconButton>
+                        </div>
+                        <IconButton className={classes.actionIcon}>
+                            <RemoveIcon fontSize='small' />
+                        </IconButton>
+                    </div>
+                </div>
+            </Card>
+        </GridListTile>
+    )
+}
 
 const CartBar = () => {
     const classes = useStyles();
@@ -17,7 +89,7 @@ const CartBar = () => {
         setCartOpen(false);
     }
     return(
-        <Drawer className={classes.cartbar} anchor='right' variant='temporary' open={isCartOpen} onClose={e => setCartOpen(false)}>
+        <Drawer className={classes.cartbar} anchor='right' variant='temporary' open={!isMobileOnly && isCartOpen} onClose={e => setCartOpen(false)}>
             <div className={classes.cartbarHeader}>
                 <IconButton className={classes.cartbarIconClose} onClick={e => setCartOpen(false)}>
                     <ChevronRightIcon />
@@ -33,7 +105,15 @@ const CartBar = () => {
                 ?
                 <>
                 <div className={classes.cartbarContent}>
-
+                    <Scrollbar
+                        render={(item, i, addClasses) => <CardItem key={i} item={item} addClasses={addClasses} />}
+                        listItems={cartList}
+                    />
+                    <div className={classes.cartbarSubtotal}>
+                        <Typography variant='h5' component='p'>
+                            <FormattedMessage id='subtotal' defaultMessage='Subtotal' /><span> :</span>
+                        </Typography>
+                    </div>
                 </div>
                 <div className={classes.cartbarCheck}>
                     <button className={classes.cartbarCheckButton} onClick={checkCart}>

@@ -1,7 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import { isMobileOnly } from 'react-device-detect';
 import { 
     Typography, CssBaseline,
     AppBar, Toolbar, Menu, MenuItem,
@@ -28,6 +30,11 @@ const NavBar = withRouter(({history}) => {
     const isLangOpen = Boolean(anchorLang);
     const { isDarkMode, setDarkMode } = useContext(ThemeContext);
     const { setCartOpen } = useContext(CartOpenContext);
+    const cart = useSelector(state => state.cart);
+    const cartQuantity = useMemo(() => {
+        const { cartList } = cart;
+        return cartList.length;
+    }, [cart])
     const dispatch = useDispatch();
 
     const handleLangOpen = (e) => {
@@ -134,11 +141,20 @@ const NavBar = withRouter(({history}) => {
                     </div> */}
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
-                        <IconButton aria-label="show 4 new mails" color="inherit" onClick={e => setCartOpen(true)}>
-                            <Badge badgeContent={4} color="secondary">
+                        {
+                            isMobileOnly
+                            ?<IconButton aria-label="show number of products in cart" color="inherit">
+                            <Badge badgeContent={cartQuantity} color="secondary">
                                 <ShoppingCartIcon />
                             </Badge>
                         </IconButton>
+                            :
+                            <IconButton aria-label="show number of products in cart" color="inherit" onClick={e => setCartOpen(true)}>
+                                <Badge badgeContent={cartQuantity} color="secondary">
+                                    <ShoppingCartIcon />
+                                </Badge>
+                            </IconButton>
+                        }                       
                         {
                             isDarkMode
                             ?

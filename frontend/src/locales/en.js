@@ -23,6 +23,7 @@ const en = defineMessages({
     cart: 'Cart',
     cart_empty: 'Your cart is empty',
     cart_detail: 'Cart detail',
+    subtotal: 'Subtotal',
 })
 
 export default en;

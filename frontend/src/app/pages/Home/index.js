@@ -1,5 +1,5 @@
 import React, { useContext, useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Swiper from 'react-id-swiper';
 import clsx from 'clsx';
@@ -17,15 +17,24 @@ import { FONT_F_PLAYFAIR } from '../../../utils/theme';
 import spinnerImage from '../../../images/infinitySpinner.gif';
 import authorAvatar from '../../../images/author-avatar.jpg';
 
+import CartOpenContext from '../../../contexts/CartOpenContext';
+import { addToCart } from '../../../actions/productActions';
+
 const CARD_ITEM_HEIGHT = '450px';
 const CARD_ITEM_WIDTH = '200px';
 
 const CardItem = (props) => {
     const classes = useStyle();
     const [isShown, setIsShown] = useState(false);
+    const { setCartOpen } = useContext(CartOpenContext);
+    const dispatch = useDispatch();
     const redirect = () => {
         console.log(props.item);
     }
+    const addItemToCart = () => {
+        dispatch(addToCart(props.item));
+        setCartOpen(true);
+    } 
     return(
         <>
         <Card className={classes.cardItem} >
@@ -41,7 +50,7 @@ const CardItem = (props) => {
                 <IconButton className={classes.iconButton} aria-label="Add to favorites">
                     <FavoriteBorderOutlinedIcon className={classes.icon}/>
                 </IconButton>
-                <IconButton className={classes.iconButton} aria-label="Add to cart">
+                <IconButton className={classes.iconButton} aria-label="Add to cart" onClick={addItemToCart}>
                     <AddShoppingCartIcon className={classes.icon} />
                 </IconButton>
             </CardActions>

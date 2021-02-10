@@ -29,6 +29,7 @@ const data_sample = {
             rating: 4.26,
             review: 10,
             price: 18.26,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -42,6 +43,7 @@ const data_sample = {
             rating: 4.14,
             review: 10,
             price: 12,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -55,6 +57,7 @@ const data_sample = {
             rating: 4.55,
             review: 10,
             price: 7.5,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -68,6 +71,7 @@ const data_sample = {
             rating: 5,
             review: 8,
             price: 18.26,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -81,6 +85,7 @@ const data_sample = {
             rating: 4.26,
             review: 10,
             price: 18.26,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -94,6 +99,7 @@ const data_sample = {
             rating: 4.26,
             review: 10,
             price: 18.26,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -107,6 +113,7 @@ const data_sample = {
             rating: 4.26,
             review: 10,
             price: 18.26,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -120,6 +127,7 @@ const data_sample = {
             rating: 4.26,
             review: 10,
             price: 18.26,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -133,6 +141,7 @@ const data_sample = {
             rating: 4.26,
             review: 10,
             price: 18.26,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -146,6 +155,7 @@ const data_sample = {
             rating: 4.26,
             review: 10,
             price: 18.26,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -159,6 +169,7 @@ const data_sample = {
             rating: 4.26,
             review: 10,
             price: 18.26,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -172,6 +183,7 @@ const data_sample = {
             rating: 4.26,
             review: 10,
             price: 18.26,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -185,6 +197,7 @@ const data_sample = {
             rating: 4.26,
             review: 10,
             price: 18.26,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -198,6 +211,7 @@ const data_sample = {
             rating: 4.26,
             review: 10,
             price: 18.26,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -211,6 +225,7 @@ const data_sample = {
             rating: 4.26,
             review: 10,
             price: 18.26,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -224,6 +239,7 @@ const data_sample = {
             rating: 4.26,
             review: 10,
             price: 18.26,
+            currency: 'usd',
             countInStock: 300,
         },
     ],
@@ -239,6 +255,7 @@ const data_sample = {
             rating: 4.26,
             review: 10,
             price: 18.26,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -252,6 +269,7 @@ const data_sample = {
             rating: 4.14,
             review: 10,
             price: 12,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -265,6 +283,7 @@ const data_sample = {
             rating: 4.55,
             review: 10,
             price: 7.5,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -278,6 +297,7 @@ const data_sample = {
             rating: 5,
             review: 8,
             price: 18.26,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -291,6 +311,7 @@ const data_sample = {
             rating: 4.26,
             review: 10,
             price: 18.26,
+            currency: 'usd',
             countInStock: 300,
         },
     ],
@@ -306,6 +327,7 @@ const data_sample = {
             rating: 4.26,
             review: 10,
             price: 18.26,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -319,6 +341,7 @@ const data_sample = {
             rating: 4.26,
             review: 10,
             price: 18.26,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -332,6 +355,7 @@ const data_sample = {
             rating: 4.26,
             review: 10,
             price: 18.26,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -345,6 +369,7 @@ const data_sample = {
             rating: 4.26,
             review: 10,
             price: 18.26,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -358,6 +383,7 @@ const data_sample = {
             rating: 4.26,
             review: 10,
             price: 18.26,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -371,6 +397,7 @@ const data_sample = {
             rating: 4.26,
             review: 10,
             price: 18.26,
+            currency: 'usd',
             countInStock: 300,
         },
         {
@@ -384,6 +411,7 @@ const data_sample = {
             rating: 4.26,
             review: 10,
             price: 18.26,
+            currency: 'usd',
             countInStock: 300,
         },
     ]
