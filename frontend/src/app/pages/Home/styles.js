@@ -121,6 +121,10 @@ const useStyle = makeStyles((theme) => ({
         background: 'none',
         boxShadow: 'none',
         cursor: 'pointer',
+        transition: 'all 150ms ease-in-out',
+        '&:hover': {
+            transform: 'scale(1.05)',
+        }
     },
     cardMedia: {
         height: theme.spacing(37.5),
@@ -154,6 +158,7 @@ const useStyle = makeStyles((theme) => ({
         width: '184px', // CARD_ITEM_WIDTH - padding*2
         cursor: 'pointer',
         color: '#000',
+        transform: 'scale(1.05)',
     },
     author: {
         [theme.breakpoints.up('md')]: {
