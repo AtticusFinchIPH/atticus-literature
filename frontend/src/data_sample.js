@@ -414,7 +414,21 @@ const data_sample = {
             currency: 'usd',
             countInStock: 300,
         },
-    ]
+    ],
+    viewingProduct: {
+        _id: "12",
+            title: "Harry Potter And The Deathly Hallows",
+            author: "J.K Rowling",
+            description: "",
+            image: "https://res.cloudinary.com/atticusfinchiph/image/upload/v1612553891/atticus-literature/dev/Harry-Potter-P7_uen2jb.jpg",
+            genre: [BOOK_GENRES.FANTASY, BOOK_GENRES.TEENAGE],
+            language: "english",
+            rating: 4.26,
+            review: 10,
+            price: 18.26,
+            currency: 'usd',
+            countInStock: 300,
+    }
 }
 
 export default data_sample;

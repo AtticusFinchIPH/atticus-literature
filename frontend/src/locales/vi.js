@@ -23,7 +23,10 @@ const vi = defineMessages({
     cart: 'Giỏ hàng',
     cart_empty: 'Giỏ hàng hiện đang trống',
     cart_save_proceed: 'Lưu & Tiếp tục',
+    add_to_cart: 'Thêm vào Giỏ hàng',
     subtotal: 'Tổng',
+    author_by: 'tác giả',
+    quantity: 'Số lượng',
 })
 
 export default vi;

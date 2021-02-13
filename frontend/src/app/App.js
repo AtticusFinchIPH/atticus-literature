@@ -11,6 +11,7 @@ import NavBar from './features/NavBar';
 import CartBar from './features/CartBar';
 import CopyRight from './features/CopyRight';
 import Home from './pages/Home';
+import Product from './pages/Product';
 
 function App() {
   const language = useSelector(state => state.language);
@@ -30,6 +31,7 @@ function App() {
             <CartBar />
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route path="/product/" component={Product} />
             </Switch>
             <CopyRight />
 

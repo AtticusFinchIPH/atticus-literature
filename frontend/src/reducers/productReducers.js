@@ -13,6 +13,9 @@ import {
     REMOVE_CART_LOCAL,
     SAVE_CART_SUCCESS,
     SAVE_CART_FAIL,
+    VIEW_PRODUCT_REQUEST,
+    VIEW_PRODUCT_SUCCESS,
+    VIEW_PRODUCT_FAIL,
 } from '../constants/productConstants';
 
 const bestsellersReducer = (state = {}, action) => {
@@ -74,4 +77,17 @@ const cartReducer = (state = { cartList: Cookie.getJSON('cartList') || [] }, act
     }
 }
 
-export { bestsellersReducer, recommendedsReducer, cartReducer }
+const viewingProductReducer = (state = {product: null}, action) => {
+    switch (action.key) {
+        case VIEW_PRODUCT_REQUEST:        
+            return {...state, loading: true };
+        case VIEW_PRODUCT_SUCCESS:        
+            return { product: action.payload, loading: false };
+        case VIEW_PRODUCT_FAIL:
+            return { ...state, loading: false, error: action.payload };
+        default:
+            return state;
+    }
+}
+
+export { bestsellersReducer, recommendedsReducer, cartReducer, viewingProductReducer }

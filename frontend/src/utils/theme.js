@@ -47,6 +47,8 @@ const lightTheme = createMuiTheme({
     },
     sectionBack: {
       main: DARK_BLUE,
+      text: LIGHT_WHITE,
+      textHover: DARK_BLUE,
     },
     icon: {
       main: DARK_BLUE,
@@ -68,7 +70,9 @@ const darkTheme = createMuiTheme({
       main: LIGHT_WHITE,
     },
     sectionBack: {
-      main: DARK_BLUE,
+      main: LIGHT_WHITE,
+      text: DARK_GRAY,
+      textHover: LIGHT_WHITE,
     },
     icon: {
       main: LIGHT_WHITE,
