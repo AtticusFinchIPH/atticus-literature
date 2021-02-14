@@ -419,7 +419,13 @@ const data_sample = {
         _id: "12",
             title: "Harry Potter And The Deathly Hallows",
             author: "J.K Rowling",
-            description: "",
+            description: `Harry Potter is leaving Privet Drive for the last time. But as he climbs into the sidecar of Hagrid’s motorbike and they take to the skies, he knows Lord Voldemort and the Death Eaters will not be far behind.
+
+            The protective charm that has kept him safe until now is broken. But the Dark Lord is breathing fear into everything he loves. And he knows he can’t keep hiding.
+            
+            To stop Voldemort, Harry knows he must find the remaining Horcruxes and destroy them.
+            
+            He will have to face his enemy in one final battle.`,
             image: "https://res.cloudinary.com/atticusfinchiph/image/upload/v1612553891/atticus-literature/dev/Harry-Potter-P7_uen2jb.jpg",
             genre: [BOOK_GENRES.FANTASY, BOOK_GENRES.TEENAGE],
             language: "english",

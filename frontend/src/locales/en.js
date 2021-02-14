@@ -27,6 +27,13 @@ const en = defineMessages({
     subtotal: 'Subtotal',
     author_by: 'by',
     quantity: 'Quantity',
+
+    intro: 'Introduction',
+    shipping: 'Shipping Info',
+    policy: 'Return & Refund Policy',
+    shipping_policy: `Free delivery within Hanoi & Ho Chi Minh City in maximum 2 hours.
+    Delivery within a maximum of 1 week across the territory of Vietnam.`,
+    return_policy: `If you are not satisfied with a product you ordered from our store or if it is defective or damaged, you can return it to us within 3 days of the delivery date, and we will refund you or will replace the entire item.`,
 })
 
 export default en;

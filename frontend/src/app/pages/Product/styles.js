@@ -8,12 +8,14 @@ const useStyle = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.main,
         color: theme.palette.text.main,
         whiteSpace: 'pre-line',
+        minHeight: '90vh',
         [theme.breakpoints.up('sm')]: {
             top: theme.spacing(8),
         },
     },
     container: {
         position: 'relative',
+        paddingBottom: theme.spacing(3),
         [theme.breakpoints.up('sm')]: {
             paddingTop: theme.spacing(10),
             display: 'grid',
@@ -26,10 +28,19 @@ const useStyle = makeStyles((theme) => ({
     gridImage: {
         position: 'relative',
         backgroundColor: theme.palette.navBar.main,
-        height: theme.spacing(50.5),
+        height: theme.spacing(60),
         [theme.breakpoints.up('sm')]: {
             height: theme.spacing(60),
             gridArea: "gridImage",
+        }
+    },
+    favoriteButton: {
+        position: 'absolute',
+        color: theme.palette.secondary.light,
+        right: theme.spacing(2),
+        bottom: theme.spacing(1),
+        [theme.breakpoints.down('sm')]: {
+            right: theme.spacing(0),
         }
     },
     mainInfo: {
@@ -93,6 +104,23 @@ const useStyle = makeStyles((theme) => ({
         '&:hover': {
             color: theme.palette.sectionBack.textHover,
         }
+    },
+    mainInfoCollapses: {
+
+    },
+    collapseSection: {
+        marginTop: theme.spacing(2),
+    },
+    collapseTitle: {
+        display: 'flex',
+        justifyContent: 'space-between',
+    },
+    collapseIcon: {
+        color: theme.palette.text.main,
+    },
+    ratingBox: {
+        display: 'flex',
+        justifyContent: 'center',
     },
 }));
 

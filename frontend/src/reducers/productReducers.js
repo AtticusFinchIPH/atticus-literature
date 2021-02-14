@@ -1,5 +1,6 @@
 
 import Cookie from 'js-cookie';
+import BigNumber from 'bignumber.js';
 import { 
     GET_BESTSELLERS_REQUEST,
     GET_BESTSELLERS_SUCCESS,
@@ -9,6 +10,7 @@ import {
     GET_RECOMMENDED_FAIL,
     GET_CART_REQUEST,
     ADD_CART_LOCAL,
+    ADD_CART_MULTI_LOCAL,
     UPDATE_CART_LOCAL,
     REMOVE_CART_LOCAL,
     SAVE_CART_SUCCESS,
@@ -51,10 +53,22 @@ const cartReducer = (state = { cartList: Cookie.getJSON('cartList') || [] }, act
         case ADD_CART_LOCAL:
             const indexAdd = state.cartList.findIndex(item => item._id === action.payload.product._id);
             if(indexAdd > -1) {
-                const quantity = state.cartList[indexAdd].quantity + 1;
+                const quantity = new BigNumber(state.cartList[indexAdd].quantity).toNumber() + 1;
                 state.cartList.splice(indexAdd, 1, {...action.payload.product, quantity});
             } else {
                 state.cartList.push({...action.payload.product, quantity: 1});
+            }
+            Cookie.set('cartList', JSON.stringify(state.cartList));
+            return { ...state, loading: false };
+        case ADD_CART_MULTI_LOCAL:
+            const indexAddMulti = state.cartList.findIndex(item => item._id === action.payload.product._id);
+            console.log(indexAddMulti, action.payload.product)
+            if(indexAddMulti > -1) {
+                const quantityMulti = new BigNumber(state.cartList[indexAddMulti].quantity).toNumber() + new BigNumber(action.payload.product.quantity).toNumber();
+                console.log(quantityMulti)
+                state.cartList.splice(indexAddMulti, 1, {...action.payload.product, quantity: quantityMulti});
+            } else {
+                state.cartList.push({...action.payload.product, quantity: action.payload.product.quantity});
             }
             Cookie.set('cartList', JSON.stringify(state.cartList));
             return { ...state, loading: false };

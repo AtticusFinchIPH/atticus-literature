@@ -4,6 +4,7 @@ import { withRouter, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { isMobileOnly } from 'react-device-detect';
+import BigNumber from 'bignumber.js';
 import { 
     Typography, CssBaseline,
     AppBar, Toolbar, Menu, MenuItem,
@@ -33,7 +34,7 @@ const NavBar = withRouter(({history}) => {
     const cart = useSelector(state => state.cart);
     const cartQuantity = useMemo(() => {
         const { cartList } = cart;
-        return cartList.reduce((total, item) => total + item.quantity, 0);
+        return cartList.reduce((total, item) => total + new BigNumber(item.quantity).toNumber(), 0);
     }, [cart])
     const dispatch = useDispatch();
 
