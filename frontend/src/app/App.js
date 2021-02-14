@@ -12,6 +12,7 @@ import CartBar from './features/CartBar';
 import CopyRight from './features/CopyRight';
 import Home from './pages/Home';
 import Product from './pages/Product';
+import Bookstore from './pages/Bookstore';
 
 function App() {
   const language = useSelector(state => state.language);
@@ -32,6 +33,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/product/" component={Product} />
+              <Route path="/products/" component={Bookstore} />
             </Switch>
             <CopyRight />
 
