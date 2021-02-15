@@ -10,10 +10,20 @@ const useStyle = makeStyles((theme) => ({
         textDecoration: 'none',
         color: theme.palette.text.main,
     },
+    noBorderRadius: {
+        borderRadius: 0,
+    },
     appBar: {
         position: 'fixed',
         backgroundColor: theme.palette.navBar.main,
         color: theme.palette.text.main,
+    },
+    pagesSections: {
+        position: 'absolute',
+        display: 'flex',
+        right: '50%',
+        transform: 'translateX(50%)',
+        textDecoration: 'none',
     },
     menuButton: {
         marginRight: theme.spacing(2),

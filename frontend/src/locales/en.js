@@ -9,8 +9,8 @@ const en = defineMessages({
 
     home: 'Home',
     bookstore: 'Bookstore',
-    story: 'Story',
-    contact: 'contact',
+    stories: 'Stories',
+    contact: 'Contact',
 
     bestsellers: 'Bestsellers',
     this_month: 'This Month\'s',

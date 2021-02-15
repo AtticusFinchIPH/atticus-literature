@@ -114,20 +114,20 @@ const NavBar = withRouter(({history}) => {
         <CssBaseline />
         <div className={classes.grow}>
             <AppBar position="static" className={classes.appBar}>
-                <Toolbar>
+                <Toolbar position='relative'>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="open drawer" >
                         <MenuIcon />
                     </IconButton>
-                    <Hidden xsDown>  
+                    <Hidden smDown>  
                         <Link to='/' className={classes.link}>
-                            <Typography className={classes.title} variant="h6" noWrap>
+                            <Typography className={classes.title} variant="h5" noWrap>
                                 Atticus Literature
                             </Typography>
                         </Link>  
                     </Hidden>
-                    <Hidden smUp>  
+                    <Hidden mdUp>  
                         <Link to='/' className={classes.link}>  
-                            <Typography className={classes.title} variant="h6" noWrap>
+                            <Typography className={classes.title} variant="h5" noWrap>
                                 AL
                             </Typography>
                         </Link>
@@ -144,8 +144,33 @@ const NavBar = withRouter(({history}) => {
                             inputProps={{ 'aria-label': 'search' }}
                         />
                     </div> */}
+                    <Hidden xsDown>  
+                    <div className={classes.pagesSections}>
+                        <Link to='/bookstore/' className={classes.link}>
+                            <IconButton className={classes.noBorderRadius}>
+                                <Typography variant='h6'>
+                                    <FormattedMessage id='bookstore' defaultMessage='Bookstore'/>
+                                </Typography>
+                            </IconButton>
+                        </Link>
+                        <Link to='/stories/' className={classes.link}>
+                            <IconButton className={classes.noBorderRadius}>
+                                <Typography variant='h6'>
+                                    <FormattedMessage id='stories' defaultMessage='Stories'/>
+                                </Typography>
+                            </IconButton>
+                        </Link>
+                        <Link to='/contact/' className={classes.link}>
+                            <IconButton className={classes.noBorderRadius}>
+                                <Typography variant='h6'>
+                                    <FormattedMessage id='contact' defaultMessage='Contact'/>
+                                </Typography>
+                            </IconButton>
+                        </Link>
+                    </div>
+                    </Hidden>
                     <div className={classes.grow} />
-                    <div className={classes.sectionDesktop}>
+                    <div className={classes.iconsSection}>
                         {
                             isMobileOnly
                             ?<IconButton aria-label="show number of products in cart" color="inherit">

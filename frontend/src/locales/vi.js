@@ -9,7 +9,7 @@ const vi = defineMessages({
 
     home: 'Trang chủ',
     bookstore: 'Hiệu sách',
-    story: 'Thư quán',
+    stories: 'Thư quán',
     contact: 'Liên hệ',
 
     bestsellers: 'Sách Bán Chạy',
