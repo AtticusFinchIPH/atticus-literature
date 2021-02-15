@@ -16,76 +16,60 @@ const Catalogue = () => {
     return(
         <div className={classes.container}>
             <div className={classes.section}>
-                <div className={classes.title}>
-                    <IconButton className={classes.noBorderRadius}>
-                        <Typography variant='body1'>
-                            <FormattedMessage id='all_categories' defaultMessage='All Categories' />
-                        </Typography>
-                    </IconButton>
-                </div>
+                <IconButton className={classes.title}>
+                    <Typography variant='body1'>
+                        <FormattedMessage id='all_books' defaultMessage='All Books' />
+                    </Typography>
+                </IconButton>
             </div>
             <div className={classes.section}>
-                <div className={classes.title}>
-                    <IconButton className={classes.noBorderRadius}>
-                        <Typography variant='body1'>
-                            <FormattedMessage id='vi_literature' defaultMessage='Vietnamese Literature' />
-                        </Typography>
-                    </IconButton>
-                </div>
+                <IconButton className={classes.title}>
+                    <Typography variant='body1'>
+                        <FormattedMessage id='vi_literature' defaultMessage='Vietnamese Literature' />
+                    </Typography>
+                </IconButton>
             </div>
             <div className={classes.section}>
-                <div className={classes.title}>
-                    <IconButton className={classes.noBorderRadius}>
+                <IconButton className={classes.title}>
                     <Typography variant='body1'>
                         <FormattedMessage id='asian_literature' defaultMessage='Asian Literature' />
                     </Typography>
-                    </IconButton>
-                    <IconButton>
-                        {
-                            asianOpen
-                            ?
-                            <MinusIcon />
-                            :
-                            <AddIcon />
-                        }
-                    </IconButton>
-                </div>
+                    {
+                        asianOpen
+                        ?
+                        <MinusIcon />
+                        :
+                        <AddIcon />
+                    }
+                </IconButton>
             </div>
             <div className={classes.section}>
-                <div className={classes.title}>
-                    <IconButton className={classes.noBorderRadius}>
+                <IconButton className={classes.title}>
                     <Typography variant='body1'>
                         <FormattedMessage id='western_literature' defaultMessage='Western Literature' />
                     </Typography>
-                    </IconButton>
-                    <IconButton>
-                        {
-                            westernOpen
-                            ?
-                            <MinusIcon />
-                            :
-                            <AddIcon />
-                        }
-                    </IconButton>
-                </div>
+                    {
+                        westernOpen
+                        ?
+                        <MinusIcon />
+                        :
+                        <AddIcon />
+                    }
+                </IconButton>
             </div>
             <div className={classes.section}>
-                <div className={classes.title}>
-                    <IconButton className={classes.noBorderRadius}>
+                <IconButton className={classes.title}>
                     <Typography variant='body1'>
                         <FormattedMessage id='genres' defaultMessage='Genres' />
                     </Typography>
-                    </IconButton>
-                    <IconButton>
-                        {
-                            genresOpen
-                            ?
-                            <MinusIcon />
-                            :
-                            <AddIcon />
-                        }
-                    </IconButton>
-                </div>
+                    {
+                        genresOpen
+                        ?
+                        <MinusIcon />
+                        :
+                        <AddIcon />
+                    }
+                </IconButton>
                 <div className={classes.subSection}>
                     {
                         // genres.map(genre => (

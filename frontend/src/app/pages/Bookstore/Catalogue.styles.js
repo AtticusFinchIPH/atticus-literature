@@ -1,9 +1,6 @@
 import { makeStyles } from '@material-ui/styles';
 
 const useStyle_Catalogue = makeStyles((theme) => ({
-    noBorderRadius: {
-        borderRadius: 0,
-    },
     container: {
         width: '100%',
     },
@@ -15,6 +12,8 @@ const useStyle_Catalogue = makeStyles((theme) => ({
     title: {
         display: 'flex',
         justifyContent: 'space-between',
+        borderRadius: 0,
+        width: '100%',
     },
 }));
 
