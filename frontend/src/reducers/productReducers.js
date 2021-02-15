@@ -18,6 +18,12 @@ import {
     VIEW_PRODUCT_REQUEST,
     VIEW_PRODUCT_SUCCESS,
     VIEW_PRODUCT_FAIL,
+    VIEW_STORE_REQUEST,
+    VIEW_STORE_SUCCESS,
+    VIEW_STORE_FAIL,
+    BOOK_GENRES_REQUEST,
+    BOOK_GENRES_SUCCESS,
+    BOOK_GENRES_FAIL,
 } from '../constants/productConstants';
 
 const bestsellersReducer = (state = {}, action) => {
@@ -104,4 +110,30 @@ const viewingProductReducer = (state = {product: null}, action) => {
     }
 }
 
-export { bestsellersReducer, recommendedsReducer, cartReducer, viewingProductReducer }
+const storeReducer = (state = { products: []}, action) => {
+    switch (action.key) {
+        case VIEW_STORE_REQUEST:
+            return {...state, loading: true };
+        case VIEW_STORE_SUCCESS:
+            return { products: action.payload, loading: false };
+        case VIEW_STORE_FAIL:
+            return { ...state, loading: false, error: action.payload };
+        default:
+            return state;
+    }
+}
+
+const bookGenresReducer = (state = { genres: []}, action) => {
+    switch (action.key) {
+        case BOOK_GENRES_REQUEST:
+            return {...state, loading: true };
+        case BOOK_GENRES_SUCCESS:
+            return { genres: action.payload, loading: false };
+        case BOOK_GENRES_FAIL:
+            return { ...state, loading: false, error: action.payload };
+        default:
+            return state;
+    }
+}
+
+export { bestsellersReducer, recommendedsReducer, cartReducer, viewingProductReducer, storeReducer, bookGenresReducer }

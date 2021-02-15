@@ -437,4 +437,4 @@ const data_sample = {
     }
 }
 
-export default data_sample;
+export { data_sample, BOOK_GENRES };
