@@ -1,4 +1,5 @@
 import React, { useContext, useMemo, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Swiper from 'react-id-swiper';
@@ -70,6 +71,15 @@ const CardItem = (props) => {
     )
 }
 
+CardItem.propTypes = {
+    item: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+    })
+}
+
 const CoverflowEffect = (props) => {
     const params = {
         effect: 'coverflow',
@@ -102,6 +112,17 @@ const CoverflowEffect = (props) => {
       </Swiper>
     )
 };
+
+CoverflowEffect.propTypes = {
+    listItems: PropTypes.arrayOf(
+        PropTypes.shape({
+            _id: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+            image: PropTypes.string.isRequired,
+            price: PropTypes.number.isRequired,
+        })
+    )
+}
 
 const MutipleSlidesPerView = (props) => {
     const params = {
@@ -148,6 +169,17 @@ const MutipleSlidesPerView = (props) => {
       </Swiper>
     )
 };
+
+MutipleSlidesPerView.propTypes = {
+    listItems: PropTypes.arrayOf(
+        PropTypes.shape({
+            _id: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+            image: PropTypes.string.isRequired,
+            price: PropTypes.number.isRequired,
+        })
+    )
+}
 
 const Home = () => {
     const classes = useStyle();
