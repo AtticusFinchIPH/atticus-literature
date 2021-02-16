@@ -29,6 +29,19 @@ const CardItem = (props) => {
     const [isShown, setIsShown] = useState(false);
     const { setCartOpen } = useContext(CartOpenContext);
     const dispatch = useDispatch();
+    const item = props.item;
+    let priceDeclare;
+    switch (item.currency) {
+        case 'usd':
+            priceDeclare = `$ ${item.price}`;
+            break;
+        case 'vnd':
+            priceDeclare = `${item.price} vnđ`;
+            break;
+        default:
+            priceDeclare = `$ ${item.price}`;
+            break;
+    }
     const redirect = () => {
         console.log(props.item);
     }
@@ -39,13 +52,13 @@ const CardItem = (props) => {
     return(
         <>
         <Card className={classes.cardItem} >
-            <CardMedia className={classes.cardMedia} image={props.item.image} title={props.item.title} 
+            <CardMedia className={classes.cardMedia} image={item.image} title={item.title} 
                 onMouseEnter={() => setIsShown(true)}
                 onMouseLeave={() => setIsShown(false)}
                 onClick={redirect}
             />
             <CardContent className={classes.cardContent}>
-                <Typography variant='body1' component='p'>{props.item.title}</Typography>
+                <Typography variant='body1' component='p'>{item.title}</Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
                 <IconButton className={classes.iconButton} aria-label="Add to favorites">
@@ -62,8 +75,8 @@ const CardItem = (props) => {
                 onMouseLeave={() => setIsShown(false)}
                 onClick={redirect}
             >
-                <Typography>
-                    <FormattedMessage id='quick_view' defaultMessage='Quick view' />
+                <Typography variant='body1'>
+                    {priceDeclare}
                 </Typography>
             </Box>       
         </Fade>

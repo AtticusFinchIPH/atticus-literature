@@ -151,7 +151,7 @@ const useStyle = makeStyles((theme) => ({
     },
     quickView: {
         position: 'absolute',
-        bottom: theme.spacing(18.75),
+        bottom: theme.spacing(18.25),
         height: theme.spacing(3.5),
         padding: theme.spacing(1),
         background: 'rgba(255, 255, 255, 0.75)',
