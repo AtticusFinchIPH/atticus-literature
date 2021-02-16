@@ -111,8 +111,8 @@ const Bookstore = () => {
                         <div className={classes.table}>
                             {
                                 products.map((item, i) => (
-                                    <div className={classes.item}>
-                                        <CardItem key={i} item={item}/>
+                                    <div key={i} className={classes.item}>
+                                        <CardItem item={item}/>
                                     </div>
                                 ))
                             }
