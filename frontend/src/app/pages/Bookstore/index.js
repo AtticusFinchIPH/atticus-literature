@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { Box, Card, CardActions, CardContent, CardMedia, Container, Fade, IconButton, Typography } from '@material-ui/core';
 import useStyle from './styles';
 import CartOpenContext from '../../../contexts/CartOpenContext';
+import Pagination from '@material-ui/lab/Pagination';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
@@ -81,10 +82,17 @@ CardItem.propTypes = {
 }
 
 const Bookstore = () => {
+    const PRODUCTS_PER_PAGE = 15;
     const classes = useStyle();
     const language = useSelector(state => state.language);
     const { products } = useSelector(state => state.store);
-    console.log(products)
+    const countPages = Math.ceil(products.length/PRODUCTS_PER_PAGE);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [currentProducts, setCurrentProducts] = useState(products.slice(0, PRODUCTS_PER_PAGE));
+    const handlePageChange = (event, value) => {
+        setCurrentPage(value);
+        setCurrentProducts(products.slice((value-1)*PRODUCTS_PER_PAGE, value*PRODUCTS_PER_PAGE));
+    }
     return (
         <div className={classes.root}>
             <Container className={classes.container} maxWidth='xl'>
@@ -110,12 +118,15 @@ const Bookstore = () => {
                     <div className={classes.products}>
                         <div className={classes.table}>
                             {
-                                products.map((item, i) => (
+                                currentProducts.map((item, i) => (
                                     <div key={i} className={classes.item}>
                                         <CardItem item={item}/>
                                     </div>
                                 ))
                             }
+                        </div>
+                        <div className={classes.pagination}>
+                            <Pagination count={countPages} page={currentPage} onChange={handlePageChange} />
                         </div>
                     </div>
                 </div>

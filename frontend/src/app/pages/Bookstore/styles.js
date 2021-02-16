@@ -101,6 +101,10 @@ const useStyle = makeStyles((theme) => ({
         color: '#000',
         transform: 'translateX(-50%) scale(1.05)',
     },
+    pagination: {
+        display: 'flex',
+        justifyContent: 'center',
+    },
 }));
 
 export default useStyle;
