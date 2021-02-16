@@ -13,6 +13,7 @@ import CopyRight from './features/CopyRight';
 import Home from './pages/Home';
 import Product from './pages/Product';
 import Bookstore from './pages/Bookstore';
+import PageNotFound from './pages/PageNotFound';
 
 function App() {
   const language = useSelector(state => state.language);
@@ -34,6 +35,7 @@ function App() {
               <Route exact path="/" component={Home} />
               <Route path="/product/" component={Product} />
               <Route path="/bookstore/" component={Bookstore} />
+              <Route component={PageNotFound} />
             </Switch>
             <CopyRight />
 
