@@ -1,6 +1,8 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+  "description": "UI for Atticus Literature project (user side)",
+  "author": "AtticusFinchIPH (TRAN Van Duc)",
   "proxy": "http://127.0.0.1:5000",
   "private": true,
   "dependencies": {
