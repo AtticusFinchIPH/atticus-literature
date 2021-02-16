@@ -12,6 +12,7 @@ const useStyle = makeStyles((theme) => ({
     },
     noBorderRadius: {
         borderRadius: 0,
+        color: theme.palette.text.main,
     },
     appBar: {
         position: 'fixed',

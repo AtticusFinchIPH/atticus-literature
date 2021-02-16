@@ -13,6 +13,7 @@ const useStyle_Catalogue = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'space-between',
         borderRadius: 0,
+        color: theme.palette.text.main,
         width: '100%',
     },
 }));
