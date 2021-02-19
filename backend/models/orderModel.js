@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 import { OrderEnumStatus, OrderEnumPaymentMethod } from '../enums/orderEnums';
+import { ProductEnumCurrency } from '../enums/productEnums';
+
 const orderSchema = new mongoose.Schema({
     userId: { type: mongoose.Schema.ObjectID, ref: 'User'},
     items: [{
@@ -22,6 +24,11 @@ const orderSchema = new mongoose.Schema({
         required: true,
     },
     total: { type: Number, required: true },
+    currency: { 
+        type: String, 
+        enum: Object.values(ProductEnumCurrency),
+        default: ProductEnumCurrency.USD,
+    },
 })
 
 const orderModel = mongoose.model("Order", orderSchema);

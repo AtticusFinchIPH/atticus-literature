@@ -9,6 +9,12 @@ const ProductEnumOrigin = Object.freeze({
     WESTERN: 'western', 
     OTHER: 'other',
 });
+const ProductEnumLanguage = Object.freeze({
+    VIETNAMESE: 'vietnamese', 
+    CHINESE: 'chinese', 
+    JAPANESE: 'japanese',   
+    ENGLISH: 'english', 
+});
 const ProductEnumGenre = Object.freeze({
     CRIME: "crime", 
     MYSTERY: "mystery",
@@ -26,6 +32,10 @@ const ProductEnumGenre = Object.freeze({
     FANTASY: "fantasy",
     HUMOROUS: "humorous",
     POLITIC: "politic",
-})
+});
+const ProductEnumCurrency = Object.freeze({
+    USD: "usd",
+    VND: "vnd",
+});
 
-export { ProductEnumOrigin, ProductEnumGenre };
+export { ProductEnumOrigin, ProductEnumGenre, ProductEnumCurrency, ProductEnumLanguage };
