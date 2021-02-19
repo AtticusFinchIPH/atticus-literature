@@ -1,41 +1,12 @@
-const ProductEnumOrigin = Object.freeze({
-    VIETNAMESE: 'vietnamese', 
-    CHINESE: 'chinese', 
-    JAPANESE: 'japanese', 
-    ASIAN: 'asian',          
-    AMERICAN: 'american', 
-    ENGLISH: 'english', 
-    RUSSIAN: 'russian', 
-    WESTERN: 'western', 
-    OTHER: 'other',
-});
-const ProductEnumLanguage = Object.freeze({
-    VIETNAMESE: 'vietnamese', 
-    CHINESE: 'chinese', 
-    JAPANESE: 'japanese',   
-    ENGLISH: 'english', 
-});
-const ProductEnumGenre = Object.freeze({
-    CRIME: "crime", 
-    MYSTERY: "mystery",
-    CLASSIC: "classic",
-    SCIENCE: "science",
-    THRILLER: "thriller",
-    FICTION: "fiction",
-    HISTORICAL: "historical",
-    COMTEMPORARY: "contemporary",
-    POETRY: "poetry",
-    PLAY: "play",
-    TEENAGE: "teenage",
-    CHILDREN: "children",
-    COMIC: "comic",
-    FANTASY: "fantasy",
-    HUMOROUS: "humorous",
-    POLITIC: "politic",
-});
-const ProductEnumCurrency = Object.freeze({
-    USD: "usd",
-    VND: "vnd",
-});
+import mongoose from 'mongoose';
+
+const EnumSchema = new mongoose.Schema({
+    _id: { type: String, required: true},
+})
+
+const ProductEnumOrigin = mongoose.model("ProductEnumOrigin", EnumSchema)
+const ProductEnumGenre = mongoose.model("ProductEnumGenre", EnumSchema)
+const ProductEnumCurrency = mongoose.model("ProductEnumCurrency", EnumSchema)
+const ProductEnumLanguage = mongoose.model("ProductEnumLanguage", EnumSchema)
 
 export { ProductEnumOrigin, ProductEnumGenre, ProductEnumCurrency, ProductEnumLanguage };

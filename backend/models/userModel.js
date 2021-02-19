@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import { UserEnumRole } from '../enums/userEnums';
 
 const userSchema = new mongoose.Schema({
     firstName: { type: String, required: true},
@@ -10,9 +9,8 @@ const userSchema = new mongoose.Schema({
     address: { type: String },
     phone: { type: String },
     role: { 
-        type: String, 
-        enum: Object.values(UserEnumRole),
-        default: UserEnumRole.CLIENT,
+        type: String,
+        ref: 'UserEnumRole',
         required: true, 
     },
     favorites: [{type: mongoose.Schema.ObjectId, ref: 'Product'}],

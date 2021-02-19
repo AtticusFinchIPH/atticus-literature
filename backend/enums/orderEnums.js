@@ -1,14 +1,10 @@
-const OrderEnumStatus = Object.freeze({
-    PAID: 'paid', 
-    PROCESSING: 'processing', 
-    SHIPPING: 'shipping', 
-    SHIPPED: 'shipped', 
-    DELIVERED: 'delivered'
+import mongoose from 'mongoose';
+
+const EnumSchema = new mongoose.Schema({
+    _id: { type: String, required: true},
 })
 
-const OrderEnumPaymentMethod = Object.freeze({
-    CASH: 'cash', 
-    VISA: 'visa',
-})
+const OrderEnumStatus = mongoose.model("OrderEnumStatus", EnumSchema)
+const OrderEnumPaymentMethod = mongoose.model("OrderEnumPaymentMethod", EnumSchema)
 
 export { OrderEnumStatus, OrderEnumPaymentMethod };
