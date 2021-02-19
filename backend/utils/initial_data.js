@@ -123,19 +123,19 @@ const initial_data = {
         { _id: OrderEnumPaymentMethod.VISA },
     ],
     authors: [
-        { _id: AC_AUTHOR, },
-        { _id: HK_AUTHOR, },
-        { _id: NNA_AUTHOR, },
-        { _id: AT_AUTHOR, },
-        { _id: HL_AUTHOR, },
-        { _id: JKR_AUTHOR, },
-        { _id: AR_AUTHOR, },
-        { _id: JRRT_AUTHOR, },
+        { name: AC_AUTHOR, },
+        { name: HK_AUTHOR, },
+        { name: NNA_AUTHOR, },
+        { name: AT_AUTHOR, },
+        { name: HL_AUTHOR, },
+        { name: JKR_AUTHOR, },
+        { name: AR_AUTHOR, },
+        { name: JRRT_AUTHOR, },
     ],
     productsInStore: [
         {
             title: "And Then There Was None",
-            authorId: AC_AUTHOR,
+            author: AC_AUTHOR,
             description: "",
             image: "https://res.cloudinary.com/atticusfinchiph/image/upload/v1612553890/atticus-literature/dev/And-Then-There-Was-None_bvd11e.jpg",
             origin: ProductEnumOrigin.ENGLISH,
@@ -147,7 +147,7 @@ const initial_data = {
         },
         {
             title: "Bạch Dạ Hành",
-            authorId: HK_AUTHOR,
+            author: HK_AUTHOR,
             description: "",
             image: "https://res.cloudinary.com/atticusfinchiph/image/upload/v1612553887/atticus-literature/dev/Bach-Da-Hanh_nmmbwx.jpg",
             origin: ProductEnumOrigin.JAPANESE,
@@ -159,7 +159,7 @@ const initial_data = {
         },
         {
             title: "Cho Tôi Xin Một Vé Đi Tuổi Thơ",
-            authorId: NNA_AUTHOR,
+            author: NNA_AUTHOR,
             description: "",
             image: "https://res.cloudinary.com/atticusfinchiph/image/upload/v1612553888/atticus-literature/dev/Cho-Toi-Xin-Mot-Ve-Di-Toui-Tho_m4yru5.jpg",     
             origin: ProductEnumOrigin.VIETNAMESE,
@@ -171,7 +171,7 @@ const initial_data = {
         },
         {
             title: "Diary Of A Wimpy Kid: The Deep End",
-            authorId: AT_AUTHOR,
+            author: AT_AUTHOR,
             description: "",
             image: "https://res.cloudinary.com/atticusfinchiph/image/upload/v1612553887/atticus-literature/dev/DWK-The-Deep-End_znhfxr.jpg",
             origin: ProductEnumOrigin.AMERICAN,
@@ -183,7 +183,7 @@ const initial_data = {
         },
         {
             title: "Go Set A Watchman",
-            authorId: HL_AUTHOR,
+            author: HL_AUTHOR,
             description: "",
             image: "https://res.cloudinary.com/atticusfinchiph/image/upload/v1612553887/atticus-literature/dev/Go-Set-A-Watchman_idipcx.jpg",
             origin: ProductEnumOrigin.AMERICAN,
@@ -195,7 +195,7 @@ const initial_data = {
         },
         {
             title: "Harry Potter And The Philosopher's Stone",
-            authorId: JKR_AUTHOR,
+            author: JKR_AUTHOR,
             description: "",
             image: "https://res.cloudinary.com/atticusfinchiph/image/upload/v1612553889/atticus-literature/dev/Harry-Potter-P1_ujlysr.jpg",
             origin: ProductEnumOrigin.ENGLISH,
@@ -207,7 +207,7 @@ const initial_data = {
         },
         {
             title: "Harry Potter And The Chamber Of Secret",
-            authorId: JKR_AUTHOR,
+            author: JKR_AUTHOR,
             description: "",
             image: "https://res.cloudinary.com/atticusfinchiph/image/upload/v1612553889/atticus-literature/dev/Harry-Potter-P2_d1eaea.jpg",
             origin: ProductEnumOrigin.ENGLISH,
@@ -219,7 +219,7 @@ const initial_data = {
         },
         {
             title: "Harry Potter And The Prison Of Azkaban",
-            authorId: JKR_AUTHOR,
+            author: JKR_AUTHOR,
             description: "",
             image: "https://res.cloudinary.com/atticusfinchiph/image/upload/v1612553891/atticus-literature/dev/Harry-Potter-P3_iz0jgs.jpg",
             origin: ProductEnumOrigin.ENGLISH,
@@ -231,7 +231,7 @@ const initial_data = {
         },
         {
             title: "Harry Potter And The Goblet Of Fire",
-            authorId: JKR_AUTHOR,
+            author: JKR_AUTHOR,
             description: "",
             image: "https://res.cloudinary.com/atticusfinchiph/image/upload/v1612553890/atticus-literature/dev/Harry-Potter-P4_g0taql.jpg",
             origin: ProductEnumOrigin.ENGLISH,
@@ -243,7 +243,7 @@ const initial_data = {
         },
         {
             title: "Harry Potter And The Order Of The Phoenix",
-            authorId: JKR_AUTHOR,
+            author: JKR_AUTHOR,
             description: "",
             image: "https://res.cloudinary.com/atticusfinchiph/image/upload/v1612553890/atticus-literature/dev/Harry-Potter-P5_npllbe.jpg",
             origin: ProductEnumOrigin.ENGLISH,
@@ -255,7 +255,7 @@ const initial_data = {
         },
         {
             title: "Harry Potter And The Half-Blood Prince",
-            authorId: JKR_AUTHOR,
+            author: JKR_AUTHOR,
             description: "",
             image: "https://res.cloudinary.com/atticusfinchiph/image/upload/v1612553891/atticus-literature/dev/Harry-Potter-P6-2_oxjz4o.jpg",
             origin: ProductEnumOrigin.ENGLISH,
@@ -267,7 +267,7 @@ const initial_data = {
         },
         {
             title: "Harry Potter And The Deathly Hallows",
-            authorId: JKR_AUTHOR,
+            author: JKR_AUTHOR,
             description: `Harry Potter is leaving Privet Drive for the last time. But as he climbs into the sidecar of Hagrid’s motorbike and they take to the skies, he knows Lord Voldemort and the Death Eaters will not be far behind.
 
             The protective charm that has kept him safe until now is broken. But the Dark Lord is breathing fear into everything he loves. And he knows he can’t keep hiding.
@@ -285,7 +285,7 @@ const initial_data = {
         },
         {
             title: "Sự Cứu Rỗi Của Thánh Nữ",
-            authorId: HK_AUTHOR,
+            author: HK_AUTHOR,
             description: "",
             image: "https://res.cloudinary.com/atticusfinchiph/image/upload/v1612553891/atticus-literature/dev/Su-Cuu-Roi-Cua-Thanh-Nu_udtdlg.jpg",
             origin: ProductEnumOrigin.JAPANESE,
@@ -297,7 +297,7 @@ const initial_data = {
         },
         {
             title: "The Fountainhead",
-            authorId: AR_AUTHOR,
+            author: AR_AUTHOR,
             description: "",
             image: "https://res.cloudinary.com/atticusfinchiph/image/upload/v1612553892/atticus-literature/dev/The-Fountainhead_c0euxz.jpg",
             origin: ProductEnumOrigin.AMERICAN,
@@ -309,7 +309,7 @@ const initial_data = {
         },
         {
             title: "The Hobbit",
-            authorId: JRRT_AUTHOR,
+            author: JRRT_AUTHOR,
             description: "",
             image: "https://res.cloudinary.com/atticusfinchiph/image/upload/v1612553892/atticus-literature/dev/The-Hobbit_oed7ax.jpg",
             origin: ProductEnumOrigin.ENGLISH,
@@ -321,7 +321,7 @@ const initial_data = {
         },
         {
             title: "To Kill A Mocking Bird",
-            authorId: HL_AUTHOR,
+            author: HL_AUTHOR,
             description: "",
             image: "https://res.cloudinary.com/atticusfinchiph/image/upload/v1612553892/atticus-literature/dev/To-Kill-A-Mocking-Bird-2_b49cmc.jpg",
             origin: ProductEnumOrigin.AMERICAN,

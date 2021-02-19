@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const authorSchema = new mongoose.Schema({
-    _id: { type: String },
+    name: { type: String, required: true },
     image: { type: String },
 })
 

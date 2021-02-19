@@ -16,20 +16,24 @@ import {
 } from "../enums/orderEnums";
 
 const insertEnum = async (list, schema) => {
-    list.map(async (item) => {
-        const existedItem = await schema.findById(item._id);
-        if(existedItem) {
-            console.log(`Enum: "${item._id}" exists, no need to import.`)
-        } else {
-            await schema.create(item).then((err, newItem) => {
-                if(err) {
-                    throw err;
-                } else {
-                    console.log(`Enum: "${newItem._id}" is inserted.`);
-                }
-            });
-        }
-    })
+    try {
+        list.map(async (item) => {
+            const existedItem = await schema.findById(item._id);
+            if(existedItem) {
+                console.log(`Enum: "${item._id}" exists, no need to import.`)
+            } else {
+                await schema.create(item).then((newItem, err) => {
+                    if(err) {
+                        throw err;
+                    } else {
+                        console.log(`Enum: "${newItem._id}" is inserted.`);
+                    }
+                });
+            }
+        })
+    } catch (error) {
+        console.error(`Error occurs: ${error}`);
+    }
 }
 
 const createInitialEnums = async () => {
@@ -59,12 +63,12 @@ const createInitialEnums = async () => {
             promiseOrderStatus,
             promiseOrderPaymentMethodes,
         ]).then(values => {
-            console.log('All initial enumerations are inserted in DB!');
+            
         }, error => {
-            console.error(error);
+            console.error(`Error occurs: ${error}`);
         });
     } catch (error) {
-        console.error(error);  
+        console.error(`Error occurs: ${error}`); 
     }
 }
 
@@ -72,22 +76,22 @@ const createInitialAuthors = async () => {
     const authorList = initial_data.authors;
     try {      
         await Promise.all(authorList.map(async (author) => {
-            const existedAuthor = await Author.findById(author._id);
+            const existedAuthor = await Author.findOne({name: author.name});
             if(existedAuthor) {
-                console.log(`Author: "${author._id}" exists, no need to import.`)
+                console.log(`Author: "${author.name}" exists, no need to import.`)
             } else {
-                await Author.create(author).then((err, newAuthor) => {
+                await Author.create(author).then((newAuthor, err) => {
                     if(err) {
                         throw err;
                     } else {
-                        console.log(`Author: "${newAuthor._id}" is inserted in Author Schema.`);
+                        console.log(`Author: "${newAuthor.name}" is inserted in Author Schema.`);
                     }
                 });
             }
         }))
         console.log('All initial authors are inserted in DB!');
     } catch (error) {
-        console.error(error);
+        console.error(`Error occurs: ${error}`);
     }
 }
 
@@ -98,19 +102,27 @@ const createInitialProducts = async () => {
             const existedItem = await Product.findOne({title: item.title});
             if(existedItem){
                 console.log(`Product: "${item.title}" exists, no need to import.`)
-            } else {          
-                await Product.create(item).then((err, newItem) => {
-                    if(err) {
-                        throw err
-                    } else {
-                        console.log(`Product: "${newItem.title}" is inserted in Product Schema.`);
-                    }
-                });
+            } else {
+                const author = await Author.findOne({name: item.author});
+                if(author) {
+                    item.authorId = author._id;
+                    delete item.author;    
+                    await Product.create(item).then((newItem, err) => {
+                        if(err) {
+                            throw err
+                        } else {
+                            console.log(`Product: "${newItem.title}" is inserted in Product Schema.`);
+                        }
+                    });
+                } else {
+                    console.log(`Issue in creating Product: "${item.title}".
+                    There is no author named: "${item.author}"!`)
+                }  
             }
         }))
         console.log('All initial products are inserted in DB!');
     } catch (error) {
-        console.error(error);
+        console.error(`Error occurs: ${error}`);
     }
 }
 
