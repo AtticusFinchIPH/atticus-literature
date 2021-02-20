@@ -1,4 +1,11 @@
+import axios from 'axios';
 import {
+    GET_BESTSELLERS_REQUEST,
+    GET_BESTSELLERS_SUCCESS,
+    GET_BESTSELLERS_FAIL,
+    GET_RECOMMENDEDS_REQUEST,
+    GET_RECOMMENDEDS_SUCCESS,
+    GET_RECOMMENDEDS_FAIL,
     ADD_CART_LOCAL,
     UPDATE_CART_LOCAL,
     REMOVE_CART_LOCAL,
@@ -6,6 +13,26 @@ import {
     SAVE_CART_FAIL,
     ADD_CART_MULTI_LOCAL,
 } from '../constants/productConstants';
+
+const getBestsellers = () => async (dispatch) => {
+    dispatch({type: GET_BESTSELLERS_REQUEST});
+    try {
+        const {data} = await axios.get('/api/products/bestsellers');
+        dispatch({ type: GET_BESTSELLERS_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({ type: GET_BESTSELLERS_FAIL, payload: error.response?.data?.msg || error.message });
+    }
+}
+
+const getRecommendeds = () => async (dispatch) => {
+    dispatch({type: GET_RECOMMENDEDS_REQUEST});
+    try {
+        const {data} = await axios.get('/api/products/recommendeds');
+        dispatch({ type: GET_RECOMMENDEDS_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({ type: GET_RECOMMENDEDS_FAIL, payload: error.response?.data?.msg || error.message });
+    }
+}
 
 const addToCart = (product) => async (dispatch, getState) => {
     dispatch({ type: ADD_CART_LOCAL, payload: {product} });
@@ -23,4 +50,4 @@ const removeFromLocalCart = (productId) => async (dispatch, getState) => {
     dispatch({ type: REMOVE_CART_LOCAL, payload: {productId} });
 }
 
-export { addToCart, addMultipleToCart, updateLocalCart, removeFromLocalCart }
+export { getBestsellers, getRecommendeds, addToCart, addMultipleToCart, updateLocalCart, removeFromLocalCart }

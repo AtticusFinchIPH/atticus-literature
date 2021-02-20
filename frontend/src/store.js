@@ -9,8 +9,8 @@ const cartList = Cookie.getJSON('cartList') || [];
 
 const initialState = {
     language: navigator.language === 'vi' ? 'vi' : 'en',
-    bestsellerProducts: { bestsellers: data_sample.bestsellers },
-    recommendedProducts: { recommendeds: data_sample.recommendeds },
+    bestsellerProducts: { bestsellers: [] },
+    recommendedProducts: { recommendeds: [] },
     cart: { cartList },
     viewingProduct: { product: data_sample.viewingProduct },
     store: { products: data_sample.products },

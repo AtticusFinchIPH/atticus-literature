@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
@@ -19,7 +19,7 @@ import spinnerImage from '../../../images/infinitySpinner.gif';
 import authorAvatar from '../../../images/author-avatar.jpg';
 
 import CartOpenContext from '../../../contexts/CartOpenContext';
-import { addToCart } from '../../../actions/productActions';
+import { addToCart, getBestsellers, getRecommendeds } from '../../../actions/productActions';
 
 const CARD_ITEM_HEIGHT = '450px';
 const CARD_ITEM_WIDTH = '200px';
@@ -196,11 +196,16 @@ MutipleSlidesPerView.propTypes = {
 
 const Home = () => {
     const classes = useStyle();
+    const dispatch = useDispatch();
     const {isDarkMode} = useContext(ThemeContext);
     const bestsellerProducts = useSelector(state => state.bestsellerProducts);
     const { bestsellers, loading: bestsellersLoading } = useMemo(() => bestsellerProducts, [bestsellerProducts]);
     const recommendedProducts = useSelector(state => state.recommendedProducts);
     const { recommendeds, loading: recommendedsLoading } = useMemo(() => recommendedProducts, [recommendedProducts]);
+    useEffect(() => {
+        dispatch(getBestsellers());
+        dispatch(getRecommendeds());
+    }, []);
     return(
         <Container className={classes.container} maxWidth='xl'>
             <Paper className={classes.cover}>

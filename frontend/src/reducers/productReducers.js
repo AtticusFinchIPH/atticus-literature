@@ -5,9 +5,9 @@ import {
     GET_BESTSELLERS_REQUEST,
     GET_BESTSELLERS_SUCCESS,
     GET_BESTSELLERS_FAIL,
-    GET_RECOMMENDED_REQUEST,
-    GET_RECOMMENDED_SUCCESS,
-    GET_RECOMMENDED_FAIL,
+    GET_RECOMMENDEDS_REQUEST,
+    GET_RECOMMENDEDS_SUCCESS,
+    GET_RECOMMENDEDS_FAIL,
     GET_CART_REQUEST,
     ADD_CART_LOCAL,
     ADD_CART_MULTI_LOCAL,
@@ -26,7 +26,7 @@ import {
     BOOK_GENRES_FAIL,
 } from '../constants/productConstants';
 
-const bestsellersReducer = (state = {}, action) => {
+const bestsellersReducer = (state = {bestsellers: []}, action) => {
     switch (action.type) {
         case GET_BESTSELLERS_REQUEST:
             return {...state, loading: true};
@@ -39,13 +39,13 @@ const bestsellersReducer = (state = {}, action) => {
     }
 }
 
-const recommendedsReducer = (state = {}, action) => {
+const recommendedsReducer = (state = {recommendeds: []}, action) => {
     switch (action.type) {
-        case GET_RECOMMENDED_REQUEST:
+        case GET_RECOMMENDEDS_REQUEST:
             return {...state, loading: true};
-        case GET_RECOMMENDED_SUCCESS:
+        case GET_RECOMMENDEDS_SUCCESS:
             return { loading: false, recommendeds: action.payload };
-        case GET_RECOMMENDED_FAIL:
+        case GET_RECOMMENDEDS_FAIL:
             return { ...state, loading: false, error: action.payload };
         default:
             return state;

@@ -207,7 +207,7 @@ const initial_data = {
             origin: ProductEnumOrigin.ENGLISH,
             language: ProductEnumLanguage.ENGLISH,
             genres: [ProductEnumGenre.FANTASY, ProductEnumGenre.TEENAGE],
-            categories: [RECOMMENDEDS, RECOMMENDEDS],
+            categories: [RECOMMENDEDS, BESTSELLERS],
             currency: ProductEnumCurrency.USD,
             price: 18.26,
             inStock: 300,
