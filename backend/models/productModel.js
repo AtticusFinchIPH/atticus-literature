@@ -22,6 +22,12 @@ const productSchema = new mongoose.Schema({
             required: true,
         },
     ],
+    categories: [
+        {
+            type: String,
+            enum: ['bestsellers', 'recommendeds'],
+        }
+    ],
     publisher: { type: String },
     publishYear: { type: Date },
     price: { type: Number, required: true },
