@@ -30,6 +30,7 @@ const useStyle = makeStyles((theme) => ({
         },
     },
     catalogue: {
+        zIndex: '10',
         [theme.breakpoints.down('sm')]: {
             display: 'none',
         },
