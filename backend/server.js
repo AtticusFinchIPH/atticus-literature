@@ -8,6 +8,7 @@ import morgan from "morgan";
 import userRoute from "./routes/userRoute";
 import productRoute from "./routes/productRoute";
 import orderRoute from "./routes/orderRoute";
+import genreRoute from "./routes/genreRoute";
 import { 
     createInitialEnums, 
     createInitialAuthors, 
@@ -36,6 +37,7 @@ app.use(morgan(" :method :url :req[header] - :res[header]"));
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
 app.use("/api/orders", orderRoute);
+app.use("/api/genres", genreRoute);
 app.get("/api", (req, res) => {
     res.send("Atticus Literature's api is running");
 });

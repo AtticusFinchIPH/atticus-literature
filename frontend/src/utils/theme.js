@@ -11,6 +11,8 @@ const LIGHT_GRAYISH_BLUE = "hsl(220, 16%, 96%)";
 const LIGHT_WHITE_BLUE = "hsl(220, 16%, 50%)";
 const DARK_GRAY = "#303030";
 const DARK_BLUE = 'rgb(14,52,90)';
+const LIGHT_BUTTON_HOVER = "rgba(0, 0, 0, 0.04)";
+const DARK_BUTTON_HOVER = "rgba(0, 0, 0, 0.3)";
 
 const commonTheme = {
   typography: {
@@ -54,6 +56,9 @@ const lightTheme = createMuiTheme({
       main: DARK_BLUE,
       hover: LIGHT_WHITE_BLUE,
     },
+    buttonHover: {
+      main: LIGHT_BUTTON_HOVER,
+    },
   }
 });
 const darkTheme = createMuiTheme({
@@ -77,6 +82,9 @@ const darkTheme = createMuiTheme({
     icon: {
       main: LIGHT_WHITE,
       hover: LIGHT_WHITE_BLUE,
+    },
+    buttonHover: {
+      main: DARK_BUTTON_HOVER,
     },
   }
 });

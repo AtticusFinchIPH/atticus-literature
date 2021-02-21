@@ -12,6 +12,9 @@ import {
     SAVE_CART_SUCCESS,
     SAVE_CART_FAIL,
     ADD_CART_MULTI_LOCAL,
+    BOOK_GENRES_REQUEST,
+    BOOK_GENRES_SUCCESS,
+    BOOK_GENRES_FAIL,
 } from '../constants/productConstants';
 
 const getBestsellers = () => async (dispatch) => {
@@ -50,4 +53,14 @@ const removeFromLocalCart = (productId) => async (dispatch, getState) => {
     dispatch({ type: REMOVE_CART_LOCAL, payload: {productId} });
 }
 
-export { getBestsellers, getRecommendeds, addToCart, addMultipleToCart, updateLocalCart, removeFromLocalCart }
+const getBookGenres = () => async (dispatch) => {
+    dispatch({type: BOOK_GENRES_REQUEST});
+    try {
+        const {data} = await axios.get('/api/genres');
+        dispatch({ type: BOOK_GENRES_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({ type: BOOK_GENRES_FAIL, payload: error.response?.data?.msg || error.message });
+    }
+}
+
+export { getBestsellers, getRecommendeds, addToCart, addMultipleToCart, updateLocalCart, removeFromLocalCart, getBookGenres }

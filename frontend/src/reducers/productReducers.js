@@ -98,8 +98,8 @@ const cartReducer = (state = { cartList: Cookie.getJSON('cartList') || [] }, act
 }
 
 const viewingProductReducer = (state = {product: null}, action) => {
-    switch (action.key) {
-        case VIEW_PRODUCT_REQUEST:        
+    switch (action.type) {
+        case VIEW_PRODUCT_REQUEST:   
             return {...state, loading: true };
         case VIEW_PRODUCT_SUCCESS:        
             return { product: action.payload, loading: false };
@@ -111,7 +111,7 @@ const viewingProductReducer = (state = {product: null}, action) => {
 }
 
 const storeReducer = (state = { products: []}, action) => {
-    switch (action.key) {
+    switch (action.type) {
         case VIEW_STORE_REQUEST:
             return {...state, loading: true };
         case VIEW_STORE_SUCCESS:
@@ -123,12 +123,12 @@ const storeReducer = (state = { products: []}, action) => {
     }
 }
 
-const bookGenresReducer = (state = { genres: []}, action) => {
-    switch (action.key) {
+const bookGenresReducer = (state = {genres: []}, action) => {
+    switch (action.type) {
         case BOOK_GENRES_REQUEST:
-            return {...state, loading: true };
+            return {...state, loading: true};
         case BOOK_GENRES_SUCCESS:
-            return { genres: action.payload, loading: false };
+            return { loading: false, genres: action.payload };
         case BOOK_GENRES_FAIL:
             return { ...state, loading: false, error: action.payload };
         default:
