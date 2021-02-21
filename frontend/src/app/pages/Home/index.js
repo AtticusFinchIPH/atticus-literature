@@ -69,7 +69,20 @@ const CardItem = (props) => {
                 </IconButton>
             </CardActions>
         </Card>
-        <Fade in={isShown} timeout={{appear: 100, enter: 300, exit: 100}} unmountOnExit>
+        <Hidden smDown>
+            <Fade in={isShown} timeout={{appear: 100, enter: 300, exit: 100}} unmountOnExit>
+                <Box className={classes.quickView} 
+                    onMouseEnter={() => setIsShown(true)}
+                    onMouseLeave={() => setIsShown(false)}
+                    onClick={redirect}
+                >
+                    <Typography variant='body1'>
+                        {priceDeclare}
+                    </Typography>
+                </Box>       
+            </Fade>
+        </Hidden>
+        <Hidden mdUp>
             <Box className={classes.quickView} 
                 onMouseEnter={() => setIsShown(true)}
                 onMouseLeave={() => setIsShown(false)}
@@ -78,8 +91,8 @@ const CardItem = (props) => {
                 <Typography variant='body1'>
                     {priceDeclare}
                 </Typography>
-            </Box>       
-        </Fade>
+            </Box>  
+        </Hidden>
         </>
     )
 }

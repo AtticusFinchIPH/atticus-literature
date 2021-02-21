@@ -122,9 +122,11 @@ const useStyle = makeStyles((theme) => ({
         boxShadow: 'none',
         cursor: 'pointer',
         transition: 'all 150ms ease-in-out',
-        '&:hover': {
-            transform: 'scale(1.05)',
-        }
+        [theme.breakpoints.up('sm')]: {
+            '&:hover': {
+                transform: 'scale(1.05)',
+            },
+        },
     },
     cardMedia: {
         height: theme.spacing(37.5),
@@ -151,14 +153,17 @@ const useStyle = makeStyles((theme) => ({
     },
     quickView: {
         position: 'absolute',
-        bottom: theme.spacing(18.25),
+        bottom: theme.spacing(18.75),
         height: theme.spacing(3.5),
         padding: theme.spacing(1),
         background: 'rgba(255, 255, 255, 0.75)',
         width: '184px', // CARD_ITEM_WIDTH - padding*2
         cursor: 'pointer',
         color: '#000',
-        transform: 'scale(1.05)',
+        [theme.breakpoints.up('sm')]: {
+            bottom: theme.spacing(18.25),
+            transform: 'scale(1.05)',
+        },
     },
     author: {
         [theme.breakpoints.up('md')]: {
