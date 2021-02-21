@@ -15,6 +15,9 @@ import {
     BOOK_GENRES_REQUEST,
     BOOK_GENRES_SUCCESS,
     BOOK_GENRES_FAIL,
+    VIEW_STORE_REQUEST,
+    VIEW_STORE_SUCCESS,
+    VIEW_STORE_FAIL,
 } from '../constants/productConstants';
 
 const getBestsellers = () => async (dispatch) => {
@@ -34,6 +37,18 @@ const getRecommendeds = () => async (dispatch) => {
         dispatch({ type: GET_RECOMMENDEDS_SUCCESS, payload: data });
     } catch (error) {
         dispatch({ type: GET_RECOMMENDEDS_FAIL, payload: error.response?.data?.msg || error.message });
+    }
+}
+
+const getStore = ({keyword, genre, origin, skip}) => async (dispatch) => {
+    dispatch({type: VIEW_STORE_REQUEST});
+    try {
+        const {data} = await axios.post('/api/products/bookstore', {
+            keyword, genre, origin, skip
+        });
+        dispatch({ type: VIEW_STORE_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({ type: VIEW_STORE_FAIL, payload: error.response?.data?.msg || error.message });
     }
 }
 
@@ -63,4 +78,4 @@ const getBookGenres = () => async (dispatch) => {
     }
 }
 
-export { getBestsellers, getRecommendeds, addToCart, addMultipleToCart, updateLocalCart, removeFromLocalCart, getBookGenres }
+export { getBestsellers, getRecommendeds, getStore, addToCart, addMultipleToCart, updateLocalCart, removeFromLocalCart, getBookGenres }

@@ -13,7 +13,7 @@ const initialState = {
     recommendedProducts: { recommendeds: [] },
     cart: { cartList },
     viewingProduct: { product: data_sample.viewingProduct },
-    store: { products: data_sample.products },
+    store: { products: [] },
     bookGenres: { genres: [] }
     // userSignin: null,
 };

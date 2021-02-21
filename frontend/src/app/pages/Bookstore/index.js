@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
@@ -10,7 +10,7 @@ import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutline
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 import Catalogue from './Catalogue';
-import { addToCart } from '../../../actions/productActions';
+import { addToCart, getStore } from '../../../actions/productActions';
 
 const CardItem = (props) => {
     const classes = useStyle();
@@ -84,15 +84,23 @@ CardItem.propTypes = {
 const Bookstore = () => {
     const PRODUCTS_PER_PAGE = 15;
     const classes = useStyle();
+    const dispatch = useDispatch();
+    const catalogueComponent = useMemo(() => <Catalogue />, []);
     const language = useSelector(state => state.language);
     const { products } = useSelector(state => state.store);
-    const countPages = Math.ceil(products.length/PRODUCTS_PER_PAGE);
+    let countPages = Math.ceil(products.length/PRODUCTS_PER_PAGE) > 0 ? Math.ceil(products.length/PRODUCTS_PER_PAGE) : 1;
     const [currentPage, setCurrentPage] = useState(1);
     const [currentProducts, setCurrentProducts] = useState(products.slice(0, PRODUCTS_PER_PAGE));
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
         setCurrentProducts(products.slice((value-1)*PRODUCTS_PER_PAGE, value*PRODUCTS_PER_PAGE));
     }
+    useEffect(() => {
+        dispatch(getStore({}));
+    }, []);
+    useEffect(() => {
+        setCurrentProducts(products.slice(0, PRODUCTS_PER_PAGE));
+    }, [products])
     return (
         <div className={classes.root}>
             <Container className={classes.container} maxWidth='xl'>
@@ -113,7 +121,7 @@ const Bookstore = () => {
                 </div>
                 <div className={classes.content}>
                     <div className={classes.catalogue}>
-                        <Catalogue />
+                        {catalogueComponent}
                     </div>
                     <div className={classes.products}>
                         <div className={classes.table}>

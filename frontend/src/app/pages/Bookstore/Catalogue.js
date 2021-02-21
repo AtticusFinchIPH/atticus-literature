@@ -91,9 +91,10 @@ const Catalogue = () => {
                         {
                             genres.map((genre, i) => (
                                 <IconButton
+                                    key={i}
                                     className={clsx(classes.subtitle, classes.buttonHover)}
                                     >
-                                    <Typography key={i} variant='body1'>
+                                    <Typography variant='body1'>
                                         <FormattedMessage id={genre._id} defaultMessage={genre._id} />
                                     </Typography>
                                 </IconButton>
