@@ -6,13 +6,41 @@ import Product from "../models/productModel";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-    try {
-        let products = await Product.find()
+const findAllProducts = async(skip) => {
+    if(!skip) skip = 0;
+    let products = await Product.find()
                                 .populate('authorId', 'name')
-                                .limit(45)
-                                .lean(true)
-                                .exec();
+                                .skip(skip).limit(45)
+                                .lean(true).exec();
+    return products;
+}
+
+const findGenreOrOrigin = async(genre, origin, skip) => {
+    if(!skip) skip = 0;
+    let products = await Product.find({ $or: [{genres: genre}, {origin}]})
+                                .populate('authorId', 'name')
+                                .skip(skip).limit(45)
+                                .lean(true).exec();
+    return products;
+}
+
+const findTitleByKeyword = async(keyword, skip) => {
+    if(!skip) skip = 0;
+    let products = await Product.find({title: {$regex: keyword, $options: "i"}})
+                                .populate('authorId', 'name')
+                                .skip(skip).limit(45)
+                                .lean(true).exec();
+    return products;
+}
+
+router.post("/bookstore", async (req, res) => {
+    const { keyword, genre, origin, skip } = req.body;
+    console.log( keyword, genre, origin, skip )
+    try {
+        let products = [];
+        if(keyword?.length > 0) products = await findTitleByKeyword(keyword, skip);
+        else if(genre || origin) products = await findGenreOrOrigin(genre, origin, skip);
+        else products = await findAllProducts(skip);
         products = products.map(product => {
             const reviewsCount = product.reviews.length;
             product.stars = reviewsCount > 0 
@@ -26,7 +54,7 @@ router.get("/", async (req, res) => {
         })
         return res.status(200).send(products);
     } catch (error) {
-        return res.status(500).json({ msg: "Error in getting all products"});
+        return res.status(500).json({ msg: "Error in getting products"});
     }
 })
 
