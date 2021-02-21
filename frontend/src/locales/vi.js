@@ -63,7 +63,7 @@ const vi = defineMessages({
     english: 'Anh',
     russian: 'Nga',
     western: 'Các nước phương Tây khác',
-
+    no_result: 'Mặt hàng hiện không tồn tại',
 })
 
 export default vi;

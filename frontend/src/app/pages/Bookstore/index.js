@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Box, Card, CardActions, CardContent, CardMedia, Container, Fade, IconButton, Typography } from '@material-ui/core';
 import useStyle from './styles';
+import boxEmptyImage from '../../../images/box_empty.png';
 import CartOpenContext from '../../../contexts/CartOpenContext';
 import Pagination from '@material-ui/lab/Pagination';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
@@ -124,18 +125,35 @@ const Bookstore = () => {
                         {catalogueComponent}
                     </div>
                     <div className={classes.products}>
-                        <div className={classes.table}>
-                            {
-                                currentProducts.map((item, i) => (
-                                    <div key={i} className={classes.item}>
-                                        <CardItem item={item}/>
-                                    </div>
-                                ))
-                            }
-                        </div>
-                        <div className={classes.pagination}>
-                            <Pagination count={countPages} page={currentPage} onChange={handlePageChange} />
-                        </div>
+                       {
+                           products.length > 0
+                           ?
+                           <>
+                           <div className={classes.table}>
+                                {
+                                    currentProducts.map((item, i) => (
+                                        <div key={i} className={classes.item}>
+                                            <CardItem item={item}/>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                            <div className={classes.pagination}>
+                                <Pagination count={countPages} page={currentPage} onChange={handlePageChange} />
+                            </div>
+                            </>
+                            :
+                            <div className={classes.emptySection}>
+                                <div className={classes.emptyImage}>
+                                    <img src={boxEmptyImage} alt="Box empty" />
+                                </div>
+                                <div>
+                                <Typography>
+                                    <FormattedMessage id='no_result' defaultMessage='Currently no result' />
+                                </Typography>
+                                </div>
+                            </div>
+                       }
                     </div>
                 </div>
             </Container>

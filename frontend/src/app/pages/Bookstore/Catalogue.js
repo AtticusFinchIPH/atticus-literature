@@ -6,7 +6,7 @@ import { Collapse, IconButton, Typography } from '@material-ui/core';
 import MinusIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import { useEffect, useState } from 'react';
-import { getBookGenres } from '../../../actions/productActions';
+import { getBookGenres, getStore } from '../../../actions/productActions';
 
 const Catalogue = () => {
     const classes = useStyle_Catalogue();
@@ -26,6 +26,7 @@ const Catalogue = () => {
         setAsianOpen(false);
         setWesternOpen(false);
         setGenresOpen(false);
+        getCollection({});
     };
     const sellectVietnamese = (e) => {
         setAllbooksOpen(false);
@@ -33,6 +34,7 @@ const Catalogue = () => {
         setAsianOpen(false);
         setWesternOpen(false);
         setGenresOpen(false);
+        getCollection({origin: 'vietnamese'});
     };
     const sellectAsian = (e) => {
         setAllbooksOpen(false);
@@ -55,6 +57,9 @@ const Catalogue = () => {
         setWesternOpen(false);
         setGenresOpen(genresOpen ? false : true);
     };
+    const getCollection = ({keyword, genre, origin}) => {
+        dispatch(getStore({keyword, genre, origin}));
+    }
     return(
         <div className={classes.container}>
             <div className={classes.section}>
@@ -91,7 +96,7 @@ const Catalogue = () => {
                         {
                             genres.map((genre, i) => (
                                 <IconButton
-                                    key={i}
+                                    key={i} onClick={e => getCollection({genre: genre._id})}
                                     className={clsx(classes.subtitle, classes.buttonHover)}
                                     >
                                     <Typography variant='body1'>
@@ -134,6 +139,7 @@ const Catalogue = () => {
                     <div className={classes.subsection}>
                         <IconButton
                             className={clsx(classes.subtitle, classes.buttonHover)}
+                            onClick={e => getCollection({origin: 'japanese'})}
                             >
                             <Typography variant='body1'>
                                 <FormattedMessage id='japanese' defaultMessage='Japanese' />
@@ -141,6 +147,7 @@ const Catalogue = () => {
                         </IconButton>
                         <IconButton
                             className={clsx(classes.subtitle, classes.buttonHover)}
+                            onClick={e => getCollection({origin: 'chinese'})}
                             >
                             <Typography variant='body1'>
                                 <FormattedMessage id='chinese' defaultMessage='Chinese' />
@@ -148,6 +155,7 @@ const Catalogue = () => {
                         </IconButton>
                         <IconButton
                             className={clsx(classes.subtitle, classes.buttonHover)}
+                            onClick={e => getCollection({origin: 'asian'})}
                             >
                             <Typography variant='body1'>
                                 <FormattedMessage id='asian' defaultMessage='Other' />
@@ -176,6 +184,7 @@ const Catalogue = () => {
                     <div className={classes.subsection}>
                         <IconButton
                             className={clsx(classes.subtitle, classes.buttonHover)}
+                            onClick={e => getCollection({origin: 'american'})}
                             >
                             <Typography variant='body1'>
                                 <FormattedMessage id='american' defaultMessage='American' />
@@ -183,6 +192,7 @@ const Catalogue = () => {
                         </IconButton>
                         <IconButton
                             className={clsx(classes.subtitle, classes.buttonHover)}
+                            onClick={e => getCollection({origin: 'english'})}
                             >
                             <Typography variant='body1'>
                                 <FormattedMessage id='english' defaultMessage='English' />
@@ -190,6 +200,7 @@ const Catalogue = () => {
                         </IconButton>
                         <IconButton
                             className={clsx(classes.subtitle, classes.buttonHover)}
+                            onClick={e => getCollection({origin: 'russian'})}
                             >
                             <Typography variant='body1'>
                                 <FormattedMessage id='russian' defaultMessage='Russian' />
@@ -197,6 +208,7 @@ const Catalogue = () => {
                         </IconButton>
                         <IconButton
                             className={clsx(classes.subtitle, classes.buttonHover)}
+                            onClick={e => getCollection({origin: 'western'})}
                             >
                             <Typography variant='body1'>
                                 <FormattedMessage id='western' defaultMessage='Other' />

@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/styles';
-import { FONT_F_PLAYFAIR, LIGHT_WHITE } from '../../../utils/theme';
+import { FONT_F_PLAYFAIR } from '../../../utils/theme';
 
 const useStyle = makeStyles((theme) => ({
     root: {
@@ -105,6 +105,23 @@ const useStyle = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
     },
+    emptySection: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        [theme.breakpoints.up('sm')]: {
+            paddingTop: theme.spacing(8),
+        },
+        [theme.breakpoints.up('md')]: {
+            position: 'absolute',
+            width: '100%',
+            transform: 'translateX(-360px)', // catalogue width + 2*grid space
+        }
+    },
+    emptyImage: {
+        width: theme.spacing(32),
+        height: theme.spacing(32),
+    }
 }));
 
 export default useStyle;
