@@ -66,6 +66,7 @@ const en = defineMessages({
     russian: 'Russian',
     western: 'Other Western',
     no_result: 'Currently no result',
+    search: 'Search',
 })
 
 export default en;

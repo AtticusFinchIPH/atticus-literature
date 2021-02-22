@@ -1,19 +1,49 @@
 
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import useStyle_Catalogue from './Catalogue.styles';
 import clsx from 'clsx';
-import { Collapse, IconButton, Typography } from '@material-ui/core';
+import { Collapse, IconButton, InputBase, Typography } from '@material-ui/core';
 import MinusIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
-import { useEffect, useState } from 'react';
+import SearchIcon from '@material-ui/icons/Search';
 import { getBookGenres } from '../../../actions/productActions';
+
+const DesignPlacehoder = ({ intl, handleSearch, sendKeyword }) => {
+    const classes = useStyle_Catalogue();
+    const placeholder = intl.formatMessage({ id: 'search', defaultMessage: 'Search' });
+    const [inputValue, setInputValue] = useState('');
+    const clickSearch = () => {
+        setInputValue(sendKeyword(inputValue));
+    }
+    return (
+        <>
+        <InputBase placeholder={`${placeholder}...`}
+            classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+            }}
+            inputProps={{ 'aria-label': 'search' }}
+            value={inputValue}
+            onChange={e => setInputValue(e.target.value)}
+            onKeyPress={e => handleSearch(e)}
+        />
+        <IconButton className={clsx(classes.buttonHover, classes.searchIcon)} onClick={clickSearch}>
+            <SearchIcon />
+        </IconButton >
+        </>
+    );
+}
 
 const Catalogue = () => {
     const classes = useStyle_Catalogue();
     const history = useHistory()
     const dispatch = useDispatch();
+    const SearchComponent = injectIntl(({intl}) => 
+        <DesignPlacehoder intl={intl} handleSearch={handleSearch} sendKeyword={sendKeyword}/>
+    );
     const { genres } = useSelector(state => state.bookGenres);
     const [allbooksOpen, setAllbooksOpen] = useState(true);
     const [vietnameseOpen, setVietnameseOpen] = useState(false);
@@ -23,6 +53,17 @@ const Catalogue = () => {
     useEffect(() => {
         dispatch(getBookGenres());
     }, []);
+    const handleSearch = (e) => {
+        // Activate on Enter key
+        if (e.which === 13) {
+            getCollection({keyword: e.target.value});
+            e.target.value = '';
+        }
+    };
+    const sendKeyword = (keyword) => {
+        getCollection({keyword});
+        return '';
+    }
     const sellectAllBooks = (e) => {
         setAllbooksOpen(true);
         setVietnameseOpen(false);
@@ -71,6 +112,9 @@ const Catalogue = () => {
     }
     return(
         <div className={classes.container}>
+            <div className={clsx( classes.search)}>
+                <SearchComponent />
+            </div>
             <div className={classes.section}>
                 <IconButton 
                     className={clsx(classes.title, classes.buttonHover, allbooksOpen && classes.onSellected)}

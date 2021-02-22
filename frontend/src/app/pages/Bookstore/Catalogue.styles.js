@@ -17,6 +17,30 @@ const useStyle_Catalogue = makeStyles((theme) => ({
         paddingBottom: theme.spacing(1),
         borderBottom: 'hsl(220, 16%, 50%) solid 1px',
     },
+    search: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        color: theme.palette.text.main,
+        border: 'hsl(220, 16%, 50%) solid 1px',
+        borderRadius: theme.spacing(3),
+        padding: theme.spacing(0, 0, 0, 1.5),
+    },
+    inputRoot: {
+        color: 'inherit',
+    },
+    inputInput: {
+        width: '100%',
+        [theme.breakpoints.up('md')]: {
+            width: '20ch',
+        },
+    },
+    searchIcon: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: theme.palette.text.main,
+    },
     title: {
         display: 'flex',
         justifyContent: 'space-between',
