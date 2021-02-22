@@ -66,8 +66,8 @@ const PageNotFound = () => {
     return(
         <div className={classes.root}>
             <div className={classes.container}>
-                <img src={error_image} className={classes.img}/>
-                <a className={classes.attribute} href="http://www.freepik.com" target='_blank'>
+                <img src={error_image} alt="Broken smartphone" className={classes.img}/>
+                <a className={classes.attribute} href="http://www.freepik.com" target='_blank' rel="noreferrer">
                     Image designed by roserodionova / Freepik
                 </a>
                 <Link to='/' className={classes.linkHome}>

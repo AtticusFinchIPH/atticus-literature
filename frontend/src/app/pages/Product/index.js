@@ -29,7 +29,7 @@ const Product = () => {
     const [expandedPolicy, setExpandedPolicy] = useState(false);
     const { setCartOpen } = useContext(CartOpenContext);
     const viewingProduct = useSelector(state => state.viewingProduct);
-    const { product, loading, error } = viewingProduct;
+    const { product, error } = viewingProduct;
     let priceDeclare;
     if(product) {
         switch (product.currency) {
@@ -236,14 +236,14 @@ const Product = () => {
                     ?
                     <div className={classes.imageSection}>
                         <div className={classes.errorImage}/>
-                        <a className={classes.attribute} href="http://www.freepik.com" target='_blank'>
+                        <a className={classes.attribute} href="http://www.freepik.com" target='_blank' rel="noreferrer">
                             Image designed by pch.vector / Freepik
                         </a>
                     </div>
                     :
                     <div className={classes.imageSection}>
                         <div className={classes.loadingImage}/>
-                        <a className={classes.attribute} href="http://www.freepik.com" target='_blank'>
+                        <a className={classes.attribute} href="http://www.freepik.com" target='_blank' rel="noreferrer">
                             Image designed by vectorjuice / Freepik
                         </a>
                     </div>
