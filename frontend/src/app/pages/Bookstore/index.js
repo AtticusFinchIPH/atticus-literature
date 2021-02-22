@@ -1,5 +1,5 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
@@ -108,7 +108,6 @@ const Bookstore = () => {
             const value = equation.split('=')[1];
             searchObj[key] = value;
         })
-        const { keyword, genre, origin, skip } = searchObj;
         dispatch(getStore(searchObj));
     }, [search]);
     useEffect(() => {

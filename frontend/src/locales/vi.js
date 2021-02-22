@@ -4,7 +4,7 @@ const vi = defineMessages({
     my_account: 'Tài Khoản',
     setting: 'Cài Đặt',
     sign_out: 'Đăng Xuất',
-    search: 'Tìm Kiếm',
+    search: 'Tìm kiếm',
     quick_view: 'Xem',
 
     home: 'Trang chủ',
@@ -66,7 +66,6 @@ const vi = defineMessages({
     russian: 'Nga',
     western: 'Các nước phương Tây khác',
     no_result: 'Mặt hàng hiện không tồn tại',
-    search: 'Tìm kiếm',
 })
 
 export default vi;
