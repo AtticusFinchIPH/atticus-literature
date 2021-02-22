@@ -9,7 +9,6 @@ const router = express.Router();
 const findAllProducts = async(skip) => {
     if(!skip) skip = 0;
     let products = await Product.find()
-                                .populate('authorId', 'name')
                                 .skip(skip).limit(45)
                                 .lean(true).exec();
     return products;
@@ -18,7 +17,6 @@ const findAllProducts = async(skip) => {
 const findGenreOrOrigin = async(genre, origin, skip) => {
     if(!skip) skip = 0;
     let products = await Product.find({ $or: [{genres: genre}, {origin}]})
-                                .populate('authorId', 'name')
                                 .skip(skip).limit(45)
                                 .lean(true).exec();
     return products;
@@ -27,12 +25,12 @@ const findGenreOrOrigin = async(genre, origin, skip) => {
 const findTitleByKeyword = async(keyword, skip) => {
     if(!skip) skip = 0;
     let products = await Product.find({title: {$regex: keyword, $options: "i"}})
-                                .populate('authorId', 'name')
                                 .skip(skip).limit(45)
                                 .lean(true).exec();
     return products;
 }
 
+// Get bookstore products
 router.post("/bookstore", async (req, res) => {
     const { keyword, genre, origin, skip } = req.body;
     console.log( keyword, genre, origin, skip )
@@ -101,6 +99,28 @@ router.get("/bestsellers", async (req, res) => {
         return res.status(200).send(products);  
     } catch (error) {       
         return res.status(500).json({ msg: "Error in getting bestsellers"});
+    }
+})
+
+router.get("/item_detail/:productId", async (req, res) => {
+    const productId = req.params.productId;
+    try {
+        let product = await Product.findById(productId)
+                                .populate('authorId', 'name')
+                                .populate('reviews.userId', 'nickName')
+                                .lean(true)
+                                .exec();
+        product.reviewsCount = product.reviews.length;
+        product.stars = product.reviewsCount > 0 
+                        ?
+                        new BigNumber(product.reviews.reduce((total, review) => {
+                            return total + review.stars
+                        }, 0)/reviewsCount).decimalPlaces(2)
+                        :
+                        null;
+        return res.status(200).send(product);  
+    } catch (error) {       
+        return res.status(500).json({ msg: "Error in getting product detail"});
     }
 })
 

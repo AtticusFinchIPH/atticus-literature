@@ -33,7 +33,7 @@ function App() {
             <CartBar />
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/product/" component={Product} />
+              <Route path="/product/:id" component={Product} />
               <Route path="/bookstore/" component={Bookstore} />
               <Route component={PageNotFound} />
             </Switch>

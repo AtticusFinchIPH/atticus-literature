@@ -34,6 +34,8 @@ const en = defineMessages({
     shipping_policy: `Free delivery within Hanoi & Ho Chi Minh City in maximum 2 hours.
     Delivery within a maximum of 1 week across the territory of Vietnam.`,
     return_policy: `If you are not satisfied with a product you ordered from our store or if it is defective or damaged, you can return it to us within 3 days of the delivery date, and we will refund you or will replace the entire item.`,
+    stars: 'stars',
+    reviews: 'reviews',
 
     all_books: 'All Books',
     vi_literature: 'Vietnamese Literature',

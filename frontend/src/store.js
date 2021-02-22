@@ -3,7 +3,6 @@ import thunk from 'redux-thunk';
 import Cookie from 'js-cookie';
 import { langReducer } from './reducers/globalReducer';
 import { bestsellersReducer, bookGenresReducer, cartReducer, recommendedsReducer, storeReducer, viewingProductReducer } from './reducers/productReducers';
-import { data_sample } from './data_sample';
 
 const cartList = Cookie.getJSON('cartList') || [];
 
@@ -12,7 +11,7 @@ const initialState = {
     bestsellerProducts: { bestsellers: [] },
     recommendedProducts: { recommendeds: [] },
     cart: { cartList },
-    viewingProduct: { product: data_sample.viewingProduct },
+    viewingProduct: { product: null },
     store: { products: [] },
     bookGenres: { genres: [] }
     // userSignin: null,

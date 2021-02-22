@@ -1,5 +1,7 @@
 import { makeStyles } from '@material-ui/styles';
 import { DARK_GRAY, LIGHT_WHITE } from '../../../utils/theme';
+import loadingImage from '../../../images/loading_page.png';
+import errorImage from '../../../images/broken_phone.png';
 
 const useStyle = makeStyles((theme) => ({
     root: {
@@ -121,6 +123,30 @@ const useStyle = makeStyles((theme) => ({
     ratingBox: {
         display: 'flex',
         justifyContent: 'center',
+    },
+    imageSection: {
+        backgroundColor: theme.palette.background.main,
+        display: 'flex',
+        flexDirection: 'column',
+        textAlign: 'center',
+    },
+    errorImage: {
+        height: '80vh',
+        backgroundImage: `url(${errorImage})`,
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+    },
+    loadingImage: {
+        height: '80vh',
+        backgroundImage: `url(${loadingImage})`,
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+    },
+    attribute: {
+        color: theme.palette.text.main,
+        textDecoration: 'none',
     },
 }));
 

@@ -34,6 +34,8 @@ const vi = defineMessages({
     shipping_policy: `Miễn phí giao hàng tại nội thành Hà Nội & TP.HCM trong vòng tối đa 2 giờ kể từ thời điểm đặt hàng thành công.
     Giao hàng trong vòng tối đa 1 tuần trên toàn lãnh thổ Việt Nam.`,
     return_policy: `Nếu bạn không hài lòng với sản phẩm bạn đặt từ Atticus Literature hoặc nếu sản phẩm bị lỗi hoặc bị hư hỏng, bạn có thể trả lại cho chúng tôi trong vòng 30 ngày kể từ ngày giao hàng và chúng tôi sẽ hoàn lại tiền cho bạn hoặc sẽ thay thế toàn bộ mặt hàng.`,
+    stars: 'sao',
+    reviews: 'đánh giá',
 
     all_books: 'Tất cả sách',
     vi_literature: 'Văn học Việt Nam',

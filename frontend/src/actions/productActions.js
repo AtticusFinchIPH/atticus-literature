@@ -18,6 +18,9 @@ import {
     VIEW_STORE_REQUEST,
     VIEW_STORE_SUCCESS,
     VIEW_STORE_FAIL,
+    VIEW_PRODUCT_REQUEST,
+    VIEW_PRODUCT_FAIL,
+    VIEW_PRODUCT_SUCCESS,
 } from '../constants/productConstants';
 
 const getBestsellers = () => async (dispatch) => {
@@ -78,4 +81,18 @@ const getBookGenres = () => async (dispatch) => {
     }
 }
 
-export { getBestsellers, getRecommendeds, getStore, addToCart, addMultipleToCart, updateLocalCart, removeFromLocalCart, getBookGenres }
+const getItemDetail = (productId) => async (dispatch) => {
+    dispatch({ type: VIEW_PRODUCT_REQUEST });
+    try {
+        const {data} = await axios.get(`/api/products/item_detail/${productId}`);
+        console.log(data)
+        dispatch({ type: VIEW_PRODUCT_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({ type: VIEW_PRODUCT_FAIL, payload: error.response?.data?.msg || error.message });
+    }
+}
+
+export { getBestsellers, getRecommendeds, getStore, getItemDetail,
+    addToCart, addMultipleToCart, updateLocalCart, removeFromLocalCart, 
+    getBookGenres 
+}
