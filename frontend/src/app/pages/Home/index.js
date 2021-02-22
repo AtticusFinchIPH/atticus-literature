@@ -69,7 +69,7 @@ const CardItem = (props) => {
                 </IconButton>
             </CardActions>
         </Card>
-        <Hidden smDown>
+        <Hidden mdDown>
             <Fade in={isShown} timeout={{appear: 100, enter: 300, exit: 100}} unmountOnExit>
                 <Box className={classes.quickView} 
                     onMouseEnter={() => setIsShown(true)}
@@ -82,7 +82,7 @@ const CardItem = (props) => {
                 </Box>       
             </Fade>
         </Hidden>
-        <Hidden mdUp>
+        <Hidden lgUp>
             <Box className={classes.quickView} 
                 onMouseEnter={() => setIsShown(true)}
                 onMouseLeave={() => setIsShown(false)}
@@ -176,6 +176,9 @@ const MutipleSlidesPerView = (props) => {
                 slidesPerView: 4,
             },
             1280: {
+                slidesPerView: 5,
+            },
+            1450: {
                 slidesPerView: 6,
             }
         }

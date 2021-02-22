@@ -122,7 +122,7 @@ const useStyle = makeStyles((theme) => ({
         boxShadow: 'none',
         cursor: 'pointer',
         transition: 'all 150ms ease-in-out',
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up('lg')]: {
             '&:hover': {
                 transform: 'scale(1.05)',
             },
@@ -160,7 +160,7 @@ const useStyle = makeStyles((theme) => ({
         width: '184px', // CARD_ITEM_WIDTH - padding*2
         cursor: 'pointer',
         color: '#000',
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up('lg')]: {
             bottom: theme.spacing(18.25),
             transform: 'scale(1.05)',
         },
