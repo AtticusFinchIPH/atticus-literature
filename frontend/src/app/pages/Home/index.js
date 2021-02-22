@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
@@ -26,6 +27,7 @@ const CARD_ITEM_WIDTH = '200px';
 
 const CardItem = (props) => {
     const classes = useStyle();
+    const history = useHistory();
     const [isShown, setIsShown] = useState(false);
     const { setCartOpen } = useContext(CartOpenContext);
     const dispatch = useDispatch();
@@ -43,7 +45,7 @@ const CardItem = (props) => {
             break;
     }
     const redirect = () => {
-        console.log(props.item);
+        history.replace(`/product/${item._id}`);
     }
     const addItemToCart = () => {
         dispatch(addToCart(props.item));
