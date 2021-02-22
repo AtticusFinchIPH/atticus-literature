@@ -1,3 +1,5 @@
+
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import useStyle_Catalogue from './Catalogue.styles';
@@ -6,10 +8,11 @@ import { Collapse, IconButton, Typography } from '@material-ui/core';
 import MinusIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import { useEffect, useState } from 'react';
-import { getBookGenres, getStore } from '../../../actions/productActions';
+import { getBookGenres } from '../../../actions/productActions';
 
 const Catalogue = () => {
     const classes = useStyle_Catalogue();
+    const history = useHistory()
     const dispatch = useDispatch();
     const { genres } = useSelector(state => state.bookGenres);
     const [allbooksOpen, setAllbooksOpen] = useState(true);
@@ -58,7 +61,13 @@ const Catalogue = () => {
         setGenresOpen(genresOpen ? false : true);
     };
     const getCollection = ({keyword, genre, origin}) => {
-        dispatch(getStore({keyword, genre, origin}));
+        history.replace(`/bookstore?${
+            keyword ? `keyword=${keyword}` : ''
+        }&${
+            genre ? `genre=${genre}` : ''
+        }&${
+            origin ? `origin=${origin}` : ''
+        }`);
     }
     return(
         <div className={classes.container}>

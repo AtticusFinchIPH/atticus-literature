@@ -1,5 +1,5 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
@@ -86,7 +86,10 @@ CardItem.propTypes = {
 
 const Bookstore = () => {
     const PRODUCTS_PER_PAGE = 15;
+    let searchArray = [];
+    let searchObj = {};
     const classes = useStyle();
+    const { search } = useLocation();
     const dispatch = useDispatch();
     const catalogueComponent = useMemo(() => <Catalogue />, []);
     const language = useSelector(state => state.language);
@@ -99,8 +102,15 @@ const Bookstore = () => {
         setCurrentProducts(products.slice((value-1)*PRODUCTS_PER_PAGE, value*PRODUCTS_PER_PAGE));
     }
     useEffect(() => {
-        dispatch(getStore({}));
-    }, []);
+        searchArray = search.slice(1).split('&');
+        searchArray.forEach(equation => {
+            const key = equation.split('=')[0];
+            const value = equation.split('=')[1];
+            searchObj[key] = value;
+        })
+        const { keyword, genre, origin, skip } = searchObj;
+        dispatch(getStore(searchObj));
+    }, [search]);
     useEffect(() => {
         setCurrentProducts(products.slice(0, PRODUCTS_PER_PAGE));
     }, [products])
