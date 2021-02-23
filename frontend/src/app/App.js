@@ -7,8 +7,10 @@ import translation from '../locales';
 import { lightTheme, darkTheme } from '../utils/theme';
 import ThemeContext from '../contexts/ThemeContext';
 import CartOpenContext from '../contexts/CartOpenContext';
+import RedirectOpenContext from '../contexts/RedirectOpenContext';
 import NavBar from './features/NavBar';
 import CartBar from './features/CartBar';
+import RedirectBar from './features/RedirectBar';
 import CopyRight from './features/CopyRight';
 import Home from './pages/Home';
 import Product from './pages/Product';
@@ -22,15 +24,19 @@ function App() {
   const theme = isDarkMode ? darkTheme : lightTheme;
   const [isCartOpen, setCartOpen] = useState(false);
   const cartOpenValue = useMemo(() => ({isCartOpen, setCartOpen}), [isCartOpen, setCartOpen]);
+  const [isRedirectOpen, setRedirectOpen] = useState(false);
+  const redirectOpenValue = useMemo(() => ({isRedirectOpen, setRedirectOpen}), [isRedirectOpen, setRedirectOpen]);
   return (
     <BrowserRouter>
       <IntlProvider locale={language} messages={translation[language]}>
         <ThemeProvider theme={theme}>   
           <ThemeContext.Provider value={themeValue}>  
           <CartOpenContext.Provider value={cartOpenValue}>
+          <RedirectOpenContext.Provider value={redirectOpenValue}>
 
             <NavBar />
             <CartBar />
+            <RedirectBar />
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/product/:id" component={Product} />
@@ -39,6 +45,7 @@ function App() {
             </Switch>
             <CopyRight />
 
+            </RedirectOpenContext.Provider>
           </CartOpenContext.Provider>
           </ThemeContext.Provider>
         </ThemeProvider>

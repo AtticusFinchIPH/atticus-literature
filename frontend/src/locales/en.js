@@ -7,10 +7,12 @@ const en = defineMessages({
     search: 'Search',
     quick_view: 'Quick view',
 
+    pages: 'Pages',
     home: 'Home',
     bookstore: 'Bookstore',
     stories: 'Stories',
     contact: 'Contact',
+    about_us: 'About us',
 
     bestsellers: 'Bestsellers',
     this_month: 'This Month\'s',

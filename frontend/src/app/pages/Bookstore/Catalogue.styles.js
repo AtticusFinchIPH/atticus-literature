@@ -1,3 +1,4 @@
+import { fade } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
 const useStyle_Catalogue = makeStyles((theme) => ({
@@ -9,13 +10,15 @@ const useStyle_Catalogue = makeStyles((theme) => ({
     onSellected: {
         backgroundColor: theme.palette.buttonHover.main,
     },
+    borderBottom: {
+        borderBottom: 'hsl(220, 16%, 50%) solid 1px',
+    },
     container: {
         width: '100%',
     },
     section: {
         paddingTop: theme.spacing(1),
         paddingBottom: theme.spacing(1),
-        borderBottom: 'hsl(220, 16%, 50%) solid 1px',
     },
     search: {
         display: 'flex',
@@ -25,6 +28,9 @@ const useStyle_Catalogue = makeStyles((theme) => ({
         border: 'hsl(220, 16%, 50%) solid 1px',
         borderRadius: theme.spacing(3),
         padding: theme.spacing(0, 0, 0, 1.5),
+        '&:hover': {
+            backgroundColor: fade(theme.palette.navBar.main, 0.6),
+        },
     },
     inputRoot: {
         color: 'inherit',

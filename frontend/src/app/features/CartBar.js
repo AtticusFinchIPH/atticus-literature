@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { isMobileOnly } from 'react-device-detect';
 import clsx from 'clsx';
 import BigNumber from 'bignumber.js';
 import { Card, Drawer, GridList, GridListTile, IconButton, Typography } from '@material-ui/core';
@@ -109,7 +108,7 @@ const CartBar = () => {
         setCartOpen(false);
     }
     return(
-        <Drawer className={classes.cartbar} anchor='right' variant='temporary' open={!isMobileOnly && isCartOpen} onClose={e => setCartOpen(false)}>
+        <Drawer className={classes.cartbar} anchor='right' variant='temporary' open={isCartOpen} onClose={e => setCartOpen(false)}>
             <div className={classes.cartbarHeader}>
                 <IconButton className={classes.cartbarIconClose} onClick={e => setCartOpen(false)}>
                     <ChevronRightIcon />

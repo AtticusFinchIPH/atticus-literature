@@ -7,10 +7,12 @@ const vi = defineMessages({
     search: 'Tìm kiếm',
     quick_view: 'Xem',
 
+    pages: 'Trang',
     home: 'Trang chủ',
     bookstore: 'Hiệu sách',
     stories: 'Thư quán',
     contact: 'Liên hệ',
+    about_us: 'Giới thiệu',
 
     bestsellers: 'Sách Bán Chạy',
     this_month: 'Tháng Này',
