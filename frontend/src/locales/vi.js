@@ -68,6 +68,20 @@ const vi = defineMessages({
     russian: 'Nga',
     western: 'Các nước phương Tây khác',
     no_result: 'Mặt hàng hiện không tồn tại',
+
+    idea: 'Ý tưởng',
+    idea_detail: `Atticus Literature không chỉ là một hiệu sách, chúng tôi mong muốn tạo ra một nền tảng cho những người yêu sách.
+    Tại đây, chúng ta có thể trao đổi, đóng góp ý kiến, nêu lên cảm nghĩ của bản thân về những cuốn sách. Tất cả sẽ được chúng tôi xây dựng trong một vài phiên bản sắp tới.
+    Chúng tôi cũng hi vọng rằng, các bạn có thể tham gia vào cộng đồng mọt sách của chúng tôi. Cùng nhau, hệ sinh thái của chúng ta có thể phát triển một cách nhanh chóng, vững vàng và đa dạng hơn.
+    Vì vậy, hãy đăng kí và trở thành một thành viên của Atticus Literature nào bạn ơi!`,
+    contribution: 'Đóng góp',
+    contribution_detail_1: `Mọi sự đóng góp của bạn đều được tôi trân trọng.
+    Đơn giản nhất, bạn có thể ghé qua trang Github của tôi và tặng 1 ngôi sao nhỏ cho `,
+    this_project: 'dự án này',
+    contribution_detail_2: `.
+    Xin cảm ơn!`,
+    images_license: 'Giấy phép hình ảnh',
+    images_license_detail: 'Trang web có sử dụng hình ảnh từ: ',
 })
 
 export default vi;

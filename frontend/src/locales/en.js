@@ -68,6 +68,21 @@ const en = defineMessages({
     russian: 'Russian',
     western: 'Other Western',
     no_result: 'Currently no result',
+
+    idea: 'The Idea',
+    idea_detail: `Atticus Literature is not just a bookstore, but we want to make it a platform for booklovers.
+    Here, we can exchange books, share thoughts, reviews, evaluations about literary works. All of that will be developed in several versions.
+    Also, we look forward to having you in our community of book lovers. Together we can make our ecosystems grow faster, stronger and more diverse.
+    So, why not sign up and give us a try, my friend!`,
+    contribution: 'Contribution',
+    contribution_detail_1: `Any contribution is appreciated.
+    Simply enough, you can visit my Github page and give `,
+    this_project: 'this project',
+    contribution_detail_2: ` a shiny little star.
+    Thank you so much!`,
+    images_license: 'Images License',
+    images_license_detail: 'Project uses free license images from: ',
+
 })
 
 export default en;

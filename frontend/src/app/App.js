@@ -15,6 +15,7 @@ import CopyRight from './features/CopyRight';
 import Home from './pages/Home';
 import Product from './pages/Product';
 import Bookstore from './pages/Bookstore';
+import AboutUS from './pages/AboutUs';
 import PageNotFound from './pages/PageNotFound';
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
               <Route exact path="/" component={Home} />
               <Route path="/product/:id" component={Product} />
               <Route path="/bookstore/" component={Bookstore} />
+              <Route path="/about_us/" component={AboutUS} />
               <Route component={PageNotFound} />
             </Switch>
             <CopyRight />
