@@ -1,6 +1,4 @@
 import mongoose from 'mongoose';
-import { OrderEnumStatus, OrderEnumPaymentMethod } from '../enums/orderEnums';
-import { ProductEnumCurrency } from '../enums/productEnums';
 
 const orderSchema = new mongoose.Schema({
     userId: { type: mongoose.Schema.ObjectId, ref: 'User'},

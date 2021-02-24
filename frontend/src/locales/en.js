@@ -70,7 +70,7 @@ const en = defineMessages({
     no_result: 'Currently no result',
 
     idea: 'The Idea',
-    idea_detail: `Atticus Literature is not just a bookstore, but we want to make it a platform for booklovers.
+    idea_detail: `Atticus Literature is not just a bookstore, we want to make it a platform for book lovers.
     Here, we can exchange books, share thoughts, reviews, evaluations about literary works. All of that will be developed in several versions.
     Also, we look forward to having you in our community of book lovers. Together we can make our ecosystems grow faster, stronger and more diverse.
     So, why not sign up and give us a try, my friend!`,

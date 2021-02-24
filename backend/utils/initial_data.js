@@ -17,8 +17,8 @@ const UserEnumRole = Object.freeze({
 })
 
 const OrderEnumStatus = Object.freeze({
-    PAID: 'paid', 
     PROCESSING: 'processing', 
+    ACCEPTED: 'accepted', 
     SHIPPING: 'shipping', 
     SHIPPED: 'shipped', 
     DELIVERED: 'delivered'
@@ -115,7 +115,7 @@ const initial_data = {
         { _id: ProductEnumCurrency.VND },
     ],
     OrderEnumStatus: [
-        { _id: OrderEnumStatus.PAID },
+        { _id: OrderEnumStatus.ACCEPTED },
         { _id: OrderEnumStatus.PROCESSING },
         { _id: OrderEnumStatus.SHIPPING },
         { _id: OrderEnumStatus.SHIPPED },

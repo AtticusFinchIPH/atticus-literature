@@ -109,7 +109,11 @@ const Product = () => {
                                 {product.title}
                             </Typography>
                             <Typography variant='h6' component='p'>
-                                <FormattedMessage id='author_by' defaultMessage='by' /> {product.author}
+                                <FormattedMessage id='author_by' defaultMessage='by' />{' '}
+                                {product.authorIds.reduce((string, author, index) => {
+                                    if(index === product.authorIds.length -1 ) return string += author.name;
+                                    else return string += `${author.name}, `;                                                  
+                                }, '')}
                             </Typography>
                         </div>
                         <div className={classes.mainInfoActions}>

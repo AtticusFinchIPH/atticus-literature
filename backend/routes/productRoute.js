@@ -106,7 +106,7 @@ router.get("/item_detail/:productId", async (req, res) => {
     const productId = req.params.productId;
     try {
         let product = await Product.findById(productId)
-                                .populate('authorId', 'name')
+                                .populate('authorIds', 'name')
                                 .populate('reviews.userId', 'nickName')
                                 .lean(true)
                                 .exec();

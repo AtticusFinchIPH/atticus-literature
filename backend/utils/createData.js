@@ -105,7 +105,7 @@ const createInitialProducts = async () => {
             } else {
                 const author = await Author.findOne({name: item.author});
                 if(author) {
-                    item.authorId = author._id;
+                    item.authorIds = [author._id];
                     delete item.author;    
                     await Product.create(item).then((newItem, err) => {
                         if(err) {
