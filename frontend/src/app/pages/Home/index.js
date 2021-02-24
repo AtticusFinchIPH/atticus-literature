@@ -292,7 +292,7 @@ const Home = () => {
                 </Container>
             </Hidden>
             <Hidden smUp>
-                <Container className={[classes.section, classes.bestsellers]} maxWidth='xl'>
+                <Container className={clsx(classes.section, classes.bestsellers)} maxWidth='xl'>
                     <Typography className={classes.sectionTitle} variant="h3" component="h3">
                         <FormattedMessage id='bestsellers' defaultMessage="Bestsellers" />
                     </Typography>
@@ -311,7 +311,7 @@ const Home = () => {
                         />
                     }
                 </Container>
-                <Container className={[classes.section, classes.recommendeds]} maxWidth='xl'>
+                <Container className={clsx(classes.section, classes.recommendeds)} maxWidth='xl'>
                     <Typography className={classes.sectionTitle} variant="h3" component="h3">
                         <FormattedMessage id='recommended_books' defaultMessage="Recommended Books" />
                     </Typography>

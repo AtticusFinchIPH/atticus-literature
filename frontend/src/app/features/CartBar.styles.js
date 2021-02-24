@@ -110,6 +110,12 @@ const useStyles = makeStyles(theme => ({
             backgroundColor: fade(DARK_BLUE, 0.75),
             border: '1px solid #fff',
         },
+    },
+    dialogActions: {
+        [theme.breakpoints.down('sm')]: {
+            display: 'flex',
+            flexDirection: 'column',
+        },
     }
 }));
 

@@ -184,7 +184,7 @@ const CartBar = () => {
                         defaultMessage='Sign in to make your purchase process faster, making it easier to track and manage orders more proficiently.' />
                     </DialogContentText>
                 </DialogContent>
-                <DialogActions>
+                <DialogActions className={classes.dialogActions}>
                     <Button onClick={handleNo} color="primary">
                         <FormattedMessage id='no_continue' defaultMessage="No, continue" />
                     </Button>
