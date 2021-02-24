@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import { useContext, forwardRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import clsx from 'clsx';
 import BigNumber from 'bignumber.js';
-import { Card, Drawer, GridList, GridListTile, IconButton, Typography } from '@material-ui/core';
+import { Button, Card, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, GridList, GridListTile, IconButton, Slide, Typography } from '@material-ui/core';
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import CartOpenContext from '../../contexts/CartOpenContext';
 import RemoveIcon from '@material-ui/icons/HighlightOff';
@@ -95,19 +95,35 @@ const CardItem = (props) => {
     )
 }
 
+// Must keep this Transition component outside of whatever component using it (Dialog component in this case).
+const Transition = forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
+
 const CartBar = () => {
     const classes = useStyles();
+    const [ isDialogOpen, setDialogOpen ] = useState(false);
     const { isCartOpen, setCartOpen } = useContext(CartOpenContext);
+    const { userInfo } = useSelector(state => state.userSignin);
     const cart = useSelector(state => state.cart);
     const { cartList } = cart;
     // Assume the currency of all items is USD
     let subtotal = new BigNumber(cartList.reduce((total, item) => total + item.quantity*item.price , 0));
     const subtotalDeclare = `$ ${subtotal.decimalPlaces(2)}`;
     const checkCart = () => {
+        if(userInfo){
 
+        } else setDialogOpen(true);
         setCartOpen(false);
     }
+    const handleNo = () => {
+        setDialogOpen(false);
+    }
+    const handleYes = () => {
+        setDialogOpen(false);
+    }
     return(
+        <>
         <Drawer className={classes.cartbar} anchor='right' variant='temporary' open={isCartOpen} onClose={e => setCartOpen(false)}>
             <div className={classes.cartbarHeader}>
                 <IconButton className={classes.cartbarIconClose} onClick={e => setCartOpen(false)}>
@@ -148,10 +164,40 @@ const CartBar = () => {
                     <Typography variant='body1' component='p'>
                         <FormattedMessage id='cart_empty' defaultMessage='Your cart is empty' />
                     </Typography>
-
                 </div>      
             }
         </Drawer>
+            <Dialog
+                open={isDialogOpen}
+                TransitionComponent={Transition}
+                keepMounted
+                onClose={e => setDialogOpen(false)}
+                aria-labelledby="cart-ask-dialog-title"
+                aria-describedby="cart-ask-dialog-description"
+            >
+                <DialogTitle id="cart-ask-dialog-title">
+                    <FormattedMessage id='cart_ask_signin_title' defaultMessage='Do you want to sign in/sign up first?' />
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="cart-ask-dialog-description">
+                        <FormattedMessage id='cart_ask_signin_text' 
+                        defaultMessage='Sign in to make your purchase process faster, making it easier to track and manage orders more proficiently.' />
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleNo} color="primary">
+                        <FormattedMessage id='no_continue' defaultMessage="No, continue" />
+                    </Button>
+                    <Button onClick={handleYes} color="primary">
+                        <FormattedMessage id='yes_register' defaultMessage="Sign up" />
+                    </Button>
+                    <Button onClick={handleYes} color="secondary">
+                        <FormattedMessage id='yes_signin' defaultMessage="Sign in" />
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        
+        </>
     )
 }
 

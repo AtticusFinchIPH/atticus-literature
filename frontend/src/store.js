@@ -3,8 +3,10 @@ import thunk from 'redux-thunk';
 import Cookie from 'js-cookie';
 import { langReducer } from './reducers/globalReducer';
 import { bestsellersReducer, bookGenresReducer, cartReducer, recommendedsReducer, storeReducer, viewingProductReducer } from './reducers/productReducers';
+import { userSigninReducer } from './reducers/userReducers';
 
 const cartList = Cookie.getJSON('cartList') || [];
+const userInfo = Cookie.getJSON('userInfo') || null;
 
 const initialState = {
     language: navigator.language === 'vi' ? 'vi' : 'en',
@@ -13,8 +15,8 @@ const initialState = {
     cart: { cartList },
     viewingProduct: { product: null },
     store: { products: [] },
-    bookGenres: { genres: [] }
-    // userSignin: null,
+    bookGenres: { genres: [] },
+    userSignin: { userInfo },
 };
 
 const reducer = combineReducers({
@@ -25,6 +27,7 @@ const reducer = combineReducers({
     viewingProduct: viewingProductReducer,
     store: storeReducer,
     bookGenres: bookGenresReducer,
+    userSignin: userSigninReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -82,6 +82,12 @@ const vi = defineMessages({
     Xin cảm ơn!`,
     images_license: 'Giấy phép hình ảnh',
     images_license_detail: 'Trang web có sử dụng hình ảnh từ: ',
+
+    cart_ask_signin_title: 'Bạn có muốn đăng nhập/đăng ký trước?',
+    cart_ask_signin_text: 'Đăng nhập giúp cho giao dịch trở nên nhanh chóng, dễ dàng theo dõi và kiểm soát tốt hơn đơn hàng của bạn.',
+    no_continue: 'Không, tiếp tục',
+    yes_register: "Đăng ký",
+    yes_signin: "Đăng nhập",
 })
 
 export default vi;
