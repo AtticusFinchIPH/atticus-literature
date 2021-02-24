@@ -1,6 +1,8 @@
 import { useContext, forwardRef, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import BigNumber from 'bignumber.js';
 import { Button, Card, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, GridList, GridListTile, IconButton, Slide, Typography } from '@material-ui/core';
@@ -31,6 +33,18 @@ const Scrollbar = (props) => {
     )
 };
 
+Scrollbar.propTypes = {
+    listItems: PropTypes.arrayOf(
+        PropTypes.shape({
+            _id: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+            image: PropTypes.string.isRequired,
+            price: PropTypes.number.isRequired,
+            quantity: PropTypes.number.isRequired,
+        })
+    )
+}
+
 const CardItem = (props) => {
     const classes = useStyles();
     const item = props.item;
@@ -50,7 +64,7 @@ const CardItem = (props) => {
     }
     const dispatch = useDispatch();
     const minusQuantity = () => {
-        if(item.quantity == 1) return;
+        if(item.quantity === 1) return;
         else {
             const product = {...item, quantity: item.quantity-1};
             dispatch(updateLocalCart(product));
@@ -77,7 +91,7 @@ const CardItem = (props) => {
                     </div>
                     <div className={classes.cartItemActions}>
                         <div className={classes.quantityActions}>
-                            <IconButton onClick={minusQuantity} className={clsx(classes.actionIcon, item.quantity == 1 && classes.disable)} >
+                            <IconButton onClick={minusQuantity} className={clsx(classes.actionIcon, item.quantity === 1 && classes.disable)} >
                                 <MinusIcon fontSize='small' />
                             </IconButton>
                             <Typography variant='body1' component='p'>{item.quantity}</Typography>
@@ -95,6 +109,16 @@ const CardItem = (props) => {
     )
 }
 
+CardItem.propTypes = {
+    item: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        quantity: PropTypes.number.isRequired,
+    })
+}
+
 // Must keep this Transition component outside of whatever component using it (Dialog component in this case).
 const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -102,6 +126,7 @@ const Transition = forwardRef(function Transition(props, ref) {
 
 const CartBar = () => {
     const classes = useStyles();
+    const history = useHistory();
     const [ isDialogOpen, setDialogOpen ] = useState(false);
     const { isCartOpen, setCartOpen } = useContext(CartOpenContext);
     const { userInfo } = useSelector(state => state.userSignin);
@@ -118,6 +143,7 @@ const CartBar = () => {
     }
     const handleNo = () => {
         setDialogOpen(false);
+        history.replace("/checkout");
     }
     const handleYes = () => {
         setDialogOpen(false);
