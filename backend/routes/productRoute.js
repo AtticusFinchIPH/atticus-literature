@@ -9,6 +9,7 @@ const router = express.Router();
 const findAllProducts = async(skip) => {
     if(!skip) skip = 0;
     let products = await Product.find()
+                                .populate('authorIds', 'name')
                                 .skip(skip).limit(45)
                                 .lean(true).exec();
     return products;
@@ -17,6 +18,7 @@ const findAllProducts = async(skip) => {
 const findGenreOrOrigin = async(genre, origin, skip) => {
     if(!skip) skip = 0;
     let products = await Product.find({ $or: [{genres: genre}, {origin}]})
+                                .populate('authorIds', 'name')
                                 .skip(skip).limit(45)
                                 .lean(true).exec();
     return products;
@@ -25,6 +27,7 @@ const findGenreOrOrigin = async(genre, origin, skip) => {
 const findTitleByKeyword = async(keyword, skip) => {
     if(!skip) skip = 0;
     let products = await Product.find({title: {$regex: keyword, $options: "i"}})
+                                .populate('authorIds', 'name')
                                 .skip(skip).limit(45)
                                 .lean(true).exec();
     return products;
@@ -59,6 +62,7 @@ router.post("/bookstore", async (req, res) => {
 router.get("/recommendeds", async (req, res) => {
     try {
         let products = await Product.find({categories: "recommendeds"})
+                                .populate('authorIds', 'name')
                                 .limit(10)
                                 .lean(true)
                                 .exec();
@@ -82,6 +86,7 @@ router.get("/recommendeds", async (req, res) => {
 router.get("/bestsellers", async (req, res) => {
     try {
         let products = await Product.find({categories: "bestsellers"})
+                                .populate('authorIds', 'name')
                                 .limit(10)
                                 .lean(true)
                                 .exec();
