@@ -3,8 +3,15 @@ import { fade } from '@material-ui/core/styles';
 import { LIGHT_WHITE, DARK_BLUE } from '../../utils/theme';
 
 const useStyles = makeStyles((theme) => ({
+    iconButton: {
+        color: theme.palette.text.main,
+    },
     redirectBar: {
         display: 'flex',
+    },
+    drawerPaper: {
+        backgroundColor: theme.palette.background.main,
+        color: theme.palette.text.main,
     },
     redirectBarHeader: {
         display: 'flex',
@@ -14,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
         height: theme.spacing(7),
         width: theme.spacing(45),
         color: LIGHT_WHITE,
-        backgroundColor: DARK_BLUE,
+        backgroundColor: theme.palette.sidebarHeader.main,
         [theme.breakpoints.up('sm')]: {
             height: theme.spacing(8),
         },
@@ -29,6 +36,10 @@ const useStyles = makeStyles((theme) => ({
     redirectBarTitle: {
         flexGrow: 1,
         textAlign: 'center',
+    },
+    accordion: {
+        backgroundColor: theme.palette.background.main,
+        color: theme.palette.text.main,
     },
 }))
 

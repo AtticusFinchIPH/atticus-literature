@@ -21,8 +21,10 @@ const RedirectBar = () => {
         setRedirectOpen(false);
     }
     return(
-        <Drawer className={classes.redirectBar} anchor='left' variant='temporary'
-            open={isRedirectOpen} onClose={e => setRedirectOpen(false)}>
+        <Drawer className={classes.redirectBar} classes={{paper: classes.drawerPaper}}
+            anchor='left' variant='temporary'
+            open={isRedirectOpen} onClose={e => setRedirectOpen(false)}
+        >
             <div className={classes.redirectBarHeader}>
                 <div className={classes.redirectBarTitle} >
                     <Typography variant='h5' component='p'>
@@ -33,9 +35,9 @@ const RedirectBar = () => {
                     <ChevronLeftIcon />
                 </IconButton>
             </div>
-            <Accordion>
+            <Accordion className={classes.accordion}>
                 <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
+                    expandIcon={<ExpandMoreIcon className={classes.iconButton} />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                 >
@@ -47,14 +49,14 @@ const RedirectBar = () => {
                     <Catalogue noLastBorderBottom={true}/>
                 </AccordionDetails>
             </Accordion>
-            <Accordion>
+            <Accordion className={classes.accordion}>
                 <AccordionSummary onClick={e => redirect(STORIES_LOCATION)}>
                     <Typography variant='h6' component='h2'>
                         <FormattedMessage id='stories' defaultMessage='Stories' />
                     </Typography>
                 </AccordionSummary>
             </Accordion>
-            <Accordion>
+            <Accordion className={classes.accordion}>
                 <AccordionSummary onClick={e => redirect(ABOUT_US_LOCATION)}>
                     <Typography variant='h6' component='h2'>
                         <FormattedMessage id='about_us' defaultMessage='About us' />
