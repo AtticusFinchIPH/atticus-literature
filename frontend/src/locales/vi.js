@@ -88,6 +88,14 @@ const vi = defineMessages({
     no_continue: 'Không, tiếp tục',
     yes_register: "Đăng ký",
     yes_signin: "Đăng nhập",
+
+    my_cart: "Giỏ hàng của bạn",
+    enter_promo: "Nhập mã giảm giá",
+    add_note: "Thêm ghi chú",
+    order_summary: "Tổng kết đơn hàng",
+    apply: "Áp dụng",
+    invalid_promo: "Mã giảm giá không hợp lệ",
+    note_description: "Nếu bạn có yêu cầu hoặc chỉ dẫn đặc biệt, hãy đính kèm cho chúng tôi tại đây.",
 })
 
 export default vi;

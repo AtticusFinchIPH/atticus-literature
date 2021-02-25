@@ -171,7 +171,7 @@ const AddNote = ({intl}) => {
                 className: classes.themeTextColor
             }}
             inputRef={input => input && input.focus()}
-            placeholder={`${placeholder}...`}
+            placeholder={placeholder}
             variant='outlined' fullWidth
             multiline rows={4} value={note}
             onChange={e => {
@@ -258,7 +258,7 @@ const Checkout = () => {
                         </Typography>
                     </div>
                     <Paper>
-                        
+
                     </Paper>
                 </div>
             </Container>

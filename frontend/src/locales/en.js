@@ -88,6 +88,14 @@ const en = defineMessages({
     no_continue: 'No, continue',
     yes_register: "Sign up",
     yes_signin: "Sign in",
+
+    my_cart: "My Cart",
+    enter_promo: "Enter a promo code",
+    add_note: "Add a note",
+    order_summary: "Order Summmary",
+    apply: "Apply",
+    invalid_promo: "Invalid promo code",
+    note_description: "Instructions? Special requests? Add them here.",
 })
 
 export default en;
