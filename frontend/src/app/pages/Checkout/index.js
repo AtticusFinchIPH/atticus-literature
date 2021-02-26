@@ -1,5 +1,6 @@
 
 import {  useContext, useEffect, useState } from 'react';
+import { useHistory, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
@@ -24,6 +25,7 @@ const Alert = (props) => {
 const CardItem = ({item}) => {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const history = useHistory();
     let retailPrice, wholeSale;
     switch (item.currency) {
         case 'usd':
@@ -55,7 +57,10 @@ const CardItem = ({item}) => {
     }
     return (
         <Card className={classes.cartItem}>
-            <div className={classes.cartItemMedia} style={{backgroundImage: `url(${item.image}`}}></div>
+            <div className={classes.cartItemMedia} 
+                style={{backgroundImage: `url(${item.image}`}}
+                onClick={e => history.push(`/product/${item._id}`)}
+            />
             <div className={classes.cardItemContent}>
                 <div className={classes.cartItemInfo}>
                     <div className={classes.cartItemTitle}>
@@ -213,15 +218,21 @@ const Checkout = () => {
                     </div>
                     <div className={classes.itemList}>
                         {
-                            cartList
+                            cartList?.length > 0
                             ?
                             cartList.map((item, index) => (
                                 <CardItem key={index} item={item} />
                             ))
                             :
-                            <Typography variant='h5' component='h2'>
-                                <FormattedMessage id='cart_empty' defaultMessage="Your cart is empty" />
+                            <>
+                            <Typography variant='body1' component='h2'>
+                                <FormattedMessage id='cart_empty' defaultMessage="Your cart is empty" />{'. '}
+                                <Link to="/bookstore/">
+                                    <FormattedMessage id='continue_shopping' defaultMessage="Continue shopping" />
+                                </Link>
+                                {'.'}
                             </Typography>
+                            </>
                         }
                     </div>
                     <div className={classes.additional}>

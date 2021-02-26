@@ -34,7 +34,7 @@ const CardItem = (props) => {
             break;
     }
     const redirect = () => {
-        history.replace(`/product/${item._id}`)
+        history.push(`/product/${item._id}`)
     }
     const addItemToCart = () => {
         dispatch(addToCart(item));

@@ -104,7 +104,7 @@ const Catalogue = ({ noLastBorderBottom = false }) => {
         setGenresOpen(genresOpen ? false : true);
     };
     const getCollection = ({keyword, genre, origin}) => {
-        history.replace(`/bookstore?${
+        history.push(`/bookstore?${
             keyword ? `keyword=${keyword}&` : ''
         }${
             genre ? `genre=${genre}&` : ''

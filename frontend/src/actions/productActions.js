@@ -83,7 +83,6 @@ const getItemDetail = (productId) => async (dispatch) => {
     dispatch({ type: VIEW_PRODUCT_REQUEST });
     try {
         const {data} = await axios.get(`/api/products/item_detail/${productId}`);
-        console.log(data)
         dispatch({ type: VIEW_PRODUCT_SUCCESS, payload: data });
     } catch (error) {
         dispatch({ type: VIEW_PRODUCT_FAIL, payload: error.response?.data?.msg || error.message });

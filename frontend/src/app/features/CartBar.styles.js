@@ -65,6 +65,9 @@ const useStyles = makeStyles(theme => ({
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
+        '&:hover': {
+            cursor: 'pointer',
+        }
     },
     cardItemContent: {
         display: 'flex',

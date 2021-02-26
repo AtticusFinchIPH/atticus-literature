@@ -55,7 +55,7 @@ const Product = () => {
     }
     useEffect(() => {
         dispatch(getItemDetail(productId));
-    }, [])
+    }, [productId])
     const handleExpand = (target) => {
         switch (target) {
             case ADD_INTRO_ICON:

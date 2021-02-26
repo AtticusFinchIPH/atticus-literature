@@ -47,6 +47,9 @@ Scrollbar.propTypes = {
 
 const CardItem = (props) => {
     const classes = useStyles();
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const { setCartOpen } = useContext(CartOpenContext);
     const item = props.item;
     const addClasses = props.addClasses;
     const {borderBottom} = addClasses;
@@ -62,7 +65,6 @@ const CardItem = (props) => {
             priceDeclare = `$ ${item.price}`;
             break;
     }
-    const dispatch = useDispatch();
     const minusQuantity = () => {
         if(item.quantity === 1) return;
         else {
@@ -77,13 +79,20 @@ const CardItem = (props) => {
     const removeItem = () => {
         dispatch(removeFromLocalCart(item._id));
     }
+    const viewItem = () => {
+        history.push(`/product/${item._id}`);
+        setCartOpen(false);
+    }
     return (
         <GridListTile style={{
             height: CARD_ITEM_HEIGHT,
             width: CARD_ITEM_WIDTH,
         }}>
             <Card className={classes.cartbarItem}>
-                <div className={classes.cartItemMedia} style={{backgroundImage: `url(${item.image}`}}></div>
+                <div className={classes.cartItemMedia} 
+                    style={{backgroundImage: `url(${item.image}`}}
+                    onClick={viewItem}
+                />
                 <div className={clsx(classes.cardItemContent, borderBottom && classes.borderBottom)}>
                     <div className={classes.cartItemInfo}>
                         <Typography variant='body2' component='p'>{item.title}</Typography>

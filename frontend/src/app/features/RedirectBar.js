@@ -17,7 +17,7 @@ const RedirectBar = () => {
     const history = useHistory()
     const { isRedirectOpen, setRedirectOpen } = useContext(RedirectOpenContext);
     const redirect = (location) => {
-        history.replace(location);
+        history.push(location);
         setRedirectOpen(false);
     }
     return(

@@ -24,6 +24,7 @@ const vi = defineMessages({
     
     cart: 'Giỏ hàng',
     cart_empty: 'Giỏ hàng hiện đang trống',
+    continue_shopping: 'Tiếp tục mua sắm',
     cart_save_proceed: 'Lưu & Tiếp tục',
     add_to_cart: 'Thêm vào Giỏ hàng',
     subtotal: 'Tổng',

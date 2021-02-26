@@ -24,6 +24,7 @@ const en = defineMessages({
 
     cart: 'Cart',
     cart_empty: 'Your cart is empty',
+    continue_shopping: 'Continue shopping',
     cart_save_proceed: 'Save & Proceed',
     add_to_cart: 'Add to Cart',
     subtotal: 'Subtotal',
