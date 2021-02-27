@@ -3,6 +3,7 @@ import {  useContext, useEffect, useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage, injectIntl, useIntl } from 'react-intl';
+import cscAPI from 'country-state-city'
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import useStyles from './styles';
@@ -16,8 +17,8 @@ import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
 import { Alert as MuiAlert, Autocomplete } from '@material-ui/lab';
 
 import { updateLocalCart, removeFromLocalCart } from '../../../actions/productActions';
-import { retailPriceCalc, wholeSaleCalc,subtotalCalc } from '../../../utils/priceCalculator';
-import cscAPI from 'country-state-city'
+import { changeShippingFee, getShippingFee } from '../../../actions/orderActions';
+import { retailPriceCalc, wholeSaleCalc, subtotalCalc, shippingFeeCalc } from '../../../utils/priceCalculator';
 
 const Alert = (props) => {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -177,8 +178,10 @@ const AddNote = ({intl}) => {
 const Checkout = () => {
     const classes = useStyles();
     const intl = useIntl();
+    const dispatch = useDispatch();
     const { isCartOpen, setCartOpen } = useContext(CartOpenContext);
     const { cartList } = useSelector(state => state.cart);
+    const { loading: shippingFeeLoading, info: shippingFeeInfo } = useSelector(state => state.shippingFee);
     const [ openPromo, setOpenPromo ] = useState(false);
     const [ openNote, setOpenNote ] = useState(false);
     const PromoCodeComponent = injectIntl(({intl}) => 
@@ -231,6 +234,17 @@ const Checkout = () => {
             setCities(cityList);
         }
     }, [selectedCountry, selectedState]);
+    useEffect(() => {
+        if (!selectedCity || !selectedCity.name) {
+            dispatch(changeShippingFee());
+        } else {
+            dispatch(getShippingFee({
+                countryId: selectedCountry.isoCode,
+                stateId: selectedState.isoCode,
+                cityId: selectedCity.isoCode,
+            }))
+        }
+    }, [selectedCity])
 
     useEffect(() => {
         setCartOpen(false); // Always close cart bar in this screen
@@ -391,7 +405,32 @@ const Checkout = () => {
                                         />
                                     }
                                 </Collapse>
+                                <Collapse in={!shippingFeeLoading && shippingFeeInfo}>
+                                    {
+                                        shippingFeeInfo?.isAllow
+                                        ?
+                                        <div className={classes.subtotal}>
+                                            <Typography variant='body1' component='h2'>
+                                                <FormattedMessage id='shipping_fee' defaultMessage="Shipping fee" />
+                                            </Typography>
+                                            <Typography variant='h6' component='h2'>
+                                                {shippingFeeCalc(shippingFeeInfo.fee)}
+                                            </Typography>
+                                        </div>
+                                        :
+                                        <Typography variant="body1" component='p'>
+                                            <FormattedMessage id='shipping_not_allowed' defaultMessage="Sorry, we haven't supported shipping to that region yet." />
+                                        </Typography>
+                                    }
+                                </Collapse>
                             </div>
+                        </Paper>
+                        <Paper className={classes.checkoutPaper}>
+                            <Button className={classes.checkoutButton}>
+                                <Typography variant='h6' component='p'>
+                                    <FormattedMessage id='checkout' defaultMessage="Checkout" />
+                                </Typography>
+                            </Button>
                         </Paper>
                         </> 
                     }

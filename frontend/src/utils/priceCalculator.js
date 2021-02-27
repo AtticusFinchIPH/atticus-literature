@@ -69,4 +69,15 @@ subtotalCalc.PropTypes = PropTypes.arrayOf(
     })
 )
 
-export { retailPriceCalc, wholeSaleCalc, subtotalCalc }
+const shippingFeeCalc = (fee, currency = 'usd') => {
+    switch (currency) {
+        case 'usd':
+            return`$ ${new BigNumber(fee).decimalPlaces(2)}`;
+        case 'vnd':
+            return `${new BigNumber(fee).decimalPlaces(0)} vnđ`;
+        default:
+            return `$ ${new BigNumber(fee).decimalPlaces(2)}`;
+    }
+}
+
+export { retailPriceCalc, wholeSaleCalc, subtotalCalc, shippingFeeCalc }

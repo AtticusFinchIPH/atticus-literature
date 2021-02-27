@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/styles';
+import { LIGHT_WHITE, DARK_BLACK } from '../../../utils/theme';
 
 const useStyles = makeStyles(theme => ({
     themeTextColor: {
@@ -155,6 +156,9 @@ const useStyles = makeStyles(theme => ({
     },
     summaryPaper: {
         padding: theme.spacing(2, 1, 2, 1),
+        margin: theme.spacing(0, 0, 1, 0),
+        backgroundColor: theme.palette.navBar.main,
+        color: theme.palette.text.main,
     },
     subtotal: {
         display: 'flex',
@@ -164,6 +168,18 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
         padding: theme.spacing(1, 0, 1, 0),
     },
+    shippingInput: {
+        color: theme.palette.text.main,
+        backgroundColor: theme.palette.navBar.main,
+    },
+    checkoutButton: {
+        width: '100%',
+        backgroundColor: theme.palette.sidebarHeader.main,
+        color: LIGHT_WHITE,
+        '&:hover': {
+            color: DARK_BLACK,
+        }
+    }
 }));
 
 export default useStyles;

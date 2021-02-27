@@ -3,7 +3,7 @@ import {
     USER_LOGOUT
 } from '../constants/userConstants';
 
-function userSigninReducer(state = {}, action) {
+const userSigninReducer = (state = {}, action) => {
     switch (action.type) {
         case USER_SIGNIN_REQUEST:
             return { loading: true };

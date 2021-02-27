@@ -2,7 +2,7 @@ import {
     SWITCH_LANGUAGE, APPLY_VI, APPLY_EN,
 } from '../constants/globalConstants';
 
-function langReducer(state = 'en', action) {
+const langReducer = (state = 'en', action) => {
     switch(action.type) {
         case SWITCH_LANGUAGE:
             return action.payload;
