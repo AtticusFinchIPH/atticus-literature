@@ -2,10 +2,9 @@
 import {  useContext, useEffect, useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl, useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import BigNumber from 'bignumber.js';
 import useStyles from './styles';
 import { Button, Card, Collapse, Container, IconButton, Paper, Snackbar, TextField, Typography } from '@material-ui/core';
 import CartOpenContext from '../../../contexts/CartOpenContext';
@@ -14,9 +13,11 @@ import MinusIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import TagIcon from '@material-ui/icons/LocalOfferOutlined';
 import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
-import MuiAlert from '@material-ui/lab/Alert';
+import { Alert as MuiAlert, Autocomplete } from '@material-ui/lab';
 
 import { updateLocalCart, removeFromLocalCart } from '../../../actions/productActions';
+import { retailPriceCalc, wholeSaleCalc,subtotalCalc } from '../../../utils/priceCalculator';
+import cscAPI from 'country-state-city'
 
 const Alert = (props) => {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -26,21 +27,8 @@ const CardItem = ({item}) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const history = useHistory();
-    let retailPrice, wholeSale;
-    switch (item.currency) {
-        case 'usd':
-            retailPrice = `$ ${item.price}`;
-            wholeSale = `$ ${new BigNumber(item.price * item.quantity).decimalPlaces(2)}`;
-            break;
-        case 'vnd':
-            retailPrice = `${new BigNumber(item.price).decimalPlaces(0)} vnđ`;
-            wholeSale = `${new BigNumber(item.price * item.quantity).decimalPlaces(0)} vnđ`;
-            break;
-        default:
-            retailPrice = `$ ${item.price}`;
-            wholeSale = `$ ${new BigNumber(item.price * item.quantity).decimalPlaces(2)}`;
-            break;
-    }
+    const retailPrice = retailPriceCalc(item);
+    const wholeSale = wholeSaleCalc(item);
     const minusQuantity = () => {
         if(item.quantity === 1) return;
         else {
@@ -136,7 +124,7 @@ const PromoCode = ({ intl }) => {
     const submitCode = () => {
         setCode('');
         setPromoError(true);
-    }
+    }     
     return(
         <>
         <TextField
@@ -188,6 +176,7 @@ const AddNote = ({intl}) => {
 
 const Checkout = () => {
     const classes = useStyles();
+    const intl = useIntl();
     const { isCartOpen, setCartOpen } = useContext(CartOpenContext);
     const { cartList } = useSelector(state => state.cart);
     const [ openPromo, setOpenPromo ] = useState(false);
@@ -198,6 +187,48 @@ const Checkout = () => {
     const AddNoteComponent = injectIntl(({intl}) => 
         <AddNote intl={intl} />
     );
+    const subtotalDeclare = subtotalCalc(cartList);
+    const countries = cscAPI.getAllCountries();
+    const [ states, setStates ] = useState([]);
+    const [ cities, setCities ] = useState([]);
+    const [ selectedCountry, setSelectedCountry ] = useState({});
+    const [ selectedState, setSelectedState ] = useState({});
+    const [ selectedCity, setSelectedCity ] = useState({});
+    const [ inputCountry, setInputCountry ] = useState("");
+    const [ inputState, setInputState ] = useState("");
+    const [ inputCity, setInputCity ] = useState("");
+    const selectCountryTransl = intl.formatMessage({id: 'select_country', defaultMessage: "Select Country"});
+    const selectStateTranls = intl.formatMessage({id: 'select_state', defaultMessage: "Select State"});
+    const selectCityTranls = intl.formatMessage({id: 'select_city', defaultMessage: "Select City"});
+    const handleCountry = (event, newValue) => {
+        setSelectedCountry(newValue);
+        if (!newValue) {
+            setSelectedState({}); setInputState("");
+            setSelectedCity({}); setInputCity("");
+        }
+    };
+    const handleState = (event, newValue) => {
+        setSelectedState(newValue);
+        if (!newValue) {
+            setSelectedCity({}); setInputCity("");
+        }
+    };
+    const handleCity = (event, newValue) => {
+        setSelectedCity(newValue);
+    };
+    useEffect(() => {
+        if (selectedCountry) {
+            const stateList = cscAPI.getStatesOfCountry(selectedCountry.isoCode);
+            setStates(stateList);
+        }
+    }, [selectedCountry]);
+    useEffect(() => {
+        if (selectedCountry && selectedState) {
+            const cityList = cscAPI.getCitiesOfState(selectedCountry.isoCode, selectedState.isoCode);
+            setCities(cityList);
+        }
+    }, [selectedCountry, selectedState]);
+
     useEffect(() => {
         setCartOpen(false); // Always close cart bar in this screen
     }, [isCartOpen]);
@@ -263,14 +294,104 @@ const Checkout = () => {
                     </div>
                 </div>
                 <div className={classes.gridSummary}>
-                    <div className={classes.title}>
-                        <Typography variant='h5' component='h2'>
-                            <FormattedMessage id='order_summary' defaultMessage="Order Summmary" />
-                        </Typography>
-                    </div>
-                    <Paper>
-
-                    </Paper>
+                    {
+                        cartList?.length > 0
+                        &&
+                        <>
+                        <div className={classes.title}>
+                            <Typography variant='h5' component='h2'>
+                                <FormattedMessage id='order_summary' defaultMessage="Order Summmary" />
+                            </Typography>
+                        </div>
+                        <Paper className={classes.summaryPaper}>
+                            <div className={classes.subtotal}>
+                                <Typography variant='body1' component='h2'>
+                                    <FormattedMessage id='subtotal' defaultMessage="Subtotal" />
+                                </Typography>
+                                <Typography variant='h6' component='h2'>
+                                    {subtotalDeclare}
+                                </Typography>
+                            </div>
+                            <div  className={classes.shippingSection}>
+                                <Typography variant='body1' component='h2'>
+                                    <FormattedMessage id='shipping_region' defaultMessage="Shipping region" />
+                                </Typography>
+                                {
+                                    countries?.length > 0
+                                    &&
+                                    <Autocomplete 
+                                        value={selectedCountry} 
+                                        onChange={(event, newValue) => handleCountry(event, newValue)}
+                                        inputValue={inputCountry}
+                                        onInputChange={(event, newInputValue) => {
+                                            setInputCountry(newInputValue);
+                                        }}
+                                        options={countries}
+                                        getOptionLabel={(option) => option?.name || ""}
+                                        className={classes.autocomplete}
+                                        renderOption={(option) => (
+                                            <div>
+                                                {`${option.flag}  ${option.name}`}
+                                            </div>
+                                        )}
+                                        renderInput={(params) => (
+                                            <TextField {...params} 
+                                                label={selectCountryTransl} 
+                                                variant="outlined"
+                                            />
+                                        )}
+                                    />
+                                }
+                                <Collapse in={selectedCountry?.name?.length > 0}>
+                                    {
+                                        states?.length > 0
+                                        &&
+                                        <Autocomplete 
+                                            value={selectedState} 
+                                            onChange={(event, newValue) => handleState(event, newValue)}
+                                            inputValue={inputState}
+                                            onInputChange={(event, newInputValue) => {
+                                                setInputState(newInputValue);
+                                            }}
+                                            options={states}
+                                            getOptionLabel={(option) => option?.name || ""}
+                                            className={classes.autocomplete}
+                                            renderInput={(params) => (
+                                                <TextField {...params} 
+                                                    label={selectStateTranls} 
+                                                    variant="outlined"
+                                                />
+                                            )}
+                                        />
+                                    }
+                                </Collapse>
+                                <Collapse in={selectedState?.name?.length > 0}>
+                                    {
+                                        cities?.length > 0
+                                        &&
+                                        <Autocomplete 
+                                            value={selectedCity} 
+                                            onChange={(event, newValue) => handleCity(event, newValue)}
+                                            inputValue={inputCity}
+                                            onInputChange={(event, newInputValue) => {
+                                                setInputCity(newInputValue);
+                                            }}
+                                            options={cities}
+                                            getOptionLabel={(option) => option?.name || ""}
+                                            className={classes.autocomplete}
+                                            renderInput={(params) => (
+                                                <TextField {...params} 
+                                                    label={selectCityTranls} 
+                                                    variant="outlined"
+                                                />
+                                            )}
+                                        />
+                                    }
+                                </Collapse>
+                            </div>
+                        </Paper>
+                        </> 
+                    }
                 </div>
             </Container>
         </div>

@@ -97,6 +97,13 @@ const en = defineMessages({
     apply: "Apply",
     invalid_promo: "Invalid promo code",
     note_description: "Instructions? Special requests? Add them here.",
+
+    shipping_region: "Shipping region",
+    select_country: "Select Country",
+    select_state: "Select State",
+    select_city: "Select City",
+    shipping_fee: "Shipping fee",
+    free: "Free",
 })
 
 export default en;

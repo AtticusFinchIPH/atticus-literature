@@ -42,16 +42,30 @@ const useStyles = makeStyles(theme => ({
         gridArea: "gridList",
         maxWidth: theme.spacing(75),
         margin: 'auto',
+        width: '100%',
+        [theme.breakpoints.up('sm')]: {
+            width: 'auto',
+            minWidth: theme.spacing(70),
+        },
         [theme.breakpoints.up('md')]: {
             margin: 0,
+            width: 'auto',
+            minWidth: 'auto',
         },
     },
     gridSummary: {
         gridArea: "gridSummary",
         maxWidth: theme.spacing(75),
         margin: 'auto',
+        width: '100%',
+        [theme.breakpoints.up('sm')]: {
+            width: 'auto',
+            minWidth: theme.spacing(70),
+        },
         [theme.breakpoints.up('md')]: {
             margin: 0,
+            width: 'auto',
+            minWidth: 'auto',
         },
     },
     title: {
@@ -138,6 +152,17 @@ const useStyles = makeStyles(theme => ({
     },
     additionalContent: {
         margin: theme.spacing(0, 0, 1, 0)
+    },
+    summaryPaper: {
+        padding: theme.spacing(2, 1, 2, 1),
+    },
+    subtotal: {
+        display: 'flex',
+        justifyContent: 'space-between',
+    },
+    autocomplete: {
+        width: '100%',
+        padding: theme.spacing(1, 0, 1, 0),
     },
 }));
 

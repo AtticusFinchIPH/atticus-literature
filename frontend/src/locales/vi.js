@@ -27,7 +27,7 @@ const vi = defineMessages({
     continue_shopping: 'Tiếp tục mua sắm',
     cart_save_proceed: 'Lưu & Tiếp tục',
     add_to_cart: 'Thêm vào Giỏ hàng',
-    subtotal: 'Tổng',
+    subtotal: 'Ước tính tổng',
     author_by: 'tác giả',
     quantity: 'Số lượng',
 
@@ -97,6 +97,13 @@ const vi = defineMessages({
     apply: "Áp dụng",
     invalid_promo: "Mã giảm giá không hợp lệ",
     note_description: "Nếu bạn có yêu cầu hoặc chỉ dẫn đặc biệt, hãy đính kèm cho chúng tôi tại đây.",
+    
+    shipping_region: "Ước tính giao hàng",
+    select_country: "Chọn quốc gia",
+    select_state: "Chọn tỉnh",
+    select_city: "Chọn thành phố/quận/huyện",
+    shipping_fee: "Phí vận chuyển",
+    free: "Miễn phí",
 })
 
 export default vi;
