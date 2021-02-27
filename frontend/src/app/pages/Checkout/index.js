@@ -202,19 +202,22 @@ const Checkout = () => {
     const selectCityTranls = intl.formatMessage({id: 'select_city', defaultMessage: "Select City"});
     const handleCountry = (event, newValue) => {
         setSelectedCountry(newValue);
-        if (!newValue) {
+        console.log(newValue);
+        if (!newValue || newValue !== selectedCountry) {
             setSelectedState({}); setInputState("");
             setSelectedCity({}); setInputCity("");
         }
     };
     const handleState = (event, newValue) => {
         setSelectedState(newValue);
-        if (!newValue) {
+        console.log(newValue);
+        if (!newValue || newValue !== selectedState) {
             setSelectedCity({}); setInputCity("");
         }
     };
     const handleCity = (event, newValue) => {
         setSelectedCity(newValue);
+        console.log(newValue);
     };
     useEffect(() => {
         if (selectedCountry) {
