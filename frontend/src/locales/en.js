@@ -30,6 +30,9 @@ const en = defineMessages({
     subtotal: 'Subtotal',
     author_by: 'by',
     quantity: 'Quantity',
+    total: "Total",
+    checkout: "Checkout",
+    shipping_not_allowed: "Sorry, we haven't supported shipping to that region yet.",
 
     intro: 'Introduction',
     shipping: 'Shipping Info',

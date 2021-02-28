@@ -30,6 +30,9 @@ const vi = defineMessages({
     subtotal: 'Ước tính tổng',
     author_by: 'tác giả',
     quantity: 'Số lượng',
+    total: "Tổng",
+    checkout: "Đặt hàng",
+    shipping_not_allowed: "Xin lỗi, chúng tôi chưa hỗ trợ giao hàng đến khu vực này.",
 
     intro: 'Giới thiệu',
     shipping: 'Giao hàng',
@@ -101,7 +104,7 @@ const vi = defineMessages({
     shipping_region: "Ước tính giao hàng",
     select_country: "Chọn quốc gia",
     select_state: "Chọn tỉnh",
-    select_city: "Chọn thành phố/quận/huyện",
+    select_city: "Chọn thành phố",
     shipping_fee: "Phí vận chuyển",
     free: "Miễn phí",
 })

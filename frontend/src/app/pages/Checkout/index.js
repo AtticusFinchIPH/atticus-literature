@@ -7,7 +7,7 @@ import cscAPI from 'country-state-city'
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import useStyles from './styles';
-import { Button, Card, Collapse, Container, Divider, IconButton, Paper, Snackbar, TextField, Typography } from '@material-ui/core';
+import { Button, Card, Collapse, Container, Divider, Hidden, IconButton, Paper, Snackbar, TextField, Typography } from '@material-ui/core';
 import CartOpenContext from '../../../contexts/CartOpenContext';
 import RemoveIcon from '@material-ui/icons/HighlightOff';
 import MinusIcon from '@material-ui/icons/Remove';
@@ -324,11 +324,13 @@ const Checkout = () => {
                         cartList?.length > 0
                         &&
                         <>
+                        <Hidden smDown>
                         <div className={classes.title}>
                             <Typography variant='h5' component='h2'>
                                 <FormattedMessage id='order_summary' defaultMessage="Order Summmary" />
                             </Typography>
                         </div>
+                        </Hidden>
                         <Paper className={classes.summaryPaper}>
                             <div className={classes.subtotal}>
                                 <Typography variant='body1' component='h2'>
@@ -446,7 +448,7 @@ const Checkout = () => {
                             </div>
                         </Paper>
                         <Paper className={classes.checkoutPaper}>
-                            <Button className={classes.checkoutButton} disabled={!(totalSum > 0)}>
+                            <Button className={classes.checkoutButton} disabled={!totalSum || !(totalSum > 0)}>
                                 <Typography variant='h6' component='p'>
                                     <FormattedMessage id='checkout' defaultMessage="Checkout" />
                                 </Typography>
