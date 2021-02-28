@@ -17,7 +17,7 @@ import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
 import { Alert as MuiAlert, Autocomplete } from '@material-ui/lab';
 
 import { updateLocalCart, removeFromLocalCart } from '../../../actions/productActions';
-import { changeShippingFee, getShippingFee } from '../../../actions/orderActions';
+import { changeShippingFee, getShippingFee, saveShippingAddress } from '../../../actions/orderActions';
 import { retailPriceCalc, wholeSaleCalc, subtotalCalc, shippingFeeCalc, totalSumCalc, totalSumNumber } from '../../../utils/priceCalculator';
 
 const Alert = (props) => {
@@ -178,6 +178,7 @@ const AddNote = ({intl}) => {
 const Checkout = () => {
     const classes = useStyles();
     const intl = useIntl();
+    const history = useHistory();
     const dispatch = useDispatch();
     const { isCartOpen, setCartOpen } = useContext(CartOpenContext);
     const { cartList } = useSelector(state => state.cart);
@@ -224,17 +225,28 @@ const Checkout = () => {
         console.log(newValue);
     };
     useEffect(() => {
-        if (selectedCountry) {
+        if (selectedCountry?.name?.length > 0) {
             const stateList = cscAPI.getStatesOfCountry(selectedCountry.isoCode);
             setStates(stateList);
+            if(stateList.length === 0) {
+                dispatch(getShippingFee({
+                    countryId: selectedCountry.isoCode,
+                }))
+            }
         }
     }, [selectedCountry]);
     useEffect(() => {
-        if (selectedCountry && selectedState) {
+        if (selectedCountry?.name?.length > 0 && selectedState?.name?.length > 0) {
             const cityList = cscAPI.getCitiesOfState(selectedCountry.isoCode, selectedState.isoCode);
             setCities(cityList);
+            if(cityList.length === 0) {
+                dispatch(getShippingFee({
+                    countryId: selectedCountry.isoCode,
+                    stateId: selectedState.isoCode,
+                }))
+            }
         }
-    }, [selectedCountry, selectedState]);
+    }, [selectedState]);
     useEffect(() => {
         if (!selectedCity || !selectedCity.name) {
             dispatch(changeShippingFee());
@@ -263,6 +275,14 @@ const Checkout = () => {
     }
     const handleOpenNote = () => {
         setOpenNote(!openNote);
+    }
+    const handleCheckout = () => {
+        dispatch(saveShippingAddress({
+            country: selectedCountry,
+            state: selectedState,
+            city: selectedCity,
+        }));
+        history.push("/order_process/");
     }
     return (
         <div className={classes.root}>
@@ -448,7 +468,11 @@ const Checkout = () => {
                             </div>
                         </Paper>
                         <Paper className={classes.checkoutPaper}>
-                            <Button className={classes.checkoutButton} disabled={!totalSum || !(totalSum > 0)}>
+                            <Button 
+                                className={classes.checkoutButton} 
+                                disabled={!totalSum || !(totalSum > 0)}
+                                onClick={handleCheckout}
+                            >
                                 <Typography variant='h6' component='p'>
                                     <FormattedMessage id='checkout' defaultMessage="Checkout" />
                                 </Typography>
