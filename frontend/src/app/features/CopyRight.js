@@ -3,9 +3,9 @@ import { Typography, Link } from "@material-ui/core";
 
 const useStyle = makeStyles((theme) => ({
   root: {
-    position: 'relative',
+    position: 'fixed',
     width: '100%', 
-    bottom: '-56px',
+    bottom: '0px',
     color: theme.palette.text.main,
     backgroundColor: theme.palette.background.main,
   },

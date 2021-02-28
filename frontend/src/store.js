@@ -3,10 +3,11 @@ import thunk from 'redux-thunk';
 import Cookie from 'js-cookie';
 import { langReducer } from './reducers/globalReducer';
 import { bestsellersReducer, bookGenresReducer, cartReducer, recommendedsReducer, storeReducer, viewingProductReducer } from './reducers/productReducers';
-import { shippingFeeReducer } from './reducers/orderReducers';
+import { shippingAddressReducer, shippingFeeReducer } from './reducers/orderReducers';
 import { userSigninReducer } from './reducers/userReducers';
 
 const cartList = Cookie.getJSON('cartList') || [];
+const shippingAddressObj = Cookie.get('shippingAddress') || {};
 const userInfo = Cookie.getJSON('userInfo') || null;
 
 const initialState = {
@@ -17,7 +18,8 @@ const initialState = {
     viewingProduct: { product: null },
     store: { products: [] },
     bookGenres: { genres: [] },
-    shippingFee: { },
+    shippingFee: {},
+    shippingAddress: shippingAddressObj,
     userSignin: { userInfo },
 };
 
@@ -30,6 +32,7 @@ const reducer = combineReducers({
     store: storeReducer,
     bookGenres: bookGenresReducer,
     shippingFee: shippingFeeReducer,
+    shippingAddress: shippingAddressReducer,
     userSignin: userSigninReducer,
 });
 

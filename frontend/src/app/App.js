@@ -16,6 +16,7 @@ import Home from './pages/Home';
 import Product from './pages/Product';
 import Bookstore from './pages/Bookstore';
 import Checkout from './pages/Checkout';
+import OrderProcess from './pages/OrderProcess';
 import AboutUS from './pages/AboutUs';
 import PageNotFound from './pages/PageNotFound';
 
@@ -45,6 +46,7 @@ function App() {
               <Route path="/bookstore/" component={Bookstore} />
               <Route path="/about_us/" component={AboutUS} />
               <Route path="/checkout/" component={Checkout} />
+              <Route path="/order_process/" component={OrderProcess} />
               <Route component={PageNotFound} />
             </Switch>
             <CopyRight />
