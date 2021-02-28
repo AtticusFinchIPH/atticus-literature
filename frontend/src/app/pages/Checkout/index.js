@@ -436,7 +436,7 @@ const Checkout = () => {
                                         />
                                     }
                                 </Collapse>
-                                <Collapse in={!shippingFeeLoading && shippingFeeInfo}>
+                                <Collapse in={!shippingFeeLoading && shippingFeeInfo && Object.keys(shippingFeeInfo).length > 0}>
                                     {
                                         shippingFeeInfo?.isAllow
                                         ?
