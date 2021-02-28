@@ -49,7 +49,7 @@ wholeSaleCalc.PropTypes = PropTypes.shape({
 
 const subtotalCalc = (items) => {
     const number = new BigNumber(items.reduce((total, item) => {
-        return total + item.price*item.quantity;
+        return (new BigNumber(item.price).times(item.quantity)).plus(total);
     }, 0));
     switch (items[0]?.currency) {
         case 'usd':
@@ -69,7 +69,7 @@ subtotalCalc.PropTypes = PropTypes.arrayOf(
     })
 )
 
-const shippingFeeCalc = (fee, currency = 'usd') => {
+const shippingFeeCalc = ({fee, currency = 'usd'}) => {
     switch (currency) {
         case 'usd':
             return`$ ${new BigNumber(fee).decimalPlaces(2)}`;
@@ -80,4 +80,46 @@ const shippingFeeCalc = (fee, currency = 'usd') => {
     }
 }
 
-export { retailPriceCalc, wholeSaleCalc, subtotalCalc, shippingFeeCalc }
+shippingFeeCalc.PropTypes =  PropTypes.shape({
+    fee: PropTypes.number.isRequired,
+    currency: PropTypes.string,
+})
+
+const totalSumNumber = ({items, shippingFeeInfo}) => {
+    const goodsSum = new BigNumber(items.reduce((total, item) => {
+        return (new BigNumber(item.price).times(item.quantity)).plus(total);
+    }, 0));
+    return (goodsSum.plus(shippingFeeInfo.fee));
+}
+
+totalSumNumber.PropTypes =  PropTypes.shape({
+    items: PropTypes.arrayOf(
+        PropTypes.shape({
+            price: PropTypes.number.isRequired,
+            quantity: PropTypes.number.isRequired,
+            currency: PropTypes.string.isRequired,
+        })
+    ),
+    shippingFeeInfo: PropTypes.shape({
+        fee: PropTypes.number.isRequired,
+        currency: PropTypes.string,
+    }).isRequired,
+})
+
+const totalSumCalc = ({number, currency = 'usd'}) => {
+    switch (currency) {
+        case 'usd':
+            return`$ ${new BigNumber(number).decimalPlaces(2)}`;
+        case 'vnd':
+            return `${new BigNumber(number).decimalPlaces(0)} vnđ`;
+        default:
+            return `$ ${new BigNumber(number).decimalPlaces(2)}`;
+    }
+}
+
+totalSumCalc.PropTypes =  PropTypes.shape({
+    number: PropTypes.number.isRequired,
+    currency: PropTypes.string,
+})
+
+export { retailPriceCalc, wholeSaleCalc, subtotalCalc, shippingFeeCalc, totalSumNumber, totalSumCalc }

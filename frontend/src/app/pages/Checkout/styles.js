@@ -163,6 +163,14 @@ const useStyles = makeStyles(theme => ({
     subtotal: {
         display: 'flex',
         justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: theme.spacing(1),
+    },
+    total: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: theme.spacing(1),
     },
     autocomplete: {
         width: '100%',
@@ -178,7 +186,10 @@ const useStyles = makeStyles(theme => ({
         color: LIGHT_WHITE,
         '&:hover': {
             color: DARK_BLACK,
-        }
+        },
+        '&:disabled': {
+            backgroundColor: LIGHT_WHITE,
+        },
     }
 }));
 

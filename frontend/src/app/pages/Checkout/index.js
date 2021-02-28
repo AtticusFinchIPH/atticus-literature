@@ -7,7 +7,7 @@ import cscAPI from 'country-state-city'
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import useStyles from './styles';
-import { Button, Card, Collapse, Container, IconButton, Paper, Snackbar, TextField, Typography } from '@material-ui/core';
+import { Button, Card, Collapse, Container, Divider, IconButton, Paper, Snackbar, TextField, Typography } from '@material-ui/core';
 import CartOpenContext from '../../../contexts/CartOpenContext';
 import RemoveIcon from '@material-ui/icons/HighlightOff';
 import MinusIcon from '@material-ui/icons/Remove';
@@ -18,7 +18,7 @@ import { Alert as MuiAlert, Autocomplete } from '@material-ui/lab';
 
 import { updateLocalCart, removeFromLocalCart } from '../../../actions/productActions';
 import { changeShippingFee, getShippingFee } from '../../../actions/orderActions';
-import { retailPriceCalc, wholeSaleCalc, subtotalCalc, shippingFeeCalc } from '../../../utils/priceCalculator';
+import { retailPriceCalc, wholeSaleCalc, subtotalCalc, shippingFeeCalc, totalSumCalc, totalSumNumber } from '../../../utils/priceCalculator';
 
 const Alert = (props) => {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -181,7 +181,9 @@ const Checkout = () => {
     const dispatch = useDispatch();
     const { isCartOpen, setCartOpen } = useContext(CartOpenContext);
     const { cartList } = useSelector(state => state.cart);
+    const subtotalDeclare = subtotalCalc(cartList);
     const { loading: shippingFeeLoading, info: shippingFeeInfo } = useSelector(state => state.shippingFee);
+    const [ totalSum, setTotalSum ] = useState();
     const [ openPromo, setOpenPromo ] = useState(false);
     const [ openNote, setOpenNote ] = useState(false);
     const PromoCodeComponent = injectIntl(({intl}) => 
@@ -190,7 +192,6 @@ const Checkout = () => {
     const AddNoteComponent = injectIntl(({intl}) => 
         <AddNote intl={intl} />
     );
-    const subtotalDeclare = subtotalCalc(cartList);
     const countries = cscAPI.getAllCountries();
     const [ states, setStates ] = useState([]);
     const [ cities, setCities ] = useState([]);
@@ -244,7 +245,15 @@ const Checkout = () => {
                 cityId: selectedCity.isoCode,
             }))
         }
-    }, [selectedCity])
+    }, [selectedCity]);
+    useEffect(() => {
+        if(cartList.length > 0 && !shippingFeeLoading && !isNaN(shippingFeeInfo?.fee)) {
+            setTotalSum(totalSumNumber({
+                items: cartList,
+                shippingFeeInfo,
+            }))
+        } else setTotalSum();
+    }, [cartList, shippingFeeInfo]);
 
     useEffect(() => {
         setCartOpen(false); // Always close cart bar in this screen
@@ -325,7 +334,7 @@ const Checkout = () => {
                                 <Typography variant='body1' component='h2'>
                                     <FormattedMessage id='subtotal' defaultMessage="Subtotal" />
                                 </Typography>
-                                <Typography variant='h6' component='h2'>
+                                <Typography variant='body1' component='h2'>
                                     {subtotalDeclare}
                                 </Typography>
                             </div>
@@ -409,14 +418,25 @@ const Checkout = () => {
                                     {
                                         shippingFeeInfo?.isAllow
                                         ?
+                                        <>
                                         <div className={classes.subtotal}>
                                             <Typography variant='body1' component='h2'>
                                                 <FormattedMessage id='shipping_fee' defaultMessage="Shipping fee" />
                                             </Typography>
-                                            <Typography variant='h6' component='h2'>
-                                                {shippingFeeCalc(shippingFeeInfo.fee)}
+                                            <Typography variant='body1' component='h2'>
+                                                {shippingFeeCalc({fee: shippingFeeInfo.fee})}
                                             </Typography>
                                         </div>
+                                        <Divider/>
+                                        <div className={classes.total}>
+                                            <Typography variant='h5' component='h2'>
+                                                <FormattedMessage id='total' defaultMessage="Total" />
+                                            </Typography>
+                                            <Typography variant='h5' component='h2'>
+                                                {totalSumCalc({number: totalSum})}
+                                            </Typography>
+                                        </div>
+                                        </>
                                         :
                                         <Typography variant="body1" component='p'>
                                             <FormattedMessage id='shipping_not_allowed' defaultMessage="Sorry, we haven't supported shipping to that region yet." />
@@ -426,7 +446,7 @@ const Checkout = () => {
                             </div>
                         </Paper>
                         <Paper className={classes.checkoutPaper}>
-                            <Button className={classes.checkoutButton}>
+                            <Button className={classes.checkoutButton} disabled={!(totalSum > 0)}>
                                 <Typography variant='h6' component='p'>
                                     <FormattedMessage id='checkout' defaultMessage="Checkout" />
                                 </Typography>
