@@ -183,7 +183,7 @@ const Checkout = () => {
     const { isCartOpen, setCartOpen } = useContext(CartOpenContext);
     const { cartList } = useSelector(state => state.cart);
     const subtotalDeclare = subtotalCalc(cartList);
-    const { loading: shippingFeeLoading, info: shippingFeeInfo } = useSelector(state => state.shippingFee);
+    const { country, state, city, loading: shippingFeeLoading, info: shippingFeeInfo } = useSelector(state => state.shippingAddress);
     const [ totalSum, setTotalSum ] = useState();
     const [ openPromo, setOpenPromo ] = useState(false);
     const [ openNote, setOpenNote ] = useState(false);
@@ -196,7 +196,6 @@ const Checkout = () => {
     const countries = cscAPI.getAllCountries();
     const [ states, setStates ] = useState([]);
     const [ cities, setCities ] = useState([]);
-    const { country, state, city } = useSelector(state => state.shippingAddress);
     const [ selectedCountry, setSelectedCountry ] = useState(country || {});
     const [ selectedState, setSelectedState ] = useState(state || {});
     const [ selectedCity, setSelectedCity ] = useState(city || {});

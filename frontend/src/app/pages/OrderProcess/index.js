@@ -27,10 +27,9 @@ const OrderProcess = () => {
     const cityTransl = intl.formatMessage({id: 'city', defaultMessage: "City"});
     const stateTransl = intl.formatMessage({id: 'state', defaultMessage: "State"});
     const countryTransl = intl.formatMessage({id: 'country', defaultMessage: "Country"});
-    const { country, state, city } = useSelector(state => state.shippingAddress);
+    const { country, state, city, loading: shippingFeeLoading, info: shippingFeeInfo } = useSelector(state => state.shippingAddress);
     const { isCartOpen, setCartOpen } = useContext(CartOpenContext);
     const { cartList } = useSelector(state => state.cart);
-    const { loading: shippingFeeLoading, info: shippingFeeInfo } = useSelector(state => state.shippingFee);
     const [activeStep, setActiveStep] = useState(0);
     const steps = getSteps();
 
@@ -47,8 +46,8 @@ const OrderProcess = () => {
     };
     
     useEffect(() => {
-        if (!city?.name || !state?.name || !country?.name || cartList.length === 0) history.replace("/checkout/");
-    }, [city, state, country, cartList]);
+        if (shippingFeeLoading || !city?.name || !state?.name || !country?.name || cartList.length === 0) history.replace("/checkout/");
+    }, [city, state, country, shippingFeeLoading, cartList]);
     useEffect(() => {
         setCartOpen(false); // Always close cart bar in this screen
     }, [isCartOpen]);
