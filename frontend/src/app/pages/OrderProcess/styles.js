@@ -20,23 +20,33 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.navBar.main,
         display: 'grid',
         gridTemplateColumns: '1fr',
-        gridTemplateRows: 'auto auto auto',
-        gridTemplateAreas: '"gridStepper" "gridInput" "gridSummary"',
-        margin: theme.spacing(5, 0, 3, 0),
+        gridTemplateRows: 'auto auto',
+        gridTemplateAreas: '"gridStepper" "gridForm"',
+        margin: theme.spacing(0, 0, 1, 0),
         paddingBottom: theme.spacing(8),
-        [theme.breakpoints.up('sm')]: {
-            gridTemplateColumns: '3fr 2fr',
-            gridTemplateRows: '2fr',
-            gridTemplateAreas: '"gridStepper gridStepper" "gridInput gridSummary"',
-            gridGap: theme.spacing(5),
-            margin: theme.spacing(10, 0, 3, 0),
-        },
         [theme.breakpoints.up('md')]: {
+            margin: theme.spacing(10, 0, 3, 0),
             paddingBottom: theme.spacing(3),
         }
     },
     gridStepper: {
         gridArea: "gridStepper",
+        marginTop: theme.spacing(5),
+    },
+    gridForm: {
+        gridArea: "gridForm",
+        display: 'grid',
+        gridTemplateColumns: '1fr',
+        gridTemplateRows: 'auto auto',
+        gridTemplateAreas: '"gridInput" "gridSummary"',
+        margin: theme.spacing(0, 0, 3, 0),
+        paddingBottom: theme.spacing(8),
+        [theme.breakpoints.up('sm')]: {
+            gridTemplateColumns: '3fr 2fr',
+            gridTemplateRows: '1fr',
+            gridTemplateAreas: '"gridInput gridSummary"',
+            gridGap: theme.spacing(5),
+        },
     },
     gridInput: {
         gridArea: "gridInput",

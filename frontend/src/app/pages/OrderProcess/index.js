@@ -6,7 +6,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import clsx from 'clsx';
 import axios from 'axios';
 import useStyles from './styles';
-import { Button, Container, Divider, InputAdornment, Step, StepLabel, Stepper, TextField, Typography } from '@material-ui/core';
+import { Button, Container, Divider, InputAdornment, Slide, Step, StepLabel, Stepper, TextField, Typography } from '@material-ui/core';
 import CartOpenContext from '../../../contexts/CartOpenContext';
 import { shippingFeeCalc, totalSumCalc, totalSumNumber, wholeSaleCalc } from '../../../utils/priceCalculator';
 
@@ -73,7 +73,7 @@ const OrderProcess = () => {
                 handleNext(); 
             }
         } catch (error) {
-            error.response.data.erros.errors.map(err => {
+            error?.response?.data?.erros?.errors?.map(err => {
                 switch(err.param) {
                     case "first_name":
                         setFirstNameError(intl.formatMessage({id: err.msg, defaultMessage: err.msg}));
@@ -104,7 +104,7 @@ const OrderProcess = () => {
         setCartOpen(false); // Always close cart bar in this screen
     }, [isCartOpen]);
     return (
-        <form className={classes.root} noValidate={false} onSubmit={submitHandler}>
+        <div className={classes.root}>
             <Container className={classes.container} maxWidth='md'>
                 <Stepper  className={classes.gridStepper} activeStep={activeStep} alternativeLabel>
                     {steps.map((label) => (
@@ -113,10 +113,8 @@ const OrderProcess = () => {
                         </Step>
                     ))}
                 </Stepper>
-                {
-                    activeStep === 0
-                    ? 
-                    <>
+                <Slide in={activeStep === 0} direction="right" mountOnEnter unmountOnExit>
+                    <form className={classes.gridForm} noValidate={false} onSubmit={submitHandler}>
                         <div className={classes.gridInput}>
                             <div className={classes.singleField}>
                                 <Typography variant='h6' component='p'>
@@ -300,20 +298,17 @@ const OrderProcess = () => {
                                 </>
                             }
                         </div>
-                    </>
-                    :
-                    activeStep === 1
-                    ?
-                    <div>
-                        Payment
-                    </div>
-                    :
-                    <div>
-                        Finish
-                    </div>
-                }
+                    </form>
+                    </Slide>
+                    <Slide in={activeStep === 1} direction="right" mountOnEnter unmountOnExit >
+                        <Typography>Payment</Typography>
+                    </Slide>
+                    <Slide in={activeStep === 2} direction="right" mountOnEnter unmountOnExit >
+                        <Typography>Finish</Typography>
+                    </Slide>
+                
             </Container>
-        </form>
+        </div>
     )
 }
 
