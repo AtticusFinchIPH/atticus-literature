@@ -32,7 +32,7 @@ const en = defineMessages({
     quantity: 'Quantity',
     total: "Total",
     checkout: "Checkout",
-    shipping_not_allowed: "Sorry, we haven't supported shipping to that region yet.",
+    shipping_not_allowed: "Sorry, we haven't supported shipping to that region yet. Only within Vietnam for now",
 
     intro: 'Introduction',
     shipping: 'Shipping Info',
@@ -93,6 +93,7 @@ const en = defineMessages({
     yes_register: "Sign up",
     yes_signin: "Sign in",
 
+    // Checkout
     my_cart: "My Cart",
     enter_promo: "Enter a promo code",
     add_note: "Add a note",
@@ -107,6 +108,21 @@ const en = defineMessages({
     select_city: "Select City",
     shipping_fee: "Shipping fee",
     free: "Free",
+
+    // Order Process
+    shipping_info: "Shipping information",
+    payment: "Payment",
+    firstname: "First Name",
+    lastname: "Last Name",
+    email: "Email",
+    phone: "Phone number",
+    shipping_addr_detail: "Shipping address detail",
+    city: "City", state: "State", country: "Country",
+    edit_shipping_region: "Edit shipping region",
+    edit_cart: "Edit cart",
+    recipient: "Recipient",
+    your_order: "Your order",
+    continue_payment: "Continue to payment",
 })
 
 export default en;

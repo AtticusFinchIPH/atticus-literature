@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/styles';
+import { LIGHT_WHITE, DARK_BLACK } from '../../../utils/theme';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -67,6 +68,50 @@ const useStyles = makeStyles((theme) => ({
     phone: { gridArea: 'gridRight' },
     city: { gridArea: 'gridLeft' },
     state: { gridArea: 'gridRight' },
+    yourOrder: {
+        paddingBottom: theme.spacing(2),
+    },
+    listItems: {
+        paddingBottom: theme.spacing(2),
+    },
+    item: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        padding: theme.spacing(1, 0, 0, 0),
+    },
+    itemTitle: {
+        maxWidth: '230px',
+        display: 'inline-block',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+    },
+    price: {
+        width: theme.spacing(8),
+        color: theme.palette.text.blur,
+    },
+    totalPrice: {
+        width: theme.spacing(9),
+    },
+    paymentButton: {
+        width: '100%',
+        backgroundColor: theme.palette.sidebarHeader.main,
+        color: LIGHT_WHITE,
+        '&:hover': {
+            color: theme.palette.text.main,
+        },
+    },
+    textfieldInput: {
+        color: theme.palette.text.main,
+    },
+    textfieldLabel: {
+        color: theme.palette.text.blur,
+    },
+    link: {
+        textDecoration: "none",
+        color: theme.palette.text.main,
+        marginLeft: theme.spacing(3),
+    },
 }))
 
 export default useStyles;

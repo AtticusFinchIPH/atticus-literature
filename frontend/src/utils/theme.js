@@ -7,6 +7,8 @@ const FONT_F_QUICKSAND = 'Quicksand';
 
 const LIGHT_WHITE = "#fff";
 const DARK_BLACK = "#000";
+const BLUR_WHITE = "#e0e0e0bf";
+const BLUR_BLACK = "rgb(0 0 0 / 65%)";
 const LIGHT_GRAYISH_BLUE = "hsl(220, 16%, 96%)";
 const LIGHT_WHITE_BLUE = "hsl(220, 16%, 50%)";
 const DARK_GRAY = "#303030";
@@ -47,6 +49,7 @@ const lightTheme = createMuiTheme({
     },
     text: {
       main: DARK_BLACK,
+      blur: BLUR_BLACK,
     },
     sectionBack: {
       main: DARK_BLUE,
@@ -77,6 +80,7 @@ const darkTheme = createMuiTheme({
     },
     text: {
       main: LIGHT_WHITE,
+      blur: BLUR_WHITE,
     },
     sectionBack: {
       main: LIGHT_WHITE,

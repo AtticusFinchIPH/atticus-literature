@@ -32,7 +32,7 @@ const vi = defineMessages({
     quantity: 'Số lượng',
     total: "Tổng",
     checkout: "Đặt hàng",
-    shipping_not_allowed: "Xin lỗi, chúng tôi chưa hỗ trợ giao hàng đến khu vực này.",
+    shipping_not_allowed: "Xin lỗi, chúng tôi chưa hỗ trợ giao hàng đến khu vực này. Hiện tại chỉ những đơn hàng trong lãnh thổ Việt Nam được tiếp nhận.",
 
     intro: 'Giới thiệu',
     shipping: 'Giao hàng',
@@ -93,6 +93,7 @@ const vi = defineMessages({
     yes_register: "Đăng ký",
     yes_signin: "Đăng nhập",
 
+    // Checkout
     my_cart: "Giỏ hàng của bạn",
     enter_promo: "Nhập mã giảm giá",
     add_note: "Thêm ghi chú",
@@ -107,6 +108,21 @@ const vi = defineMessages({
     select_city: "Chọn thành phố",
     shipping_fee: "Phí vận chuyển",
     free: "Miễn phí",
+
+    // Order Process
+    shipping_info: "Thông tin giao hàng",
+    payment: "Thanh toán",
+    firstname: "Tên",
+    lastname: "Họ",
+    email: "Email",
+    phone: "Số điện thoại",
+    shipping_addr_detail: "Địa chỉ giao hàng chi tiết",
+    city: "Thành phố", state: "Tỉnh", country: "Quốc gia",
+    edit_shipping_region: "Chỉnh sửa vùng",
+    edit_cart: "Chỉnh sửa đơn hàng",
+    recipient: "Người nhận",
+    your_order: "Đơn hàng của bạn",
+    continue_payment: "Tiếp tục thanh toán",
 })
 
 export default vi;
