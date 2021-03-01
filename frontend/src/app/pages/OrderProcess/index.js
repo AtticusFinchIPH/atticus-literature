@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage, useIntl } from 'react-intl';
 import clsx from 'clsx';
+import axios from 'axios';
 import useStyles from './styles';
 import { Button, Container, Divider, InputAdornment, Step, StepLabel, Stepper, TextField, Typography } from '@material-ui/core';
 import CartOpenContext from '../../../contexts/CartOpenContext';
@@ -30,6 +31,16 @@ const OrderProcess = () => {
     const { country, state, city, loading: shippingFeeLoading, info: shippingFeeInfo } = useSelector(state => state.shippingAddress);
     const { isCartOpen, setCartOpen } = useContext(CartOpenContext);
     const { cartList } = useSelector(state => state.cart);
+    const [ firstName, setFirstName ] = useState();
+    const [ lastName, setLastName ] = useState();
+    const [ email, setEmail ] = useState();
+    const [ phone, setPhone ] = useState();
+    const [ addressDetail, setAddressDetail ] = useState();
+    const [ firstNameError, setFirstNameError ] = useState();
+    const [ lastNameError, setLastNameError ] = useState();
+    const [ emailError, setEmailError ] = useState();
+    const [ phoneError, setPhoneError ] = useState();
+    const [ addressDetailError, setAddressDetailError ] = useState();
     const [activeStep, setActiveStep] = useState(0);
     const steps = getSteps();
 
@@ -44,6 +55,47 @@ const OrderProcess = () => {
     const handleReset = () => {
         setActiveStep(0);
     };
+    const resetError = () => {
+        setFirstNameError(); setLastNameError(); setEmailError(); setPhoneError(); setAddressDetailError();
+    };
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post("/api/orders/validate_shipping",
+                            {
+                                first_name: firstName,
+                                last_name: lastName,
+                                email, phone,
+                                address_detail: addressDetail,
+                            });
+            if(response.data.isValidate) {
+                resetError();
+                handleNext(); 
+            }
+        } catch (error) {
+            error.response.data.erros.errors.map(err => {
+                switch(err.param) {
+                    case "first_name":
+                        setFirstNameError(intl.formatMessage({id: err.msg, defaultMessage: err.msg}));
+                        break;
+                    case "last_name":
+                        setLastNameError(intl.formatMessage({id: err.msg, defaultMessage: err.msg}));
+                        break;
+                    case "email":
+                        setEmailError(intl.formatMessage({id: err.msg, defaultMessage: err.msg}));
+                        break;
+                    case "phone":
+                        setPhoneError(intl.formatMessage({id: err.msg, defaultMessage: err.msg}));
+                        break;  
+                    case "address_detail":
+                        setAddressDetailError(intl.formatMessage({id: err.msg, defaultMessage: err.msg}));
+                        break;
+                    default:
+                        break;
+                }
+            })
+        }
+    };
     
     useEffect(() => {
         if (shippingFeeLoading || !city?.name || !state?.name || !country?.name || cartList.length === 0) history.replace("/checkout/");
@@ -52,7 +104,7 @@ const OrderProcess = () => {
         setCartOpen(false); // Always close cart bar in this screen
     }, [isCartOpen]);
     return (
-        <div className={classes.root}>
+        <form className={classes.root} noValidate={false} onSubmit={submitHandler}>
             <Container className={classes.container} maxWidth='md'>
                 <Stepper  className={classes.gridStepper} activeStep={activeStep} alternativeLabel>
                     {steps.map((label) => (
@@ -76,8 +128,11 @@ const OrderProcess = () => {
                                     InputLabelProps= {{ className: classes.textfieldLabel }}
                                     InputProps={{ className: classes.textfieldInput }}
                                     className={clsx(classes.firstname, classes.textfield)}
-                                    required variant="outlined" fullWidth
+                                    required variant="outlined" fullWidth autoFocus
                                     label={firstnameTransl}
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                    error={firstNameError}
+                                    helperText={firstNameError}
                                 />
                                 <TextField
                                     InputLabelProps= {{ className: classes.textfieldLabel }}
@@ -85,6 +140,9 @@ const OrderProcess = () => {
                                     className={clsx(classes.lastname, classes.textfield)}
                                     required variant="outlined" fullWidth
                                     label={lastnameTransl}
+                                    onChange={(e) => setLastName(e.target.value)}
+                                    error={lastNameError}
+                                    helperText={lastNameError}
                                 />
                             </div>
                             <div className={classes.pairField}>
@@ -92,8 +150,12 @@ const OrderProcess = () => {
                                     InputLabelProps= {{ className: classes.textfieldLabel }}
                                     InputProps={{ className: classes.textfieldInput }}
                                     className={clsx(classes.email, classes.textfield)}
+                                    type="email" autoComplete="email"
                                     required variant="outlined" fullWidth
                                     label={emailTransl}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    error={emailError}
+                                    helperText={emailError}
                                 />
                                 <TextField
                                     InputLabelProps= {{ className: classes.textfieldLabel }}
@@ -104,6 +166,9 @@ const OrderProcess = () => {
                                     className={clsx(classes.phone, classes.textfield)}
                                     required variant="outlined" fullWidth
                                     label={phoneTransl}
+                                    onChange={(e) => setPhone(e.target.value)}
+                                    error={phoneError}
+                                    helperText={phoneError}
                                 />
                             </div>
                             <div className={classes.singleField}>
@@ -113,6 +178,9 @@ const OrderProcess = () => {
                                     className={clsx(classes.textfield)}
                                     required variant="outlined" fullWidth
                                     label={shippingDetailTransl}
+                                    onChange={(e) => setAddressDetail(e.target.value)}
+                                    error={addressDetailError}
+                                    helperText={addressDetailError}
                                 />
                             </div>
                             <div className={classes.pairField}>
@@ -224,7 +292,7 @@ const OrderProcess = () => {
                                         })}
                                     </Typography>
                                 </div>
-                                <Button className={classes.paymentButton} >
+                                <Button className={classes.paymentButton} type="submit">
                                     <Typography variant='h6' component='p'>
                                         <FormattedMessage id='continue_payment' defaultMessage="Continue to payment" />
                                     </Typography>
@@ -245,7 +313,7 @@ const OrderProcess = () => {
                     </div>
                 }
             </Container>
-        </div>
+        </form>
     )
 }
 

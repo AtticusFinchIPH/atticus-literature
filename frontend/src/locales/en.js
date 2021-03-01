@@ -123,6 +123,13 @@ const en = defineMessages({
     recipient: "Recipient",
     your_order: "Your order",
     continue_payment: "Continue to payment",
+
+    // Errors
+    empty_firstname: "First name must not be empty",
+    empty_lastname: "Last name must not be empty",
+    invalid_email: "Invalid email address",
+    empty_phone: "Phone number must not be empty",
+    empty_address_detail: "Address detail must not be empty",
 })
 
 export default en;

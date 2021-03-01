@@ -123,6 +123,13 @@ const vi = defineMessages({
     recipient: "Người nhận",
     your_order: "Đơn hàng của bạn",
     continue_payment: "Tiếp tục thanh toán",
+
+    // Errors
+    empty_firstname: "Tên người nhận không được trống",
+    empty_lastname: "Họ người nhận không được trống",
+    invalid_email: "Địa chỉ email không hợp lệ",
+    empty_phone: "Số điện thoại không được trống",
+    empty_address_detail: "Địa chỉ không được trống",
 })
 
 export default vi;
