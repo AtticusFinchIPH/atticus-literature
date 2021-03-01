@@ -7,7 +7,7 @@ import { shippingAddressReducer, shippingFeeReducer } from './reducers/orderRedu
 import { userSigninReducer } from './reducers/userReducers';
 
 const cartList = Cookie.getJSON('cartList') || [];
-const shippingAddressObj = Cookie.get('shippingAddress') || {};
+const shippingAddressObj = Cookie.getJSON('shippingAddress') || {};
 const userInfo = Cookie.getJSON('userInfo') || null;
 
 const initialState = {

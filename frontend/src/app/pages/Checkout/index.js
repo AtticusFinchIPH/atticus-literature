@@ -196,9 +196,10 @@ const Checkout = () => {
     const countries = cscAPI.getAllCountries();
     const [ states, setStates ] = useState([]);
     const [ cities, setCities ] = useState([]);
-    const [ selectedCountry, setSelectedCountry ] = useState({});
-    const [ selectedState, setSelectedState ] = useState({});
-    const [ selectedCity, setSelectedCity ] = useState({});
+    const { country, state, city } = useSelector(state => state.shippingAddress);
+    const [ selectedCountry, setSelectedCountry ] = useState(country || {});
+    const [ selectedState, setSelectedState ] = useState(state || {});
+    const [ selectedCity, setSelectedCity ] = useState(city || {});
     const [ inputCountry, setInputCountry ] = useState("");
     const [ inputState, setInputState ] = useState("");
     const [ inputCity, setInputCity ] = useState("");
