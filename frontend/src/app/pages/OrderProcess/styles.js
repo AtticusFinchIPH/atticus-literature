@@ -121,6 +121,7 @@ const useStyles = makeStyles((theme) => ({
         textDecoration: "none",
         color: theme.palette.text.main,
         marginLeft: theme.spacing(3),
+        '&:hover': { cursor: 'pointer' }, 
     },
     paymentBox: {
         border: "solid 1px",

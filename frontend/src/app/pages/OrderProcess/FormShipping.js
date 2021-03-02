@@ -117,6 +117,7 @@ const FormShipping = ({handleNext}) => {
                         required variant="outlined" fullWidth autoFocus
                         label={firstnameTransl}
                         onChange={(e) => handleTextField(e.target.value, TYPE_FIRSTNAME)}
+                        value={firstName}
                         error={firstNameError}
                         helperText={firstNameError}
                     />
@@ -127,6 +128,7 @@ const FormShipping = ({handleNext}) => {
                         required variant="outlined" fullWidth
                         label={lastnameTransl}
                         onChange={(e) => handleTextField(e.target.value, TYPE_LASTNAME)}
+                        value={lastName}
                         error={lastNameError}
                         helperText={lastNameError}
                     />
@@ -140,6 +142,7 @@ const FormShipping = ({handleNext}) => {
                         required variant="outlined" fullWidth
                         label={emailTransl}
                         onChange={(e) => handleTextField(e.target.value, TYPE_EMAIL)}
+                        value={email}
                         error={emailError}
                         helperText={emailError}
                     />
@@ -153,6 +156,7 @@ const FormShipping = ({handleNext}) => {
                         required variant="outlined" fullWidth
                         label={phoneTransl} type="tel"
                         onChange={(e) => handleTextField(e.target.value, TYPE_PHONE)}
+                        value={phone}
                         error={phoneError}
                         helperText={phoneError}
                     />
@@ -165,6 +169,7 @@ const FormShipping = ({handleNext}) => {
                         required variant="outlined" fullWidth
                         label={shippingDetailTransl}
                         onChange={(e) => handleTextField(e.target.value, TYPE_ADDRESS)}
+                        value={addressDetail}
                         error={addressDetailError}
                         helperText={addressDetailError}
                     />

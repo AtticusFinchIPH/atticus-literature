@@ -21,7 +21,7 @@ const FormPayment = ({handleBack, handleNext}) => {
     const { cartList } = useSelector(state => state.cart);
     const { firstName, lastName, email, phone, addressDetail } = useSelector(state => state.orderFormShipping);
     const [ modePayment, setModePayment ] = useState(MODE_PAYMENT_CASH);
-    
+
     const changeModePayment = (e) => {
         setModePayment(e.target.value);
     }
@@ -84,6 +84,13 @@ const FormPayment = ({handleBack, handleNext}) => {
                     <Typography variant='h6' component='p'>
                         <FormattedMessage id='recipient' defaultMessage="Recipient" />
                     </Typography>
+                    <div onClick={handleBack} className={classes.link} >
+                        <Typography variant="body2" component='p'>
+                            {"("}
+                            <FormattedMessage id='edit_recipient_info' defaultMessage="Edit recipient information" />
+                            {")"}
+                        </Typography>
+                    </div>
                 </div>
                 <Divider />
                 <div>
