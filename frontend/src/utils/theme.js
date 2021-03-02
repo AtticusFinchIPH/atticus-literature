@@ -16,6 +16,7 @@ const DARK_BLUE = 'rgb(14,52,90)';
 const LIGHT_BUTTON_HOVER = "rgba(0, 0, 0, 0.04)";
 const DARK_BUTTON_HOVER = "rgba(0, 0, 0, 0.3)";
 const ORANGE = "#fe7e00";
+const BLUE = "#5c67a3";
 
 const commonTheme = {
   typography: {
@@ -66,6 +67,9 @@ const lightTheme = createMuiTheme({
     sidebarHeader: {
       main: DARK_BLUE,
     },
+    orangeBlue: {
+      main: ORANGE,
+    },
   }
 });
 const darkTheme = createMuiTheme({
@@ -96,6 +100,9 @@ const darkTheme = createMuiTheme({
     },
     sidebarHeader: {
       main: ORANGE,
+    },
+    orangeBlue: {
+      main: BLUE,
     },
   }
 });

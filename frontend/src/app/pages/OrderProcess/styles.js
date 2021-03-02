@@ -154,6 +154,13 @@ const useStyles = makeStyles((theme) => ({
         bottom: theme.spacing(1),
         right: theme.spacing(2),
     },
+    circularProgress: {
+        color: theme.palette.orangeBlue.main,
+    },
+    paymentError: {
+        textAlign: "center",
+        paddingTop: theme.spacing(1),
+    },
 }))
 
 export default useStyles;

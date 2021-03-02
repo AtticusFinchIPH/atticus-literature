@@ -143,6 +143,7 @@ const en = defineMessages({
     invalid_email: "Invalid email address",
     empty_phone: "Phone number must not be empty",
     empty_address_detail: "Address detail must not be empty",
+    payment_error: "Payment error. Please try other payment method.",
 })
 
 export default en;

@@ -143,6 +143,7 @@ const vi = defineMessages({
     invalid_email: "Địa chỉ email không hợp lệ",
     empty_phone: "Số điện thoại không được trống",
     empty_address_detail: "Địa chỉ không được trống",
+    payment_error: "Lỗi thanh toán. Vui lòng chọn phương thức thanh toán khác.",
 })
 
 export default vi;

@@ -12,7 +12,7 @@ import {
     CardCvcElement,
 } from "@stripe/react-stripe-js";
 import StripeInput from './StripeInput';
-import { Button, Collapse, Divider, FormControl, FormControlLabel, Radio, RadioGroup, TextField, Typography } from '@material-ui/core';
+import { Button, CircularProgress, Collapse, Divider, FormControl, FormControlLabel, Radio, RadioGroup, TextField, Typography } from '@material-ui/core';
 import { shippingFeeCalc, totalSumCalc, totalSumNumber, wholeSaleCalc } from '../../../utils/priceCalculator';
 import paypalImage from '../../../images/payment/paypal.png';
 import maestroImage from '../../../images/payment/maestro.png';
@@ -32,12 +32,33 @@ const FormPayment = ({handleBack, handleNext}) => {
     const { cartList } = useSelector(state => state.cart);
     const { firstName, lastName, email, phone, addressDetail } = useSelector(state => state.orderFormShipping);
     const [ modePayment, setModePayment ] = useState(MODE_PAYMENT_CASH);
+    const [ paymentProcessing, setPaymentProcessing] = useState(false);
+    const [ paymentError, setPaymentError ] = useState();
 
     const changeModePayment = (e) => {
+        setPaymentError();
         setModePayment(e.target.value);
     }
+    const submitPayment = async (e) => {
+        setPaymentError();
+        setPaymentProcessing(true);
+        switch (modePayment) {
+            case MODE_PAYMENT_CASH:
+                // send info to server
+                break;   
+            case MODE_PAYMENT_CREDIT:
+            case MODE_PAYMENT_PAYPAL:
+                setTimeout(() => {
+                    setPaymentProcessing(false);
+                    setPaymentError(true);
+                }, 5000)
+                break;
+            default:
+                return;
+        }
+    }
     return (
-        <form className={classes.gridForm} noValidate={false}>
+        <form className={classes.gridForm} noValidate={false} onSubmit={e => { e.preventDefault(); submitPayment(); }}>
             <div className={classes.gridInput}>
                 <div className={clsx(classes.yourOrder, classes.singleField)}>
                     <Typography variant='h6' component='p'>
@@ -230,17 +251,28 @@ const FormPayment = ({handleBack, handleNext}) => {
                             })}
                         </Typography>
                     </div>
-                    <Button className={classes.paymentButton} type="submit">
-                        <Typography variant='h6' component='p'>
-                            <FormattedMessage id='pay' defaultMessage="Pay" />
-                            {` ${totalSumCalc({ 
-                                number: totalSumNumber({
-                                    items: cartList,
-                                    shippingFeeInfo,
-                                }),
-                            })}`}
-                        </Typography>
+                    <Button className={classes.paymentButton} type="submit" disabled={paymentProcessing}>
+                        {
+                            paymentProcessing
+                            ?
+                            <CircularProgress size={30} classes={{ colorPrimary: classes.circularProgress }} />
+                            :
+                            <Typography variant='h6' component='p'>
+                                <FormattedMessage id='pay' defaultMessage="Pay" />
+                                {` ${totalSumCalc({ 
+                                    number: totalSumNumber({
+                                        items: cartList,
+                                        shippingFeeInfo,
+                                    }),
+                                })}`}
+                            </Typography>
+                        }
                     </Button>
+                    <Collapse in={paymentError} className={classes.paymentError}>
+                        <Typography variant='body1' component='p' color="secondary" >
+                            <FormattedMessage id='payment_error' defaultMessage="Payment error. Please try other payment method." />    
+                        </Typography>
+                    </Collapse>
                     </>
                 }
             </div>
