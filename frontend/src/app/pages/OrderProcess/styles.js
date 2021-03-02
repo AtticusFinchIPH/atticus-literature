@@ -122,6 +122,10 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.text.main,
         marginLeft: theme.spacing(3),
     },
+    paymentBox: {
+        border: "solid 1px",
+        padding: theme.spacing(1, 2, 1, 2),
+    },
 }))
 
 export default useStyles;

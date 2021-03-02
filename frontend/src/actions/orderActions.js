@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {
-    SHIPPING_FEE_CHANGE, SHIPPING_FEE_REQUEST, SHIPPING_FEE_SUCCESS, SHIPPING_FEE_FAIL, SHIPPING_ADDRESS_SAVE
+    SHIPPING_FEE_CHANGE, SHIPPING_FEE_REQUEST, SHIPPING_FEE_SUCCESS, SHIPPING_FEE_FAIL, SHIPPING_ADDRESS_SAVE, ORDER_FORM_SHIPPING_SAVE
 } from '../constants/orderConstants';
 
 const getShippingFee = ({ countryId, stateId, cityId }) => async (dispatch) => {
@@ -25,4 +25,8 @@ const saveShippingAddress = (data) => (dispatch) => {
     dispatch({ type: SHIPPING_ADDRESS_SAVE, payload: data });
 }
 
-export { getShippingFee, changeShippingFee, saveShippingAddress };
+const saveOrderFormShipping = (data) => (dispatch) => {
+    dispatch({ type: ORDER_FORM_SHIPPING_SAVE, payload: data });
+}
+
+export { getShippingFee, changeShippingFee, saveShippingAddress, saveOrderFormShipping };

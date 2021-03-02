@@ -1,7 +1,7 @@
 
 import Cookie from 'js-cookie';
 import {
-    SHIPPING_FEE_CHANGE, SHIPPING_FEE_REQUEST, SHIPPING_FEE_SUCCESS, SHIPPING_FEE_FAIL, SHIPPING_ADDRESS_SAVE
+    SHIPPING_FEE_CHANGE, SHIPPING_FEE_REQUEST, SHIPPING_FEE_SUCCESS, SHIPPING_FEE_FAIL, SHIPPING_ADDRESS_SAVE, ORDER_FORM_SHIPPING_SAVE
 } from '../constants/orderConstants';
 
 const shippingAddressReducer = (storeState = Cookie.get('shippingAddress') || {}, action) => {
@@ -25,4 +25,18 @@ const shippingAddressReducer = (storeState = Cookie.get('shippingAddress') || {}
     }
 }
 
-export { shippingAddressReducer }
+const orderFormShippingReducer = (state = {}, action) => {
+    const firstName = action?.payload?.firstName || state?.firstName;
+    const lastName = action?.payload?.lastName || state?.lastName;
+    const email = action?.payload?.email || state?.email;
+    const phone = action?.payload?.phone || state?.phone;
+    const addressDetail = action?.payload?.addressDetail || state?.addressDetail;
+    switch (action.type) {
+        case ORDER_FORM_SHIPPING_SAVE:
+            return {...state, firstName, lastName, email, phone, addressDetail};
+        default:
+            return state;
+    }
+}
+
+export { shippingAddressReducer, orderFormShippingReducer }
