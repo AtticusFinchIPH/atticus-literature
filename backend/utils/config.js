@@ -7,4 +7,5 @@ export default {
     PORT: process.env.PORT || 5000,
     JWT_SECRET: process.env.JWT_SECRET || 'somethingsecret',
     MONGODB_URL: process.env.MONGODB_URL || 'mongodb://localhost/atticus-social',
+    STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY || 'pk_test_nqH70Fb8FmabuVsU5kp4gpYf00XGNeVxyf',
 }

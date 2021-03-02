@@ -1,6 +1,7 @@
 import express from "express";
 import { body, validationResult } from "express-validator";
 import {getToken, isAuth} from "../auth/authHelper";
+import config from "../utils/config";
 import Order from "../models/orderModel";
 
 const router = express.Router();
@@ -30,6 +31,10 @@ router.get("/shipping_fee/", (req, res) => {
     if (!isNaN(fee)) return res.status(200).send({ isAllow: true, fee });
     else return res.status(200).send({ isAllow: false });
 });
+
+router.get("/stripe_key/", (req, res) => {
+    return res.status(200).send({ publishKey: config.STRIPE_PUBLIC_KEY });
+})
 
 router.post("/validate_shipping/", 
     [
