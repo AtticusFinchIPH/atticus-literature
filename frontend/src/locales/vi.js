@@ -135,6 +135,7 @@ const vi = defineMessages({
     fullname: "Họ và tên",
     address: "Địa chỉ",
     complete_order: "Hoàn thành thanh toán",
+    pay: "Thanh toán",
 
     // Errors
     empty_firstname: "Tên người nhận không được trống",

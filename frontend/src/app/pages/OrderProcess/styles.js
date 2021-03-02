@@ -101,7 +101,7 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.text.blur,
     },
     totalPrice: {
-        width: theme.spacing(9),
+        width: theme.spacing(10),
     },
     paymentButton: {
         width: '100%',
@@ -109,6 +109,7 @@ const useStyles = makeStyles((theme) => ({
         color: LIGHT_WHITE,
         '&:hover': {
             color: theme.palette.text.main,
+            backgroundColor: theme.palette.background.main,
         },
     },
     textfield: {
@@ -130,9 +131,28 @@ const useStyles = makeStyles((theme) => ({
         '&:hover': { cursor: 'pointer' }, 
     },
     paymentBox: {
+        position: "relative",
         width: "100%",
         border: "solid 1px",
         padding: theme.spacing(1, 2, 1, 2),
+    },
+    creditImages: {
+        position: "absolute",
+        top: theme.spacing(7),
+        right: theme.spacing(2),
+        [theme.breakpoints.down("sm")]: {
+            display: 'none',
+        }
+    },
+    creditImage: {
+        width: '50px',
+        marginLeft: theme.spacing(1),
+    },
+    paypalImage: {
+        position: "absolute",
+        width: "50px",
+        bottom: theme.spacing(1),
+        right: theme.spacing(2),
     },
 }))
 

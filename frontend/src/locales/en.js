@@ -135,6 +135,7 @@ const en = defineMessages({
     fullname: "Name",
     address: "Address",
     complete_order: "Complete order",
+    pay: "Pay",
 
     // Errors
     empty_firstname: "First name must not be empty",

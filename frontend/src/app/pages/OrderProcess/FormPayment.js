@@ -14,6 +14,10 @@ import {
 import StripeInput from './StripeInput';
 import { Button, Collapse, Divider, FormControl, FormControlLabel, Radio, RadioGroup, TextField, Typography } from '@material-ui/core';
 import { shippingFeeCalc, totalSumCalc, totalSumNumber, wholeSaleCalc } from '../../../utils/priceCalculator';
+import paypalImage from '../../../images/payment/paypal.png';
+import maestroImage from '../../../images/payment/maestro.png';
+import mastercardImage from '../../../images/payment/mastercard.png';
+import visaImage from '../../../images/payment/visa.png';
 
 const MODE_PAYMENT_CASH = "MODE_PAYMENT_CASH";
 const MODE_PAYMENT_CREDIT = "MODE_PAYMENT_CREDIT";
@@ -112,6 +116,12 @@ const FormPayment = ({handleBack, handleNext}) => {
                             value={MODE_PAYMENT_PAYPAL}
                             control={<Radio color="primary"  />}
                         />
+                        <div className={classes.creditImages}>
+                            <img src={visaImage} alt="paypal card" className={classes.creditImage} />
+                            <img src={mastercardImage} alt="paypal card" className={classes.creditImage} />
+                            <img src={maestroImage} alt="paypal card" className={classes.creditImage} />
+                        </div>
+                        <img src={paypalImage} alt="paypal card" className={classes.paypalImage} />
                     </RadioGroup>
                 </FormControl>
                 <div className={clsx(classes.yourOrder, classes.singleField)}>
@@ -222,7 +232,13 @@ const FormPayment = ({handleBack, handleNext}) => {
                     </div>
                     <Button className={classes.paymentButton} type="submit">
                         <Typography variant='h6' component='p'>
-                            <FormattedMessage id='complete_order' defaultMessage="Complete order" />
+                            <FormattedMessage id='pay' defaultMessage="Pay" />
+                            {` ${totalSumCalc({ 
+                                number: totalSumNumber({
+                                    items: cartList,
+                                    shippingFeeInfo,
+                                }),
+                            })}`}
                         </Typography>
                     </Button>
                     </>
