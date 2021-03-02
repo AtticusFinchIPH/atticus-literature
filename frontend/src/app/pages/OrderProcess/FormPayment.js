@@ -6,6 +6,12 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import clsx from 'clsx';
 import axios from 'axios';
 import useStyles from './styles';
+import {
+    CardNumberElement,
+    CardExpiryElement,
+    CardCvcElement,
+} from "@stripe/react-stripe-js";
+import StripeInput from './StripeInput';
 import { Button, Collapse, Divider, FormControl, FormControlLabel, Radio, RadioGroup, TextField, Typography } from '@material-ui/core';
 import { shippingFeeCalc, totalSumCalc, totalSumNumber, wholeSaleCalc } from '../../../utils/priceCalculator';
 
@@ -17,6 +23,7 @@ const FormPayment = ({handleBack, handleNext}) => {
     const classes = useStyles();
     const intl = useIntl();
     const cardNumberTransl = intl.formatMessage({id: 'card_number', defaultMessage: "Card number"});
+    const expireDateTransl = intl.formatMessage({id: 'expire_date', defaultMessage: "Expiration date"});
     const { country, state, city, loading: shippingFeeLoading, info: shippingFeeInfo } = useSelector(state => state.shippingAddress);
     const { cartList } = useSelector(state => state.cart);
     const { firstName, lastName, email, phone, addressDetail } = useSelector(state => state.orderFormShipping);
@@ -49,27 +56,54 @@ const FormPayment = ({handleBack, handleNext}) => {
                         <Collapse in={modePayment === MODE_PAYMENT_CREDIT}>
                             <div className={classes.singleField}>
                                 <TextField
-                                    InputLabelProps={{ className: classes.textfieldLabel }}
-                                    InputProps={{ className: classes.textfieldInput }}
+                                    InputLabelProps={{ 
+                                        className: classes.textfieldLabel,
+                                        shrink: true,
+                                    }}
+                                    InputProps={{ 
+                                        className: classes.textfieldInput,
+                                        inputComponent: StripeInput,
+                                        inputProps: {
+                                            component: CardNumberElement
+                                        },
+                                    }}
                                     className={clsx(classes.cardNumber, classes.textfield)}
                                     required variant="outlined" fullWidth
-                                    placeholder={cardNumberTransl}
+                                    label={cardNumberTransl}
                                 />
                             </div>
                             <div className={classes.pairField}>
                                 <TextField
-                                    InputLabelProps={{ className: classes.textfieldLabel }}
-                                    InputProps={{ className: classes.textfieldInput }}
+                                    InputLabelProps={{ 
+                                        className: classes.textfieldLabel,
+                                        shrink: true,
+                                    }}
+                                    InputProps={{ 
+                                        className: classes.textfieldInput,
+                                        inputComponent: StripeInput,
+                                        inputProps: {
+                                            component: CardExpiryElement
+                                        },
+                                    }}
                                     className={clsx(classes.cardExpire, classes.textfield)}
                                     required variant="outlined"
-                                    placeholder="MM/YY"
+                                    label={expireDateTransl}
                                 />
                                 <TextField
-                                    InputLabelProps={{ className: classes.textfieldLabel }}
-                                    InputProps={{ className: classes.textfieldInput }}
+                                    InputLabelProps={{ 
+                                        className: classes.textfieldLabel,
+                                        shrink: true,
+                                    }}
+                                    InputProps={{ 
+                                        className: classes.textfieldInput, 
+                                        inputComponent: StripeInput,
+                                        inputProps: {
+                                            component: CardCvcElement
+                                        },
+                                    }}
                                     className={clsx(classes.cardCVC, classes.textfield)}
                                     required variant="outlined"
-                                    placeholder="CVC"
+                                    label="CVC"
                                 />
                             </div>
                         </Collapse>
@@ -188,7 +222,7 @@ const FormPayment = ({handleBack, handleNext}) => {
                     </div>
                     <Button className={classes.paymentButton} type="submit">
                         <Typography variant='h6' component='p'>
-                            <FormattedMessage id='continue_payment' defaultMessage="Continue to payment" />
+                            <FormattedMessage id='complete_order' defaultMessage="Complete order" />
                         </Typography>
                     </Button>
                     </>

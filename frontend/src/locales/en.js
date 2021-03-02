@@ -109,7 +109,7 @@ const en = defineMessages({
     shipping_fee: "Shipping fee",
     free: "Free",
 
-    // Order Process
+    // Order Process Shipping
     shipping_info: "Shipping information",
     payment: "Payment",
     firstname: "First Name",
@@ -123,6 +123,18 @@ const en = defineMessages({
     recipient: "Recipient",
     your_order: "Your order",
     continue_payment: "Continue to payment",
+
+    // Order Process Payment
+    mode_payment: "Mode of payment",
+    cash_on_delivery: "Cash on delivery",
+    credit_card: "Credit card",
+    card_number: "Card number",
+    expire_date: "Expiration date",
+    paypal: "Paypal",
+    edit_recipient_info: "Edit recipient information",
+    fullname: "Name",
+    address: "Address",
+    complete_order: "Complete order",
 
     // Errors
     empty_firstname: "First name must not be empty",

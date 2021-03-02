@@ -111,11 +111,17 @@ const useStyles = makeStyles((theme) => ({
             color: theme.palette.text.main,
         },
     },
+    textfield: {
+        
+    },
     textfieldInput: {
         color: theme.palette.text.main,
     },
     textfieldLabel: {
         color: theme.palette.text.blur,
+    },
+    inputAdornment: {
+        color: theme.palette.text.main,
     },
     link: {
         textDecoration: "none",
@@ -124,6 +130,7 @@ const useStyles = makeStyles((theme) => ({
         '&:hover': { cursor: 'pointer' }, 
     },
     paymentBox: {
+        width: "100%",
         border: "solid 1px",
         padding: theme.spacing(1, 2, 1, 2),
     },

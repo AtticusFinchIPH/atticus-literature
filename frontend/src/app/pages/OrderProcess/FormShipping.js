@@ -117,7 +117,7 @@ const FormShipping = ({handleNext}) => {
                         required variant="outlined" fullWidth autoFocus
                         label={firstnameTransl}
                         onChange={(e) => handleTextField(e.target.value, TYPE_FIRSTNAME)}
-                        value={firstName}
+                        // value={firstName}
                         error={firstNameError}
                         helperText={firstNameError}
                     />
@@ -128,7 +128,7 @@ const FormShipping = ({handleNext}) => {
                         required variant="outlined" fullWidth
                         label={lastnameTransl}
                         onChange={(e) => handleTextField(e.target.value, TYPE_LASTNAME)}
-                        value={lastName}
+                        // value={lastName}
                         error={lastNameError}
                         helperText={lastNameError}
                     />
@@ -142,7 +142,7 @@ const FormShipping = ({handleNext}) => {
                         required variant="outlined" fullWidth
                         label={emailTransl}
                         onChange={(e) => handleTextField(e.target.value, TYPE_EMAIL)}
-                        value={email}
+                        // value={email}
                         error={emailError}
                         helperText={emailError}
                     />
@@ -150,13 +150,18 @@ const FormShipping = ({handleNext}) => {
                         InputLabelProps= {{ className: classes.textfieldLabel }}
                         InputProps={{ 
                             className: classes.textfieldInput,
-                            startAdornment: <InputAdornment position="start">{`(+${country?.phonecode})`}</InputAdornment>,
+                            startAdornment: <InputAdornment 
+                                                classes={{ positionStart: classes.inputAdornment }} 
+                                                position="start"
+                                            >
+                                                {`(+${country?.phonecode})`}
+                                            </InputAdornment>,
                         }}
                         className={clsx(classes.phone, classes.textfield)}
                         required variant="outlined" fullWidth
                         label={phoneTransl} type="tel"
                         onChange={(e) => handleTextField(e.target.value, TYPE_PHONE)}
-                        value={phone}
+                        // value={phone}
                         error={phoneError}
                         helperText={phoneError}
                     />
@@ -169,7 +174,7 @@ const FormShipping = ({handleNext}) => {
                         required variant="outlined" fullWidth
                         label={shippingDetailTransl}
                         onChange={(e) => handleTextField(e.target.value, TYPE_ADDRESS)}
-                        value={addressDetail}
+                        // value={addressDetail}
                         error={addressDetailError}
                         helperText={addressDetailError}
                     />

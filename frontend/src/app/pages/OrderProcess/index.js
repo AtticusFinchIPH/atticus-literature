@@ -7,6 +7,9 @@ import clsx from 'clsx';
 import useStyles from './styles';
 import { Container, Slide, Step, StepLabel, Stepper, Typography } from '@material-ui/core';
 import CartOpenContext from '../../../contexts/CartOpenContext';
+import { Elements as StripeElements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import { getPublishKey } from '../../../utils/stripeAPI';
 import FormShipping from './FormShipping';
 import FormPayment from './FormPayment';
 
@@ -23,6 +26,7 @@ const OrderProcess = () => {
     const { isCartOpen, setCartOpen } = useContext(CartOpenContext);
     const { cartList } = useSelector(state => state.cart);
     const [activeStep, setActiveStep] = useState(0);
+    const [stripePromise, setStripePromise] = useState(null)
     const steps = getSteps();
 
     const handleNext = () => {
@@ -41,30 +45,47 @@ const OrderProcess = () => {
     useEffect(() => {
         setCartOpen(false); // Always close cart bar in this screen
     }, [isCartOpen]);
+    useEffect(() => {
+        (async() => {
+            const { publishKey } = await getPublishKey();
+            const stripe = loadStripe(publishKey);
+            setStripePromise(stripe);
+        })();
+    }, []);
     return (
-        <div className={classes.root}>
-            <Container className={classes.container} maxWidth='md'>
-                <Stepper  className={classes.gridStepper} activeStep={activeStep} alternativeLabel>
-                    {steps.map((label) => (
-                        <Step key={label}>
-                            <StepLabel>{label}</StepLabel>
-                        </Step>
-                    ))}
-                </Stepper>
-                <Slide in={activeStep === 0} direction="right" mountOnEnter unmountOnExit>
-                    <div>
-                        <FormShipping handleNext={handleNext} />
-                    </div>
-                </Slide>
-                <Slide in={activeStep === 1} direction="right" mountOnEnter unmountOnExit >
-                    <div>
-                        <FormPayment handleBack={handleBack} handleNext={handleNext} />
-                    </div>
-                </Slide>
-                <Slide in={activeStep === 2} direction="right" mountOnEnter unmountOnExit >
-                    <Typography>Finish</Typography>
-                </Slide>           
-            </Container>
+        <div>
+        {
+            stripePromise
+            ?
+            <StripeElements stripe={stripePromise}>
+                <div className={classes.root}>
+                    <Container className={classes.container} maxWidth='md'>
+                        <Stepper className={classes.gridStepper} activeStep={activeStep} alternativeLabel>
+                            {steps.map((label) => (
+                                <Step key={label}>
+                                    <StepLabel>{label}</StepLabel>
+                                </Step>
+                            ))}
+                        </Stepper>
+                        <Slide in={activeStep === 0} direction="right" mountOnEnter unmountOnExit>
+                            <div>
+                                <FormShipping handleNext={handleNext} />
+                            </div>
+                        </Slide>
+                        <Slide in={activeStep === 1} direction="right" mountOnEnter unmountOnExit >
+                            <div>
+                                <FormPayment handleBack={handleBack} handleNext={handleNext} />
+                            </div>
+                        </Slide>
+                        <Slide in={activeStep === 2} direction="right" mountOnEnter unmountOnExit >
+                            <Typography>Finish</Typography>
+                        </Slide>   
+                    </Container>
+                </div>       
+            </StripeElements>
+            :
+            <> </>
+        }
         </div>
     )
 }

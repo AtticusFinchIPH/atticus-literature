@@ -109,7 +109,7 @@ const vi = defineMessages({
     shipping_fee: "Phí vận chuyển",
     free: "Miễn phí",
 
-    // Order Process
+    // Order Process Shipping
     shipping_info: "Thông tin giao hàng",
     payment: "Thanh toán",
     firstname: "Tên",
@@ -123,6 +123,18 @@ const vi = defineMessages({
     recipient: "Người nhận",
     your_order: "Đơn hàng của bạn",
     continue_payment: "Tiếp tục thanh toán",
+
+    // Order Process Payment
+    mode_payment: "Phương thức thanh toán",
+    cash_on_delivery: "Chuyển tiền khi nhận hàng",
+    credit_card: "Thẻ tín dụng",
+    card_number: "Mã số thẻ",
+    expire_date: "Ngày hết hạn",
+    paypal: "Paypal",
+    edit_recipient_info: "Sửa thông tin người nhận",
+    fullname: "Họ và tên",
+    address: "Địa chỉ",
+    complete_order: "Hoàn thành thanh toán",
 
     // Errors
     empty_firstname: "Tên người nhận không được trống",
