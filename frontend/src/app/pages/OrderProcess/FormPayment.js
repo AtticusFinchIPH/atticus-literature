@@ -19,9 +19,9 @@ import maestroImage from '../../../images/payment/maestro.png';
 import mastercardImage from '../../../images/payment/mastercard.png';
 import visaImage from '../../../images/payment/visa.png';
 
-const MODE_PAYMENT_CASH = "MODE_PAYMENT_CASH";
-const MODE_PAYMENT_CREDIT = "MODE_PAYMENT_CREDIT";
-const MODE_PAYMENT_PAYPAL = "MODE_PAYMENT_PAYPAL";
+const MODE_PAYMENT_CASH = "cash";
+const MODE_PAYMENT_CREDIT = "credit";
+const MODE_PAYMENT_PAYPAL = "paypal";
 
 const FormPayment = ({handleBack, handleNext}) => {
     const classes = useStyles();
@@ -44,7 +44,6 @@ const FormPayment = ({handleBack, handleNext}) => {
         setPaymentProcessing(true);
         switch (modePayment) {
             case MODE_PAYMENT_CASH:
-                // send info to server
                 break;   
             case MODE_PAYMENT_CREDIT:
             case MODE_PAYMENT_PAYPAL:
@@ -55,7 +54,27 @@ const FormPayment = ({handleBack, handleNext}) => {
                 break;
             default:
                 return;
+        };
+        try {
+            const { order } = await axios.post("/api/orders/save_order/", {
+                first_name: firstName,
+                last_name: lastName,
+                address_detail: addressDetail,
+                payment_method: modePayment,
+                items: cartList,
+                total: totalSumNumber({
+                    items: cartList,
+                    shippingFeeInfo,
+                }).decimalPlaces(2).toNumber(),
+                email, phone, city, state, country, currency: 'usd',
+            })
+            console.log(order)
+        } catch (error) {
+            error?.response?.data?.errors.forEach(err => { 
+                console.log(err.param);
+            });
         }
+        setPaymentProcessing(false);
     }
     return (
         <form className={classes.gridForm} noValidate={false} onSubmit={e => { e.preventDefault(); submitPayment(); }}>

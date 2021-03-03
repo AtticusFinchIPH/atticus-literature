@@ -6,8 +6,20 @@ const orderSchema = new mongoose.Schema({
         productId:{ type: mongoose.Schema.ObjectId, ref: 'Product', required: true },
         quantity: { type: Number, required: true }
     }],
-    receiver: { type: String, required: true },
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
     address: { type: String, required: true },
+    city: { 
+        name: { type: String, required: true },
+    },
+    state: { 
+        name: { type: String, required: true },
+        isoCode: { type: String, required: true },
+    },
+    country:  { 
+        name: { type: String, required: true },
+        isoCode: { type: String, required: true },
+    },
     email: { type: String, required: true },
     phone: { type: String, required: true },
     status: { 

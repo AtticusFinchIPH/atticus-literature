@@ -26,7 +26,8 @@ const OrderEnumStatus = Object.freeze({
 
 const OrderEnumPaymentMethod = Object.freeze({
     CASH: 'cash', 
-    VISA: 'visa',
+    CREDIT: 'credit',
+    PAYPAL: 'paypal',
 })
 
 const ProductEnumOrigin = Object.freeze({
@@ -123,7 +124,8 @@ const initial_data = {
     ],
     OrderEnumPaymentMethod: [
         { _id: OrderEnumPaymentMethod.CASH },
-        { _id: OrderEnumPaymentMethod.VISA },
+        { _id: OrderEnumPaymentMethod.CREDIT },
+        { _id: OrderEnumPaymentMethod.PAYPAL },
     ],
     authors: [
         { name: AC_AUTHOR, },

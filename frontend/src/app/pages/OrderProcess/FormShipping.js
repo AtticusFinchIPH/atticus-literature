@@ -78,7 +78,7 @@ const FormShipping = ({handleNext}) => {
                 handleNext(); 
             }
         } catch (error) {
-            error?.response?.data?.erros?.errors?.map(err => {
+            error?.response?.data?.errors?.map(err => {
                 switch(err.param) {
                     case "first_name":
                         setFirstNameError(intl.formatMessage({id: err.msg, defaultMessage: err.msg}));
