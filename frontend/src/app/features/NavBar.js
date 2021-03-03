@@ -143,7 +143,7 @@ const NavBar = withRouter(({history}) => {
                                 </Typography>
                             </IconButton>
                         </Link>
-                        <Link to='/stories/' className={classes.link}>
+                        <Link to='/under_construction/' className={classes.link}>
                             <IconButton className={classes.noBorderRadius}>
                                 <Typography variant='h6'>
                                     <FormattedMessage id='stories' defaultMessage='Stories'/>

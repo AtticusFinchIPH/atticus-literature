@@ -19,6 +19,7 @@ import Checkout from './pages/Checkout';
 import OrderProcess from './pages/OrderProcess';
 import AboutUS from './pages/AboutUs';
 import PageNotFound from './pages/PageNotFound';
+import UnderConstruction from "./pages/UnderConstruction";
 
 function App() {
   const language = useSelector(state => state.language);
@@ -47,6 +48,7 @@ function App() {
               <Route path="/about_us/" component={AboutUS} />
               <Route path="/checkout/" component={Checkout} />
               <Route path="/order_process/" component={OrderProcess} />
+              <Route path="/under_construction/" component={UnderConstruction} />
               <Route component={PageNotFound} />
             </Switch>
             <CopyRight />

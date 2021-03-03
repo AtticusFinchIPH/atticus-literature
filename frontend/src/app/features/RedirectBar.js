@@ -9,8 +9,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import Catalogue from '../pages/Bookstore/Catalogue';
 
-const STORIES_LOCATION = "/stories";
-const ABOUT_US_LOCATION = "/about_us";
+const STORIES_LOCATION = "/under_construction/";
+const ABOUT_US_LOCATION = "/about_us/";
 
 const RedirectBar = () => {
     const classes = useStyles();
