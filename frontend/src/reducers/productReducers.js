@@ -24,6 +24,7 @@ import {
     BOOK_GENRES_REQUEST,
     BOOK_GENRES_SUCCESS,
     BOOK_GENRES_FAIL,
+    REMOVE_ALL_CART_LOCAL,
 } from '../constants/productConstants';
 
 const bestsellersReducer = (state = {bestsellers: []}, action) => {
@@ -88,6 +89,10 @@ const cartReducer = (state = { cartList: Cookie.getJSON('cartList') || [] }, act
             state.cartList.splice(indexRemove, 1);
             Cookie.set('cartList', JSON.stringify(state.cartList));
             return { ...state, loading: false };
+        case REMOVE_ALL_CART_LOCAL:
+            state.cartList = [];
+            Cookie.set('cartList', JSON.stringify(state.cartList));
+        return { ...state, loading: false };
         case SAVE_CART_SUCCESS:
             return { ...state, loading: false };
         case SAVE_CART_FAIL:

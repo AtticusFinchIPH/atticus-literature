@@ -1,6 +1,6 @@
 
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage, useIntl } from 'react-intl';
 import clsx from 'clsx';
@@ -16,8 +16,9 @@ const TYPE_EMAIL = "TYPE_EMAIL";
 const TYPE_PHONE = "TYPE_PHONE";
 const TYPE_ADDRESS = "TYPE_ADDRESS";
 
-const FormShipping = ({handleNext}) => {
+const FormShipping = ({handleNext, activeStep}) => {
     const classes = useStyles();
+    const history = useHistory();
     const dispatch = useDispatch();
     const intl = useIntl();
     const firstnameTransl = intl.formatMessage({id: 'firstname', defaultMessage: "First Name"});
@@ -36,6 +37,10 @@ const FormShipping = ({handleNext}) => {
     const [ emailError, setEmailError ] = useState();
     const [ phoneError, setPhoneError ] = useState();
     const [ addressDetailError, setAddressDetailError ] = useState();
+
+    useEffect(() => {
+        if (cartList.length === 0 && activeStep === 0) history.replace("/checkout/");
+    }, [cartList]);
 
     const handleTextField = (value, type) => {
         const data = {};

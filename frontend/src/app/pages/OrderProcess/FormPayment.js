@@ -1,6 +1,6 @@
 
 import { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage, useIntl } from 'react-intl';
 import clsx from 'clsx';
@@ -23,8 +23,9 @@ const MODE_PAYMENT_CASH = "cash";
 const MODE_PAYMENT_CREDIT = "credit";
 const MODE_PAYMENT_PAYPAL = "paypal";
 
-const FormPayment = ({handleBack, handleNext}) => {
+const FormPayment = ({handleBack, handleNext, activeStep}) => {
     const classes = useStyles();
+    const history = useHistory();
     const intl = useIntl();
     const cardNumberTransl = intl.formatMessage({id: 'card_number', defaultMessage: "Card number"});
     const expireDateTransl = intl.formatMessage({id: 'expire_date', defaultMessage: "Expiration date"});
@@ -34,6 +35,10 @@ const FormPayment = ({handleBack, handleNext}) => {
     const [ modePayment, setModePayment ] = useState(MODE_PAYMENT_CASH);
     const [ paymentProcessing, setPaymentProcessing] = useState(false);
     const [ paymentError, setPaymentError ] = useState();
+
+    useEffect(() => {
+        if (cartList.length === 0 && activeStep === 1) history.replace("/checkout/");
+    }, [cartList]);
 
     const changeModePayment = (e) => {
         setPaymentError();
@@ -68,7 +73,7 @@ const FormPayment = ({handleBack, handleNext}) => {
                 }).decimalPlaces(2).toNumber(),
                 email, phone, city, state, country, currency: 'usd',
             })
-            console.log(order)
+            handleNext();
         } catch (error) {
             error?.response?.data?.errors.forEach(err => { 
                 console.log(err.param);

@@ -19,6 +19,7 @@ import {
     VIEW_PRODUCT_REQUEST,
     VIEW_PRODUCT_FAIL,
     VIEW_PRODUCT_SUCCESS,
+    REMOVE_ALL_CART_LOCAL,
 } from '../constants/productConstants';
 
 const getBestsellers = () => async (dispatch) => {
@@ -69,6 +70,10 @@ const removeFromLocalCart = (productId) => async (dispatch, getState) => {
     dispatch({ type: REMOVE_CART_LOCAL, payload: {productId} });
 }
 
+const removeAllLocalCart = () => async (dispatch, getState) => {
+    dispatch({ type: REMOVE_ALL_CART_LOCAL });
+}
+
 const getBookGenres = () => async (dispatch) => {
     dispatch({type: BOOK_GENRES_REQUEST});
     try {
@@ -90,6 +95,6 @@ const getItemDetail = (productId) => async (dispatch) => {
 }
 
 export { getBestsellers, getRecommendeds, getStore, getItemDetail,
-    addToCart, addMultipleToCart, updateLocalCart, removeFromLocalCart, 
+    addToCart, addMultipleToCart, updateLocalCart, removeFromLocalCart, removeAllLocalCart,
     getBookGenres 
 }

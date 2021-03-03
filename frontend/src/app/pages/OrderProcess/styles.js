@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
         gridTemplateAreas: '"gridStepper" "gridForm"',
         margin: theme.spacing(0, 0, 1, 0),
         paddingBottom: theme.spacing(8),
+        borderRadius: theme.spacing(1.25),
         [theme.breakpoints.up('md')]: {
             margin: theme.spacing(10, 0, 3, 0),
             paddingBottom: theme.spacing(3),
@@ -160,6 +161,49 @@ const useStyles = makeStyles((theme) => ({
     paymentError: {
         textAlign: "center",
         paddingTop: theme.spacing(1),
+    },
+    orderCompleted: {
+        position: "relative",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    formComplete: {
+        borderRadius: theme.spacing(1.25),
+        margin: theme.spacing(15, 0, 15, 0),
+        height: "330px",
+        [theme.breakpoints.up("sm")]: {
+            height: "65vh",
+        },
+        [theme.breakpoints.up("md")]: {
+            margin: theme.spacing(5, 0, 5, 0),
+        },
+    },
+    goHomeLink: {
+        position: "absolute",
+        width: "88px", height: "27px",
+        left: "50%", top: "67%",
+        transform: "translateX(-44%)",
+        [theme.breakpoints.up("sm")]: {
+            width: "160px", height: "40px",
+            left: "50%", top: "71%",
+            transform: "translateX(-43%)",
+        },
+        [theme.breakpoints.up("md")]: {
+            width: "160px", height: "40px",
+            left: "50%", top: "76%",
+            transform: "translateX(-44%)",
+        },
+    },
+    goHomeButton: {
+        width: "100%",
+        height: "100%",
+        borderRadius: "15px",
+    },
+    attribute: {
+        color: theme.palette.text.main,
+        textDecoration: 'none',
     },
 }))
 
