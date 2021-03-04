@@ -8,6 +8,7 @@ import BigNumber from 'bignumber.js';
 import { Button, Card, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, GridList, GridListTile, IconButton, Slide, Typography } from '@material-ui/core';
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import CartOpenContext from '../../contexts/CartOpenContext';
+import AuthOpenContext from '../../contexts/AuthOpenContext';
 import RemoveIcon from '@material-ui/icons/HighlightOff';
 import MinusIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
@@ -138,6 +139,7 @@ const CartBar = () => {
     const history = useHistory();
     const [ isDialogOpen, setDialogOpen ] = useState(false);
     const { isCartOpen, setCartOpen } = useContext(CartOpenContext);
+    const { setAuthOpen } = useContext(AuthOpenContext);
     const { userInfo } = useSelector(state => state.userSignin);
     const cart = useSelector(state => state.cart);
     const { cartList } = cart;
@@ -146,16 +148,17 @@ const CartBar = () => {
     const subtotalDeclare = `$ ${subtotal.decimalPlaces(2)}`;
     const checkCart = () => {
         if(userInfo){
-
+            history.push("/checkout");
         } else setDialogOpen(true);
         setCartOpen(false);
     }
     const handleNo = () => {
         setDialogOpen(false);
-        history.replace("/checkout");
+        history.push("/checkout");
     }
     const handleYes = () => {
         setDialogOpen(false);
+        setAuthOpen(true);
     }
     return(
         <>
@@ -222,9 +225,6 @@ const CartBar = () => {
                 <DialogActions className={classes.dialogActions}>
                     <Button onClick={handleNo} color="primary">
                         <FormattedMessage id='no_continue' defaultMessage="No, continue" />
-                    </Button>
-                    <Button onClick={handleYes} color="primary">
-                        <FormattedMessage id='yes_register' defaultMessage="Sign up" />
                     </Button>
                     <Button onClick={handleYes} color="secondary">
                         <FormattedMessage id='yes_signin' defaultMessage="Sign in" />
