@@ -158,6 +158,8 @@ const vi = defineMessages({
     password_notmatch: "Mật khẩu không khớp",
     used_email: "Email đã được sử dụng",
     invalid_user_data: "Dữ liệu người dùng không hợp lệ",
+    unregisted_user: "Email chưa đăng ký",
+    invalid_password: "Sai mật khẩu",
 })
 
 export default vi;

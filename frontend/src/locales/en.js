@@ -157,6 +157,8 @@ const en = defineMessages({
     password_notmatch: "Passwords don't match",
     used_email: "Email has been used by another user",
     invalid_user_data: "Invalid user data",
+    unregisted_user: "User not registered",
+    invalid_password: "Incorrect Password",
 })
 
 export default en;

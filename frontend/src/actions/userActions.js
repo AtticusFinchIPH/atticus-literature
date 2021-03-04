@@ -16,7 +16,7 @@ const authConfig = (userInfo) => {
     }
 }
 
-const signin = (email, password) => async (dispatch) => {
+const signin = ({email, password}) => async (dispatch) => {
     dispatch({ type: USER_SIGNIN_REQUEST, payload: { email, password } });
     try {
         const { data } = await axios.post("/api/users/signin", { email, password });

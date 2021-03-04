@@ -19,7 +19,7 @@ const userSigninReducer = (state = {}, action) => {
             Cookie.remove("userInfo");
             return {};
         case CLEAR_USER_SIGNIN_ERRORS:
-            return {...state, erros: null };
+            return {...state, errors: null };
         default: return state;
     }
 }

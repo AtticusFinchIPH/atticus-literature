@@ -60,4 +60,53 @@ router.post("/register",
     }
 )
 
+router.post("/signin", 
+    [
+        body('email').isEmail().withMessage('invalid_email'),
+    ],
+    async (req, res) => {
+        const validatorErrors = validationResult(req);
+        if (!validatorErrors.isEmpty()) {
+            console.log(validatorErrors.array())
+            return res.status(400).send(validatorErrors.array());
+        }
+        const { email, password } = req.body;
+        const signinUser = await User.findOne({ email }).populate([
+        {
+            path: 'favorites',
+            model: 'Product',
+            select: '_id title image price',
+            populate: {
+                path: 'authorIds',
+                model: 'Author',
+                select: 'name',
+            }
+        }]).populate([
+        {
+            path: 'orders',
+            model: 'Order',
+            populate: {
+                path: 'items',
+                model: 'Product',
+            }
+        }]);
+        if (!signinUser) return res.status(401).send([{ msg: 'unregisted_user' }]);
+        const isMatch = await bcrypt.compare(password, signinUser.password);
+        if (!isMatch) return res.status(401).send([{ msg: 'invalid_password' }]);
+        const {
+            _id, firstName, lastName, nickName,
+            address, city, state, country,
+            phone, role,
+            favorites, orders
+        } = signinUser;
+        const token = getToken(signinUser);
+        return res.send({
+            _id, firstName, lastName, nickName,
+            email, address, city, state, country,
+            phone, role, token,
+            favorites, orders
+        })
+    }
+)
+
 export default router;

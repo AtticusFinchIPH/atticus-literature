@@ -6,7 +6,7 @@ import useStyles from './AuthPopup.styles';
 import { Button, Checkbox, CircularProgress, Dialog, FormControlLabel, Grid, Paper, Tab, Tabs, TextField, Typography } from '@material-ui/core';
 import AuthOpenContext from '../../contexts/AuthOpenContext';
 import booksIcon from '../../images/homework.png';
-import { register, clearUserSigninErros } from '../../actions/userActions';
+import { register, clearUserSigninErros, signin } from '../../actions/userActions';
 
 const PARAM_FIRSTNAME = "firstName";
 const PARAM_LASTNAME = "lastName";
@@ -14,7 +14,7 @@ const PARAM_EMAIL = "email";
 const PARAM_PASSWORD = "password";
 const PARAM_RE_PASSWORD = "rePassword";
 
-const SignIn = () => {
+const SignIn = forwardRef((props, ref) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const intl = useIntl();
@@ -22,11 +22,41 @@ const SignIn = () => {
     const passwordTransl = intl.formatMessage({id: 'password', defaultMessage: "Password"});
     const [ email, setEmail ] = useState();
     const [ password, setPassword ] = useState(); 
+    const [ emailErr, setEmailErr ] = useState();
+    const [ passwordErr, setPasswordErr ] = useState(); 
+    const [error, setError] = useState();
     const userSignin = useSelector(state => state.userSignin);
-    const { loading, userInfo, error } = userSignin;
+    const { loading, userInfo, errors } = userSignin;
+    useEffect(() => {
+        if(errors?.length > 0) {
+            errors.forEach(err => {
+                switch (err?.param) {
+                    case PARAM_EMAIL:
+                        setEmailErr(intl.formatMessage({id: err.msg, defaultMessage: err.msg}));
+                        break;
+                    case PARAM_PASSWORD:
+                        setPasswordErr(intl.formatMessage({id: err.msg, defaultMessage: err.msg}));
+                        break;
+                    default:
+                        setError(intl.formatMessage({id: err.msg, defaultMessage: err.msg}))
+                        break;
+                }
+            });
+        }
+        return (() => clearErrors());
+    }, [errors]);
+    const clearErrors = () => {
+        dispatch(clearUserSigninErros());
+    }
     const submitHandler = (e) => {
         e.preventDefault();
+        dispatch(signin({ email, password }));
     }
+    useImperativeHandle(ref, () => ({
+        close(){
+            clearErrors()
+        }
+    }));
     return(
         <div className={classes.tabContent}>
             <div className={classes.iconBox}>
@@ -43,31 +73,41 @@ const SignIn = () => {
                     required fullWidth autoFocus
                     name="email" type="email" autoComplete="email"      
                     label={emailAddressTransl}             
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => { clearErrors(); setEmail(e.target.value)}}
+                    error={Boolean(emailErr)}
+                    helperText={emailErr}
                 />
                 <TextField
                     variant="outlined" margin="normal"
                     required fullWidth
                     name="password" type="password" autoComplete="current-password"
                     label={passwordTransl}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => { clearErrors(); setPassword(e.target.value)}}
+                    error={Boolean(passwordErr)}
+                    helperText={passwordErr}
                 />
                 {/* <FormControlLabel
                     control={<Checkbox value="remember" color="primary" />}
                     label="Remember me"
                 /> */}
-                <Button
-                    type="submit"
-                    fullWidth variant="contained" color="primary"
-                    className={classes.submit}
-                >
-                    <FormattedMessage id='sign_in' defaultMessage="Sign In" />
-                </Button>
+                {
+                    loading
+                    ?
+                    <CircularProgress size={30} />
+                    :
+                    <Button
+                        type="submit"
+                        fullWidth variant="contained" color="primary"
+                        className={classes.submit}
+                    >
+                        <FormattedMessage id='sign_in' defaultMessage="Sign In" />
+                    </Button>
+                }
             </form> 
             <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
         </div>
     )
-}
+})
 
 const SignUp = forwardRef((props, ref) => {
     const classes = useStyles();
@@ -130,7 +170,7 @@ const SignUp = forwardRef((props, ref) => {
         close(){
             clearErrors()
         }
-      }));
+    }));
     return(
         <div className={classes.tabContent}>
             <div className={classes.iconBox}>
@@ -239,6 +279,7 @@ const AuthPopup = () => {
     const [ tab, setTab ] = useState(0);
 
     const handleClose = () => {
+        signInRef.current?.close();
         signUpRef.current?.close();
         setTab(0);
         setAuthOpen(false);
@@ -264,7 +305,7 @@ const AuthPopup = () => {
                 {
                     tab === 0
                     ?
-                    <SignIn />
+                    <SignIn ref={signInRef} />
                     :
                     <SignUp ref={signUpRef} />
                 }

@@ -7,6 +7,17 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true},
     email: { type: String, required: true, unique: true, trim: true},
     address: { type: String },
+    city: { 
+        name: { type: String, required: true },
+    },
+    state: { 
+        name: { type: String, required: true },
+        isoCode: { type: String, required: true },
+    },
+    country:  { 
+        name: { type: String, required: true },
+        isoCode: { type: String, required: true },
+    },
     phone: { type: String },
     role: { 
         type: String,
