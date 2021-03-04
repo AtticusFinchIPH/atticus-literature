@@ -15,22 +15,28 @@ import SunIcon from '@material-ui/icons/WbSunny';
 import MoonIcon from '@material-ui/icons/Brightness2';
 import LanguageIcon from '@material-ui/icons/Language';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import FaceIcon from '@material-ui/icons/Face';
 import { APPLY_VI, APPLY_EN } from '../../constants/globalConstants';
 import useStyle from './NavBar.styles'; // Must be imported after all @material-ui
 import ThemeContext from '../../contexts/ThemeContext';
 import CartOpenContext from '../../contexts/CartOpenContext';
+import AuthOpenContext from '../../contexts/AuthOpenContext';
 import RedirectOpenContext from '../../contexts/RedirectOpenContext';
 
 const NavBar = withRouter(({history}) => {
     const classes = useStyle();
     const [anchorAcc, setAnchorAcc] = useState(null);
     const isAccOpen = Boolean(anchorAcc);
+    const [anchorUnknownAcc, setAnchorUnknownAcc] = useState(null);
+    const isUnknownAccOpen = Boolean(anchorUnknownAcc);
     const [anchorLang, setAnchorLang] = useState(null);
     const isLangOpen = Boolean(anchorLang);
     const { isDarkMode, setDarkMode } = useContext(ThemeContext);
     const { setCartOpen } = useContext(CartOpenContext);
+    const { setAuthOpen } = useContext(AuthOpenContext);
     const { setRedirectOpen } = useContext(RedirectOpenContext);
     const cart = useSelector(state => state.cart);
+    const { userInfo } = useSelector(state => state.userSignin);
     const cartQuantity = useMemo(() => {
         const { cartList } = cart;
         return cartList.reduce((total, item) => total + new BigNumber(item.quantity).toNumber(), 0);
@@ -45,9 +51,14 @@ const NavBar = withRouter(({history}) => {
         setAnchorAcc(e.currentTarget);
     }
 
+    const handleUnknownAccOpen = (e) => {
+        setAnchorUnknownAcc(e.currentTarget);
+    }
+
     const handleMenuClose = () => {
         setAnchorLang(null);
         setAnchorAcc(null);
+        setAnchorUnknownAcc(null);
     }
 
     const chooseVietnamese = () => {
@@ -85,10 +96,10 @@ const NavBar = withRouter(({history}) => {
         </Menu>
     );
 
-    const accountMenuId = 'account-menu';
-    const renderAccountMenu = (
+    const userAcountMenuId = 'user-account-menu';
+    const renderUserAccountMenu = (
         <Menu
-            id={accountMenuId}
+            id={userAcountMenuId}
             open={isAccOpen}
             anchorEl={anchorAcc}
             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -104,6 +115,23 @@ const NavBar = withRouter(({history}) => {
             </MenuItem>
             <MenuItem onClick={handleMenuClose}>
                 <FormattedMessage id='sign_out' defaultMessage="Sign Out" />
+            </MenuItem>
+        </Menu>
+    );
+
+    const unknownAcountMenuId = 'unknown-account-menu';
+    const renderUnknownAccountMenu = (
+        <Menu
+            id={unknownAcountMenuId}
+            open={isUnknownAccOpen}
+            anchorEl={anchorUnknownAcc}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            keepMounted
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            onClose={handleMenuClose}
+        >
+            <MenuItem onClick={e => { setAuthOpen(true); handleMenuClose(); }}>
+                <FormattedMessage id='sign_in' defaultMessage="Sign In" />
             </MenuItem>
         </Menu>
     );
@@ -183,16 +211,27 @@ const NavBar = withRouter(({history}) => {
                         >
                             <LanguageIcon />
                         </IconButton>
-                        <IconButton edge="end" aria-label="account of current user" aria-controls={accountMenuId} aria-haspopup="true" color="inherit" 
-                            onClick={handleAccOpen}
-                        >
-                            <AccountCircleIcon />
-                        </IconButton>
+                        {
+                            userInfo
+                            ?
+                            <IconButton edge="end" aria-label="account of current user" aria-controls={userAcountMenuId} aria-haspopup="true" color="inherit" 
+                                onClick={handleAccOpen}
+                            >
+                                <FaceIcon />
+                            </IconButton>
+                            :
+                            <IconButton edge="end" aria-label="account of unknown user" aria-controls={unknownAcountMenuId} aria-haspopup="true" color="inherit" 
+                                onClick={handleUnknownAccOpen}
+                            >
+                                <AccountCircleIcon />
+                            </IconButton>
+                        }
                     </div>
                 </Toolbar>
             </AppBar>
             {renderLanguageMenu}
-            {renderAccountMenu}
+            {renderUserAccountMenu}
+            {renderUnknownAccountMenu}
         </div>
         </>
     )

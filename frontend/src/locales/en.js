@@ -137,6 +137,15 @@ const en = defineMessages({
     complete_order: "Complete order",
     pay: "Pay",
 
+    // AuthPopup
+    sign_in: "Sign In",
+    sign_up: "Sign Up",
+    welcome: "Welcome to Atticus Literature",
+    email_address: "Email Address",
+    password: "Password",
+    re_password: "Re-Enter Password",
+    receive_promo: "I want to receive inspiration, marketing promotions and updates via email.",
+
     // Errors
     empty_firstname: "First name must not be empty",
     empty_lastname: "Last name must not be empty",

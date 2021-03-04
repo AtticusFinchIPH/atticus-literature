@@ -137,6 +137,16 @@ const vi = defineMessages({
     complete_order: "Hoàn thành thanh toán",
     pay: "Thanh toán",
 
+    // AuthPopup
+    sign_in: "Đăng nhập",
+    sign_up: "Đăng ký",
+    welcome: `Chào mừng bạn đến với 
+    Atticus Literature`,
+    email_address: "Địa chỉ email",
+    password: "Mật khẩu",
+    re_password: "Nhập lại mật khẩu",
+    receive_promo: "Tôi muốn nhận được những cập nhật, thông tin mới nhất thông qua email.",
+
     // Errors
     empty_firstname: "Tên người nhận không được trống",
     empty_lastname: "Họ người nhận không được trống",
