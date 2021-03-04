@@ -154,6 +154,10 @@ const vi = defineMessages({
     empty_phone: "Số điện thoại không được trống",
     empty_address_detail: "Địa chỉ không được trống",
     payment_error: "Lỗi thanh toán. Vui lòng chọn phương thức thanh toán khác.",
+    weak_password: "Mật khẩu phải kết hợp giữa ít nhất 1 chữ cái viết hoa, 1 chữ cái viết thường, 1 ký tự đặc biệt, 1 chữ số và có độ dài tối thiểu 8 ký tự và tốt đa 20 ký tự.",
+    password_notmatch: "Mật khẩu không khớp",
+    used_email: "Email đã được sử dụng",
+    invalid_user_data: "Dữ liệu người dùng không hợp lệ",
 })
 
 export default vi;

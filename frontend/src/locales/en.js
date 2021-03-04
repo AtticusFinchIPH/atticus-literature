@@ -153,6 +153,10 @@ const en = defineMessages({
     empty_phone: "Phone number must not be empty",
     empty_address_detail: "Address detail must not be empty",
     payment_error: "Payment error. Please try other payment method.",
+    weak_password: "Password should be combination of one uppercase, one lower case, one special char, one digit and min 8, max 20 char long",
+    password_notmatch: "Passwords don't match",
+    used_email: "Email has been used by another user",
+    invalid_user_data: "Invalid user data",
 })
 
 export default en;

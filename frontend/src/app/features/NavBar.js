@@ -23,6 +23,8 @@ import CartOpenContext from '../../contexts/CartOpenContext';
 import AuthOpenContext from '../../contexts/AuthOpenContext';
 import RedirectOpenContext from '../../contexts/RedirectOpenContext';
 
+import { signout } from '../../actions/userActions';
+
 const NavBar = withRouter(({history}) => {
     const classes = useStyle();
     const [anchorAcc, setAnchorAcc] = useState(null);
@@ -42,6 +44,16 @@ const NavBar = withRouter(({history}) => {
         return cartList.reduce((total, item) => total + new BigNumber(item.quantity).toNumber(), 0);
     }, [cart])
     const dispatch = useDispatch();
+
+    const handleSignIn = () => {
+        setAuthOpen(true); 
+        handleMenuClose(); 
+    }
+
+    const handleSignOut = () => {
+        dispatch(signout());
+        handleMenuClose();
+    }
 
     const handleLangOpen = (e) => {
         setAnchorLang(e.currentTarget);
@@ -113,7 +125,7 @@ const NavBar = withRouter(({history}) => {
             <MenuItem onClick={handleMenuClose}>
                 <FormattedMessage id='setting' defaultMessage="Setting" />
             </MenuItem>
-            <MenuItem onClick={handleMenuClose}>
+            <MenuItem onClick={handleSignOut}>
                 <FormattedMessage id='sign_out' defaultMessage="Sign Out" />
             </MenuItem>
         </Menu>
@@ -130,7 +142,7 @@ const NavBar = withRouter(({history}) => {
             transformOrigin={{ vertical: 'top', horizontal: 'right' }}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={e => { setAuthOpen(true); handleMenuClose(); }}>
+            <MenuItem onClick={handleSignIn}>
                 <FormattedMessage id='sign_in' defaultMessage="Sign In" />
             </MenuItem>
         </Menu>

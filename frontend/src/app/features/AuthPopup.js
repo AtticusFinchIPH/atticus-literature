@@ -1,11 +1,18 @@
 
-import { useContext, useState } from 'react';
+import { forwardRef, useContext, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage, useIntl } from 'react-intl';
 import useStyles from './AuthPopup.styles';
-import { Avatar, Button, Checkbox, Dialog, FormControlLabel, Grid, Paper, Tab, Tabs, TextField, Typography } from '@material-ui/core';
+import { Button, Checkbox, CircularProgress, Dialog, FormControlLabel, Grid, Paper, Tab, Tabs, TextField, Typography } from '@material-ui/core';
 import AuthOpenContext from '../../contexts/AuthOpenContext';
 import booksIcon from '../../images/homework.png';
+import { register, clearUserSigninErros } from '../../actions/userActions';
+
+const PARAM_FIRSTNAME = "firstName";
+const PARAM_LASTNAME = "lastName";
+const PARAM_EMAIL = "email";
+const PARAM_PASSWORD = "password";
+const PARAM_RE_PASSWORD = "rePassword";
 
 const SignIn = () => {
     const classes = useStyles();
@@ -62,7 +69,7 @@ const SignIn = () => {
     )
 }
 
-const SignUp = () => {
+const SignUp = forwardRef((props, ref) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const intl = useIntl();
@@ -76,12 +83,54 @@ const SignUp = () => {
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [rePassword, setRePassword] = useState('');
+    const [rePassword, setRePassword] = useState();
+    const [firstNameErr, setFirstNameErr] = useState();
+    const [lastNameErr, setLastNameErr] = useState();
+    const [emailErr, setEmailErr] = useState();
+    const [passwordErr, setPasswordErr] = useState();
+    const [rePasswordErr, setRePasswordErr] = useState();
+    const [error, setError] = useState();
     const userSignin = useSelector(state => state.userSignin);
-    const { loading, userInfo, error } = userSignin;
+    const { loading, errors } = userSignin;
+    useEffect(() => {
+        if(errors?.length > 0) {
+            errors.forEach(err => {
+                switch (err?.param) {
+                    case PARAM_FIRSTNAME:
+                        setFirstNameErr(intl.formatMessage({id: err.msg, defaultMessage: err.msg}));
+                        break;
+                    case PARAM_LASTNAME:
+                        setLastNameErr(intl.formatMessage({id: err.msg, defaultMessage: err.msg}));
+                        break;
+                    case PARAM_EMAIL:
+                        setEmailErr(intl.formatMessage({id: err.msg, defaultMessage: err.msg}));
+                        break;
+                    case PARAM_PASSWORD:
+                        setPasswordErr(intl.formatMessage({id: err.msg, defaultMessage: err.msg}));
+                        break;
+                    case PARAM_RE_PASSWORD:
+                        setRePasswordErr(intl.formatMessage({id: err.msg, defaultMessage: err.msg}));
+                        break;
+                    default:
+                        setError(intl.formatMessage({id: err.msg, defaultMessage: err.msg}))
+                        break;
+                }
+            });
+        }
+        return (() => clearErrors());
+    }, [errors]);
+    const clearErrors = () => {
+        dispatch(clearUserSigninErros());
+    }
     const submitHandler = (e) => {
         e.preventDefault();
+        dispatch(register({ firstName, lastName, email, password, rePassword }));
     }
+    useImperativeHandle(ref, () => ({
+        close(){
+            clearErrors()
+        }
+      }));
     return(
         <div className={classes.tabContent}>
             <div className={classes.iconBox}>
@@ -95,15 +144,16 @@ const SignUp = () => {
             <form className={classes.form} noValidate={false} onSubmit={submitHandler}>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
-                        <TextField
-                            
+                        <TextField                          
                             variant="outlined" required fullWidth autoFocus
                             name="firstName" autoComplete="fname"
                             label={firstnameTransl}                       
-                            onChange={(e) => setFirstName(e.target.value)}
+                            onChange={(e) => { clearErrors(); setFirstName(e.target.value)}}
                             inputProps={{
                                 maxLength: 15,
                             }}
+                            error={Boolean(firstNameErr)}
+                            helperText={firstNameErr}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -111,10 +161,12 @@ const SignUp = () => {
                             variant="outlined" required fullWidth
                             name="lastName" autoComplete="lname"
                             label={lastnameTransl}
-                            onChange={(e) => setLastName(e.target.value)}
+                            onChange={(e) => { clearErrors(); setLastName(e.target.value)}}
                             inputProps={{
                                 maxLength: 15,
                             }}
+                            error={Boolean(lastNameErr)}
+                            helperText={lastNameErr}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -123,7 +175,9 @@ const SignUp = () => {
                             name="email" autoComplete="email"
                             label={emailAddressTransl}
                             type="email"  
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={(e) => { clearErrors(); setEmail(e.target.value)}}
+                            error={Boolean(emailErr)}
+                            helperText={emailErr}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -132,7 +186,9 @@ const SignUp = () => {
                             name="password" autoComplete="current-password"
                             label={passwordTransl}
                             type="password"
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={(e) => { clearErrors(); setPassword(e.target.value)}}
+                            error={Boolean(passwordErr)}
+                            helperText={passwordErr}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -141,9 +197,9 @@ const SignUp = () => {
                             name="rePassword" autoComplete="re-password"
                             label={rePasswordTransl}
                             type="password"
-                            onChange={(e) => setRePassword(e.target.value)}
-                            error={password !== rePassword}
-                            helperText={password === rePassword ? "" : "Password not match!"}
+                            onChange={(e) => { clearErrors(); setRePassword(e.target.value)}}
+                            error={Boolean(rePasswordErr)}
+                            helperText={rePasswordErr}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -153,32 +209,46 @@ const SignUp = () => {
                         />
                     </Grid>
                 </Grid>
-                <Button
-                    type="submit"
-                    fullWidth variant="contained" color="primary"
-                    className={classes.submit}
-                >
-                    <FormattedMessage id='sign_up' defaultMessage="Sign Up" />
-                </Button>
+                {
+                    loading
+                    ?
+                    <CircularProgress size={30} />
+                    :
+                    <Button
+                        type="submit"
+                        fullWidth variant="contained" color="primary"
+                        className={classes.submit}
+                    >
+                        <FormattedMessage id='sign_up' defaultMessage="Sign Up" />
+                    </Button>
+                }
             </form> 
             <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
         </div>
     )
-}
+})
 
 const AuthPopup = () => {
     const intl = useIntl();
     const signInTransl = intl.formatMessage({id: 'sign_in', defaultMessage: "Sign In"});
     const signUpTransl = intl.formatMessage({id: 'sign_up', defaultMessage: "Sign Up"});
     const { isAuthOpen, setAuthOpen } = useContext(AuthOpenContext);
+    const { userInfo } = useSelector(state => state.userSignin);
+    const signInRef = useRef();
+    const signUpRef = useRef();
     const [ tab, setTab ] = useState(0);
 
     const handleClose = () => {
+        signUpRef.current?.close();
+        setTab(0);
         setAuthOpen(false);
     }
     const handleSwitchTab = (event, newValue) => {
         setTab(newValue);
     }
+    useEffect(() => {
+        if(userInfo) handleClose();
+    }, [userInfo])
     return(
         <Dialog open={isAuthOpen} onClose={handleClose} >
             <Paper square>
@@ -196,7 +266,7 @@ const AuthPopup = () => {
                     ?
                     <SignIn />
                     :
-                    <SignUp />
+                    <SignUp ref={signUpRef} />
                 }
             </Paper>
         </Dialog>
