@@ -159,6 +159,9 @@ const en = defineMessages({
     invalid_user_data: "Invalid user data",
     unregisted_user: "User not registered",
     invalid_password: "Incorrect Password",
+
+    // Infos
+    signin_demand: "Please sign in to use this functionality",
 })
 
 export default en;

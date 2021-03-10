@@ -160,6 +160,9 @@ const vi = defineMessages({
     invalid_user_data: "Dữ liệu người dùng không hợp lệ",
     unregisted_user: "Email chưa đăng ký",
     invalid_password: "Sai mật khẩu",
+
+    // Infos
+    signin_demand: "Vui lòng đăng nhập để sử dụng tính năng này", 
 })
 
 export default vi;
