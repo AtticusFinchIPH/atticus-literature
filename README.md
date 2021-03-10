@@ -4,12 +4,12 @@ Atticus Literature, is an online platform for book lovers. Based on a bookstore 
 **Project Link** - ...
 
 ## Table of contents
-1. [Installation](#installation-:zap:)
-2. [Tech Stack](#tech-stack-&#128640;)
-3. [API](#api-&#128421;)
-4. [Current Version](#current-version-&#128293;)
-5. [Screenshots](#screenshots-&#128248;)
-6. [What's Next?](#whats-next?-&#127993;)
+1. [Installation](#installation-zap)
+2. [Tech Stack](#tech-stack-)
+3. [API](#api-)
+4. [Current Version](#current-version-)
+5. [Screenshots](#screenshots-)
+6. [What's Next?](#whats-next-)
 
 ## Installation :zap:
 **1. Clone this repo by running the following command:**
