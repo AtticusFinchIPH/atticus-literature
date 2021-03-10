@@ -25,8 +25,9 @@ cd backend && npm install
 cd frontend && npm install
 ```
 **3. Create a `.env` file in the project root folder and copy the format of `.env.sample` file.**
-- `.env.sample` file contains all the environment variables required for running the project.
-**4. In case you have [Concurrently](https://www.npmjs.com/package/concurrently) running in your system, start the react and node server together by running the following command :-**
+- `.env.sample` file contains all the environment variables required for running the project.  
+
+**4. In case you have [Concurrently](https://www.npmjs.com/package/concurrently) running in your system, start the react and node server together by running the following command:**
 ```bash
 npm start
 ```
