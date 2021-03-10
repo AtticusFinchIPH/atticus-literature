@@ -4,12 +4,12 @@ Atticus Literature, is an online platform for book lovers. Based on a bookstore 
 **Project Link** - ...
 
 ## Table of contents
-1. Installation
-2. Tech Stack
-3. API
-4. Current Version
-5. Screenshots
-6. What's Next?
+1. [Installation](#installation)
+2. [Tech Stack](#tech-stack)
+3. [API](#api)
+4. [Current Version](#current-version)
+5. [Screenshots](#screenshots)
+6. [What's Next?](#whats-next)
 
 ## Installation :zap:
 **1. Clone this repo by running the following command:**
@@ -64,6 +64,25 @@ In this version (1.0.0), we are able to access these features:
 - User Sign In, Sign up, Sign out
 
 ## Screenshots &#128248;
+### Landing Page ###
+![al-home](https://user-images.githubusercontent.com/45216222/110588413-47c23a00-8175-11eb-9849-c43fe3b35d73.png)
+### Bookstore Page ###
+![al-bookstore](https://user-images.githubusercontent.com/45216222/110588400-43961c80-8175-11eb-807d-88c19e54702d.png)
+### About US Page ###
+![al-aboutus](https://user-images.githubusercontent.com/45216222/110588385-3e38d200-8175-11eb-82a7-19aa71038f33.png)
+### Checkout Page
+![al-checkout](https://user-images.githubusercontent.com/45216222/110588409-46910d00-8175-11eb-8dd2-a9a4af637c96.png)
+### Order Process Page
+![al-order_process_1](https://user-images.githubusercontent.com/45216222/110588418-48f36700-8175-11eb-85bb-1786e3518c4b.png)
+![al-order_process_2](https://user-images.githubusercontent.com/45216222/110588448-50b30b80-8175-11eb-8b8b-0fe4c9e5eb50.png)
+![al-order_process_3](https://user-images.githubusercontent.com/45216222/110588420-498bfd80-8175-11eb-9058-f79181edd8c1.png)
+### Cart Bar
+![al-cartbar](https://user-images.githubusercontent.com/45216222/110588404-455fe000-8175-11eb-84fc-1359fcb26e8b.png)
+### Redirect Bar (for mobile view) ###
+![al-redirectbar](https://user-images.githubusercontent.com/45216222/110588424-4a249400-8175-11eb-9bf8-6b1560a64570.png)
+### Underconstruction Page
+![al-underconstruction](https://user-images.githubusercontent.com/45216222/110588427-4abd2a80-8175-11eb-8fbd-1a1cc73c10e1.png)
+
 
 ## What's Next? &#127993;
 In up comming version (or sub-version), we will focus on dealing with these issues:
