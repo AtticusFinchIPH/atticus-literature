@@ -11,5 +11,5 @@ FROM nginx:1.19.7-alpine
 COPY --from=builder /react-ui/nginx/nginx.conf /etc/nginx/nginx.conf
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=builder /react-ui/build /usr/share/nginx/html
-EXPOSE 3000 80
+EXPOSE 80
 ENTRYPOINT ["nginx", "-g", "daemon off;"]

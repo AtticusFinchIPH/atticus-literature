@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  db:
+    image: mongo:4.0
+    restart: always
+    volumes:
+      - db-data:/data/db
+    ports: 
+      - 27017:27017
+    command: mongod --noauth --smallfiles
+    networks:
+      - backend
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: al-api:latest
+    volumes: 
+      - /home/node/app/node_modules
+      - ./backend:/home/node/app
+    networks: 
+      - backend
+  client:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: al-client:latest
+    volumes: 
+      - /home/node/app/node_modules
+      - ./frontend:/home/node/app/node_modules
+    networks: 
+      - frontend
+volumes:
+    db-data:
+        name: notes-db-dev-data
+networks: 
+    frontend:
+        name: fullstack-notes-application-network-frontend
+        driver: bridge
+    backend:
+        name: fullstack-notes-application-network-backend
+        driver: bridge
