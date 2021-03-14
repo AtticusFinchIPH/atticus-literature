@@ -4,6 +4,6 @@ COPY ["package.json", "package-lock.json*", "./"]
 RUN npm install
 COPY . .
 RUN npm run build
-EXPOSE 5000
+EXPOSE 80
 # ENV MONGODB_URL=mongodb+srv://user:password@cluster0.mg9jn.mongodb.net/atticus-literature
 CMD ["npm", "run", "start-product"]

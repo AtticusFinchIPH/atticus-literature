@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../utils/axiosInstance';
 import {
     GET_BESTSELLERS_REQUEST,
     GET_BESTSELLERS_SUCCESS,
