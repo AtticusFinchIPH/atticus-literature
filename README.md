@@ -1,7 +1,7 @@
 # Welcome to Atticus Literature! ✨
 Atticus Literature, is an online platform for book lovers. Based on a bookstore website design, Atticus Literature sells all genres of literary products. However, in several versions, people will be able to post their own blogs, write their thought about books or share, rent books between each others.
 
-**Project Link** - ...
+**Project Link** - http://books.atticus-literature.cf
 
 ## Table of contents
 1. [Installation](#installation-zap)
@@ -12,6 +12,7 @@ Atticus Literature, is an online platform for book lovers. Based on a bookstore 
 6. [What's Next?](#whats-next-)
 
 ## Installation :zap:
+### Steps to follow if you don't have docker or docker-compose:  
 **1. Clone this repo by running the following command:**
 ```bash
 git clone https://github.com/AtticusFinchIPH/atticus-literature
@@ -24,7 +25,7 @@ cd backend && npm install
 ```bash
 cd frontend && npm install
 ```
-**3. Create a `.env` file in the project root folder and copy the format of `.env.sample` file.**
+**3. Create a `.env` file in the 'backend' folder and copy the format of `.env.sample` file.**
 - `.env.sample` file contains all the environment variables required for running the project.  
 
 **4. In case you have [Concurrently](https://www.npmjs.com/package/concurrently) running in your system, start the react and node server together by running the following command:**
@@ -38,7 +39,14 @@ cd backend && npm start
 ```bash
 cd frontend && npm start
 ```
-**4.** **🎉  Open your browser and go to  `https://localhost:3000`**
+**5.** **🎉  Open your browser and go to  `https://localhost:3000`**
+### If you have docker & docker-compose:
+**1. Modify MONGODB_URL environment variable in docker-compose.yaml with your mongodb connection.**  
+**2. Run in root project the following command:**
+```bash
+docker-compose up
+```
+**3.** **🎉  Open your browser and go to  `https://localhost:80`**
 
 ## Tech Stack &#128640;
 ### Frontend
