@@ -12,14 +12,14 @@ services:
   #   networks:
   #     - database-api
   api:
-    container_name: api
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    # image: "al-api:1.0.0"
-    volumes: 
-      - /home/node/app/node_modules
-      - ./backend:/home/node/app
+    container_name: api-hub
+    # build:
+    #   context: ./backend
+    #   dockerfile: Dockerfile
+    image: "atticusfinch123/atticus-literature-api"
+    # volumes: 
+    #   - /home/node/app/node_modules
+    #   - ./backend:/home/node/app
     environment: 
       - MONGODB_URL=mongodb+srv://user:password@cluster0.mg9jn.mongodb.net/atticus-literature
     # ports: 
@@ -27,14 +27,14 @@ services:
     networks: 
       - api-client
   client:
-    container_name: client
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    # image: "al-client:1.0.0"
-    volumes: 
-      - /home/node/app/node_modules
-      - ./frontend:/home/node/app
+    container_name: client-hub
+    # build:
+    #   context: ./frontend
+    #   dockerfile: Dockerfile
+    image: "atticusfinch123/atticus-literature-client"
+    # volumes: 
+    #   - /home/node/app/node_modules
+    #   - ./frontend:/home/node/app
     depends_on:
       - api
     # ports: 
