@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { Button, Container, Typography, TextField, IconButton, Collapse, Box } from '@material-ui/core';
-import useStyle from './styles';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import MinusIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import Rating from '@material-ui/lab/Rating';
 
+import useStyle from './styles';
 import CartOpenContext from '../../../contexts/CartOpenContext';
 import { addMultipleToCart, getItemDetail } from '../../../actions/productActions';
 

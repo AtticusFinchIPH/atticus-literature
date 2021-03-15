@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage, useIntl } from 'react-intl';
 import clsx from 'clsx';
 import axios from 'axios';
-import useStyles from './styles';
 import {
     CardNumberElement,
     CardExpiryElement,
@@ -13,6 +12,8 @@ import {
 } from "@stripe/react-stripe-js";
 import StripeInput from './StripeInput';
 import { Button, CircularProgress, Collapse, Divider, FormControl, FormControlLabel, Radio, RadioGroup, TextField, Typography } from '@material-ui/core';
+
+import useStyles from './styles';
 import { shippingFeeCalc, totalSumCalc, totalSumNumber, wholeSaleCalc } from '../../../utils/priceCalculator';
 import paypalImage from '../../../images/payment/paypal.png';
 import maestroImage from '../../../images/payment/maestro.png';

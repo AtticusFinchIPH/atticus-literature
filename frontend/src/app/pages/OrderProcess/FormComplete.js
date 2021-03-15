@@ -2,8 +2,9 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import useStyles from './styles';
 import { Button } from '@material-ui/core';
+
+import useStyles from './styles';
 import orderCompletedImage from '../../../images/payment/order_completed.jpg';
 import { removeAllLocalCart } from '../../../actions/productActions';
 

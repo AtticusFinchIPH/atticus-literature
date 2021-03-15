@@ -16,6 +16,7 @@ import MoonIcon from '@material-ui/icons/Brightness2';
 import LanguageIcon from '@material-ui/icons/Language';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FaceIcon from '@material-ui/icons/Face';
+
 import { APPLY_VI, APPLY_EN } from '../../constants/globalConstants';
 import useStyle from './NavBar.styles'; // Must be imported after all @material-ui
 import ThemeContext from '../../contexts/ThemeContext';

@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage, useIntl } from 'react-intl';
 import clsx from 'clsx';
 import axios from 'axios';
-import useStyles from './styles';
 import { Button, Divider, InputAdornment, TextField, Typography } from '@material-ui/core';
+
+import useStyles from './styles';
 import { shippingFeeCalc, totalSumCalc, totalSumNumber, wholeSaleCalc } from '../../../utils/priceCalculator';
 import { saveOrderFormShipping } from '../../../actions/orderActions';
 

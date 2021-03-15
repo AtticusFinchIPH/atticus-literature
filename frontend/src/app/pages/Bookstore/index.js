@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Box, Card, CardActions, CardContent, CardMedia, Container, Fade, IconButton, Typography } from '@material-ui/core';
-import useStyle from './styles';
-import boxEmptyImage from '../../../images/box_empty.png';
 import CartOpenContext from '../../../contexts/CartOpenContext';
 import Pagination from '@material-ui/lab/Pagination';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 import Catalogue from './Catalogue';
+import useStyle from './styles';
+import boxEmptyImage from '../../../images/box_empty.png';
 import { addToCart, getStore } from '../../../actions/productActions';
 
 const CardItem = (props) => {
