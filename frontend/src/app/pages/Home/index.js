@@ -81,8 +81,8 @@ const CardItem = (props) => {
             <CardContent className={classes.cardContent}>
                 <Typography variant='body1' component='p'>{item.title}</Typography>
             </CardContent>
-            <CardActions className={classes.cardActions} onClick={addToFavorites}>
-                <IconButton className={classes.iconButton} aria-label="Add to favorites">
+            <CardActions className={classes.cardActions}>
+                <IconButton className={classes.iconButton} aria-label="Add to favorites" onClick={addToFavorites}>
                     <FavoriteBorderOutlinedIcon className={classes.icon}/>
                 </IconButton>
                 <IconButton className={classes.iconButton} aria-label="Add to cart" onClick={addItemToCart}>
