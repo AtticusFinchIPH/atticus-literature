@@ -6,6 +6,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import translation from '../locales';
 import { lightTheme, darkTheme } from '../utils/theme';
 import ThemeContext from '../contexts/ThemeContext';
+import { SnackbarProvider } from 'notistack';
 import CartOpenContext from '../contexts/CartOpenContext';
 import AuthOpenContext from '../contexts/AuthOpenContext';
 import RedirectOpenContext from '../contexts/RedirectOpenContext';
@@ -38,7 +39,8 @@ function App() {
     <BrowserRouter>
       <IntlProvider locale={language} messages={translation[language]}>
         <ThemeProvider theme={theme}>   
-          <ThemeContext.Provider value={themeValue}>  
+          <ThemeContext.Provider value={themeValue}> 
+          <SnackbarProvider maxSnack={3}>
           <CartOpenContext.Provider value={cartOpenValue}>
           <AuthOpenContext.Provider value={authOpenValue}>
           <RedirectOpenContext.Provider value={redirectOpenValue}>
@@ -62,6 +64,7 @@ function App() {
           </RedirectOpenContext.Provider>
           </AuthOpenContext.Provider>
           </CartOpenContext.Provider>
+          </SnackbarProvider>
           </ThemeContext.Provider>
         </ThemeProvider>
       </IntlProvider>

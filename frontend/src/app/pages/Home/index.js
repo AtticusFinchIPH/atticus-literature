@@ -2,12 +2,13 @@ import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import Swiper from 'react-id-swiper';
+import { useSnackbar } from 'notistack';
 import clsx from 'clsx';
 import { 
     Box, Container, Hidden, Paper, Typography, IconButton, Avatar,
-    Card, CardMedia, CardContent, CardActions, Fade, Grid, 
+    Card, CardMedia, CardContent, CardActions, Fade, Grid, Slide, 
 } from "@material-ui/core";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
@@ -28,8 +29,12 @@ const CARD_ITEM_WIDTH = '200px';
 const CardItem = (props) => {
     const classes = useStyle();
     const history = useHistory();
+    const intl = useIntl();
+    const signinTransl = intl.formatMessage({ id: 'signin_demand', defaultMessage: "Please sign in to use this functionality" });
+    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
     const [isShown, setIsShown] = useState(false);
     const { setCartOpen } = useContext(CartOpenContext);
+    const { userInfo } = useSelector(state => state.userSignin);
     const dispatch = useDispatch();
     const item = props.item;
     let priceDeclare;
@@ -47,6 +52,20 @@ const CardItem = (props) => {
     const redirect = () => {
         history.push(`/product/${item._id}`);
     }
+    const addToFavorites = () => {
+        if (userInfo) {
+
+        } else {
+            enqueueSnackbar(signinTransl, {
+                variant: 'info',
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'center',
+                },
+                TransitionComponent: Slide,
+            })
+        }
+    }
     const addItemToCart = () => {
         dispatch(addToCart(props.item));
         setCartOpen(true);
@@ -62,7 +81,7 @@ const CardItem = (props) => {
             <CardContent className={classes.cardContent}>
                 <Typography variant='body1' component='p'>{item.title}</Typography>
             </CardContent>
-            <CardActions className={classes.cardActions}>
+            <CardActions className={classes.cardActions} onClick={addToFavorites}>
                 <IconButton className={classes.iconButton} aria-label="Add to favorites">
                     <FavoriteBorderOutlinedIcon className={classes.icon}/>
                 </IconButton>
