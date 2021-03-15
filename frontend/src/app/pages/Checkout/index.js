@@ -6,7 +6,6 @@ import { FormattedMessage, injectIntl, useIntl } from 'react-intl';
 import cscAPI from 'country-state-city'
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import useStyles from './styles';
 import { Button, Card, Collapse, Container, Divider, Hidden, IconButton, Paper, Snackbar, TextField, Typography } from '@material-ui/core';
 import CartOpenContext from '../../../contexts/CartOpenContext';
 import RemoveIcon from '@material-ui/icons/HighlightOff';
@@ -16,6 +15,7 @@ import TagIcon from '@material-ui/icons/LocalOfferOutlined';
 import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
 import { Alert as MuiAlert, Autocomplete } from '@material-ui/lab';
 
+import useStyles from './styles';
 import { updateLocalCart, removeFromLocalCart } from '../../../actions/productActions';
 import { changeShippingFee, getShippingFee, saveShippingAddress } from '../../../actions/orderActions';
 import { retailPriceCalc, wholeSaleCalc, subtotalCalc, shippingFeeCalc, totalSumCalc, totalSumNumber } from '../../../utils/priceCalculator';

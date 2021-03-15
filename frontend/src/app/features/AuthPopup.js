@@ -2,8 +2,9 @@
 import { forwardRef, useContext, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage, useIntl } from 'react-intl';
-import useStyles from './AuthPopup.styles';
 import { Button, Checkbox, CircularProgress, Dialog, FormControlLabel, Grid, Paper, Tab, Tabs, TextField, Typography } from '@material-ui/core';
+
+import useStyles from './AuthPopup.styles';
 import AuthOpenContext from '../../contexts/AuthOpenContext';
 import booksIcon from '../../images/homework.png';
 import { register, clearUserSigninErros, signin } from '../../actions/userActions';
