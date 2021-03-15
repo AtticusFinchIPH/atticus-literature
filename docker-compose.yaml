@@ -1,0 +1,58 @@
+version: "3.8"
+
+services:
+  # db:
+  #   image: mongo:4.0
+  #   restart: always
+  #   volumes:
+  #     - db-data:/data/db
+  #   ports: 
+  #     - 27017:27017
+  #   command: mongod --noauth --smallfiles
+  #   networks:
+  #     - database-api
+  api:
+    container_name: api
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    # image: "al-api:1.0.0"
+    volumes: 
+      - /home/node/app/node_modules
+      - ./backend:/home/node/app
+    environment: 
+      - MONGODB_URL=mongodb+srv://user:password@cluster0.mg9jn.mongodb.net/atticus-literature
+    # ports: 
+      # - 5000:5000
+    networks: 
+      - api-client
+  client:
+    container_name: client
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    # image: "al-client:1.0.0"
+    volumes: 
+      - /home/node/app/node_modules
+      - ./frontend:/home/node/app
+    depends_on:
+      - api
+    # ports: 
+    #   - 3000:3000
+    networks: 
+      - api-client
+  revproxy:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    networks:
+      - api-client
+    ports:
+      - "80:80"
+volumes:
+    db-data:
+        name: notes-db-dev-data
+networks: 
+    api-client:
+        name: atticus-literature-network
+        driver: bridge

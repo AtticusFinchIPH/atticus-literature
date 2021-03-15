@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import useStyles from './RedirectBar.styles';
 import RedirectOpenContext from '../../contexts/RedirectOpenContext';
 import { Accordion, AccordionDetails, AccordionSummary, Drawer, IconButton, Typography } from '@material-ui/core';
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import Catalogue from '../pages/Bookstore/Catalogue';
+import useStyles from './RedirectBar.styles';
 
 const STORIES_LOCATION = "/under_construction/";
 const ABOUT_US_LOCATION = "/about_us/";

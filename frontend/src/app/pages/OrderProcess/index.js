@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 import clsx from 'clsx';
-import useStyles from './styles';
 import { CircularProgress, Container, Slide, Step, StepLabel, Stepper, Typography } from '@material-ui/core';
 import CartOpenContext from '../../../contexts/CartOpenContext';
 import { Elements as StripeElements } from '@stripe/react-stripe-js';
@@ -13,6 +12,7 @@ import { getPublishKey } from '../../../utils/stripeAPI';
 import FormShipping from './FormShipping';
 import FormPayment from './FormPayment';
 import FormComplete from './FormComplete';
+import useStyles from './styles';
 
 const OrderProcess = () => {
     const classes = useStyles();

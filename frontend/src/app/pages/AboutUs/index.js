@@ -3,9 +3,9 @@ import { useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import clsx from 'clsx';
 import { Accordion, AccordionDetails, AccordionSummary, Container, Fade, Link, Paper, Typography } from '@material-ui/core';
-import useStyles from './styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+import useStyles from './styles';
 import { FONT_F_PLAYFAIR } from '../../../utils/theme';
 import EIFFEL_IMAGE from '../../../images/duc_eiffel_tower.jpg';
 import COLMA_IMAGE from '../../../images/duc_colma_village.jpg';

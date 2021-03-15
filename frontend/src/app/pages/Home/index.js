@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Swiper from 'react-id-swiper';
 import clsx from 'clsx';
-import useStyle from './styles';
 import { 
     Box, Container, Hidden, Paper, Typography, IconButton, Avatar,
     Card, CardMedia, CardContent, CardActions, Fade, Grid, 
@@ -15,6 +14,7 @@ import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutline
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import ThemeContext from '../../../contexts/ThemeContext';
 
+import useStyle from './styles';
 import { FONT_F_PLAYFAIR } from '../../../utils/theme';
 import spinnerImage from '../../../images/infinitySpinner.gif';
 import authorAvatar from '../../../images/author-avatar.jpg';

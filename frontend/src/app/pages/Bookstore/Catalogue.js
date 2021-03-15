@@ -3,12 +3,13 @@ import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import useStyle_Catalogue from './Catalogue.styles';
 import clsx from 'clsx';
 import { Collapse, IconButton, InputBase, Typography } from '@material-ui/core';
 import MinusIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
+
+import useStyle_Catalogue from './Catalogue.styles';
 import { getBookGenres } from '../../../actions/productActions';
 import RedirectOpenContext from '../../../contexts/RedirectOpenContext';
 
