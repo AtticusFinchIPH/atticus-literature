@@ -6,6 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { Box, Card, CardActions, CardContent, CardMedia, Container, Fade, IconButton, Typography } from '@material-ui/core';
 import CartOpenContext from '../../../contexts/CartOpenContext';
 import Pagination from '@material-ui/lab/Pagination';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
@@ -13,13 +14,21 @@ import Catalogue from './Catalogue';
 import useStyle from './styles';
 import boxEmptyImage from '../../../images/box_empty.png';
 import { addToCart, getStore } from '../../../actions/productActions';
+import { addToFavorites, removeFromFavorites } from '../../../actions/userActions';
+import { ADD_NOTI, INFO } from '../../../constants/globalConstants';
+
+const isFavorited = (userInfo, productId) => {
+    const { favorites } = userInfo;
+    return favorites?.length > 0 && favorites.findIndex(favorite => favorite === productId) > -1;
+}
 
 const CardItem = (props) => {
     const classes = useStyle();
     const history = useHistory();
+    const dispatch = useDispatch();
     const [isShown, setIsShown] = useState(false);
     const { setCartOpen } = useContext(CartOpenContext);
-    const dispatch = useDispatch();
+    const { userInfo } = useSelector(state => state.userSignin);
     const item = props.item;
     let priceDeclare;
     switch (item.currency) {
@@ -35,6 +44,22 @@ const CardItem = (props) => {
     }
     const redirect = () => {
         history.push(`/product/${item._id}`)
+    }
+    const handleAddFavorites = () => {
+        if (userInfo) {
+            dispatch(addToFavorites(item._id));
+        } else {
+            dispatch({
+                type: ADD_NOTI,
+                payload: {
+                    id: 'signin_demand',
+                    type: INFO,
+                }
+            })
+        }
+    }
+    const handleRemoveFavorites = () => {
+        dispatch(removeFromFavorites(item._id));
     }
     const addItemToCart = () => {
         dispatch(addToCart(item));
@@ -52,9 +77,17 @@ const CardItem = (props) => {
                 <Typography variant='body1' component='p'>{item.title}</Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
-                <IconButton className={classes.iconButton} aria-label="Add to favorites">
-                    <FavoriteBorderOutlinedIcon className={classes.icon}/>
-                </IconButton>
+                {
+                    userInfo && isFavorited(userInfo, item._id)
+                    ?
+                    <IconButton className={classes.iconButton} onClick={handleRemoveFavorites} aria-label="Remove from favorites">
+                        <FavoriteIcon color="secondary"/>
+                    </IconButton>
+                    :
+                    <IconButton className={classes.iconButton} onClick={handleAddFavorites} aria-label="Add to favorites">
+                        <FavoriteBorderOutlinedIcon className={classes.icon}/>
+                    </IconButton>
+                }
                 <IconButton className={classes.iconButton} aria-label="Add to cart" onClick={addItemToCart}>
                     <AddShoppingCartIcon className={classes.icon} />
                 </IconButton>
