@@ -24,8 +24,8 @@ const userSchema = new mongoose.Schema({
         ref: 'UserEnumRole',
         required: true, 
     },
-    favorites: [{type: mongoose.Schema.ObjectId, ref: 'Product'}],
-    orders: [{type: mongoose.Schema.ObjectId, ref: 'Order'}],
+    favorites: [{type: mongoose.Schema.ObjectId, ref: 'Product', unique: true}],
+    orders: [{type: mongoose.Schema.ObjectId, ref: 'Order', unique: true}],
 })
 
 const userModel = mongoose.model("User", userSchema);

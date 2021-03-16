@@ -148,6 +148,7 @@ const vi = defineMessages({
     receive_promo: "Tôi muốn nhận được những cập nhật, thông tin mới nhất thông qua email.",
 
     // Errors
+    server_error: "Lỗi hệ thống",
     empty_firstname: "Tên người nhận không được trống",
     empty_lastname: "Họ người nhận không được trống",
     invalid_email: "Địa chỉ email không hợp lệ",
@@ -160,6 +161,8 @@ const vi = defineMessages({
     invalid_user_data: "Dữ liệu người dùng không hợp lệ",
     unregisted_user: "Email chưa đăng ký",
     invalid_password: "Sai mật khẩu",
+    product_notfound: "Sản phẩm không tồn tại",
+    user_notfound: "Người dùng không tồn tại",
 
     // Infos
     signin_demand: "Vui lòng đăng nhập để sử dụng tính năng này", 

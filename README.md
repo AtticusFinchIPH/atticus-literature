@@ -13,22 +13,22 @@ Atticus Literature, is an online platform for book lovers. Based on a bookstore 
 
 ## Installation :zap:
 ### Steps to follow if you don't have docker or docker-compose:  
-**1. Clone this repo by running the following command:**
+1. Clone this repo by running the following command:
 ```bash
 git clone https://github.com/AtticusFinchIPH/atticus-literature
 cd atticus-literature
 ```
-**2. Now install all the required packages by running the following commands in separate prompts:**
+2. Now install all the required packages by running the following commands in separate prompts:
 ```bash
 cd backend && npm install
 ```
 ```bash
 cd frontend && npm install
 ```
-**3. Create a `.env` file in the 'backend' folder and copy the format of `.env.sample` file.**
+3. Create a `.env` file in the 'backend' folder and copy the format of `.env.sample` file.
 - `.env.sample` file contains all the environment variables required for running the project.  
 
-**4. In case you have [Concurrently](https://www.npmjs.com/package/concurrently) running in your system, start the react and node server together by running the following command:**
+4. In case you have [Concurrently](https://www.npmjs.com/package/concurrently) running in your system, start the react and node server together by running the following command:
 ```bash
 npm start
 ```
@@ -39,14 +39,14 @@ cd backend && npm start
 ```bash
 cd frontend && npm start
 ```
-**5.** **🎉  Open your browser and go to  `https://localhost:3000`**
+5. 🎉  Open your browser and go to  `https://localhost:3000`
 ### If you have docker & docker-compose:
-**1. Modify MONGODB_URL environment variable in docker-compose.yaml with your mongodb connection.**  
-**2. Run in root project the following command:**
+1. Modify MONGODB_URL environment variable in docker-compose.yaml with your mongodb connection.  
+2. Run in root project the following command:
 ```bash
 docker-compose up
 ```
-**3.** **🎉  Open your browser and go to  `https://localhost:80`**
+3. 🎉  Open your browser and go to  `https://localhost:80`
 
 ## Tech Stack &#128640;
 ### Frontend
@@ -62,14 +62,20 @@ docker-compose up
 - [Stripe](https://stripe.com/)
 
 ## Current Version &#128293;
-In this version (1.0.0), we are able to access these features:
+In this version (1.0.2), we are able to access these features:
 - Landing page
 - Bookstore page
 - About Us page
 - Checkout page
 - OrderProcess page
 - Redirect bar, Cart bar
-- User Sign In, Sign up, Sign out
+- User Sign In, Sign up, Sign out<br>
+
+Fixed last version issues & new features:
+- Build Notification feature.
+- Click issue showing sign in demand on "add to cart" button in Landing page.
+- Handle favorite in Lading, Bookstore, Product page when user sign in existed.
+- Fix FormPayment auto complete order.
 
 ## Screenshots &#128248;
 ### Landing Page ###
@@ -93,9 +99,9 @@ In this version (1.0.0), we are able to access these features:
 
 
 ## What's Next? &#127993;
-In up comming version (or sub-version), we will focus on dealing with these issues:
-- Dockerize the application
-- Favorites implementation for login user
+In up comming version (or sub-version, 1.0.3), we will focus on dealing with these issues:
 - Order review for login user
 - Apply userInfo in Checkout, OrderProcess
 - Stories page
+- Use Github Action for CI/CD
+- Use Github Project for planning next features

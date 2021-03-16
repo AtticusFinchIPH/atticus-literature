@@ -139,6 +139,7 @@ const useStyle = makeStyles((theme) => ({
         height: theme.spacing(6),
         paddingBottom: '0',
         color: LIGHT_WHITE,
+        overflow: 'hidden',
     },
     cardActions: {
         display: 'block',
@@ -189,7 +190,7 @@ const useStyle = makeStyles((theme) => ({
             textAlign: 'left',
         },
         [theme.breakpoints.down('sm')]: {
-            textAlign: 'justify',
+            textAlign: 'center',
         },
         paddingBottom: '15px',
     },
@@ -198,7 +199,7 @@ const useStyle = makeStyles((theme) => ({
             textAlign: 'right',
         },
         [theme.breakpoints.down('sm')]: {
-            textAlign: 'justify',
+            textAlign: 'center',
         },
     },
 }))

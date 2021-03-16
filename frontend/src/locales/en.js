@@ -147,6 +147,7 @@ const en = defineMessages({
     receive_promo: "I want to receive inspiration, marketing promotions and updates via email.",
 
     // Errors
+    server_error: "Server error",
     empty_firstname: "First name must not be empty",
     empty_lastname: "Last name must not be empty",
     invalid_email: "Invalid email address",
@@ -159,6 +160,8 @@ const en = defineMessages({
     invalid_user_data: "Invalid user data",
     unregisted_user: "User not registered",
     invalid_password: "Incorrect Password",
+    product_notfound: "Product Not Found",
+    user_notfound: "User Not Found",
 
     // Infos
     signin_demand: "Please sign in to use this functionality",

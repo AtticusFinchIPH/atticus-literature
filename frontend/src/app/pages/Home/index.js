@@ -2,9 +2,8 @@ import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import Swiper from 'react-id-swiper';
-import { useSnackbar } from 'notistack';
 import clsx from 'clsx';
 import { 
     Box, Container, Hidden, Paper, Typography, IconButton, Avatar,
@@ -22,20 +21,24 @@ import authorAvatar from '../../../images/author-avatar.jpg';
 
 import CartOpenContext from '../../../contexts/CartOpenContext';
 import { addToCart, getBestsellers, getRecommendeds } from '../../../actions/productActions';
+import { ADD_NOTI, INFO } from '../../../constants/globalConstants';
+import { addToFavorites, removeFromFavorites } from '../../../actions/userActions';
 
 const CARD_ITEM_HEIGHT = '450px';
 const CARD_ITEM_WIDTH = '200px';
 
+const isFavorited = (userInfo, productId) => {
+    const { favorites } = userInfo;
+    return favorites?.length > 0 && favorites.findIndex(favorite => favorite === productId) > -1;
+}
+
 const CardItem = (props) => {
     const classes = useStyle();
     const history = useHistory();
-    const intl = useIntl();
-    const signinTransl = intl.formatMessage({ id: 'signin_demand', defaultMessage: "Please sign in to use this functionality" });
-    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+    const dispatch = useDispatch();
     const [isShown, setIsShown] = useState(false);
     const { setCartOpen } = useContext(CartOpenContext);
     const { userInfo } = useSelector(state => state.userSignin);
-    const dispatch = useDispatch();
     const item = props.item;
     let priceDeclare;
     switch (item.currency) {
@@ -52,19 +55,21 @@ const CardItem = (props) => {
     const redirect = () => {
         history.push(`/product/${item._id}`);
     }
-    const addToFavorites = () => {
+    const handleAddFavorites = () => {
         if (userInfo) {
-
+            dispatch(addToFavorites(props.item._id));
         } else {
-            enqueueSnackbar(signinTransl, {
-                variant: 'info',
-                anchorOrigin: {
-                    vertical: 'top',
-                    horizontal: 'center',
-                },
-                TransitionComponent: Slide,
+            dispatch({
+                type: ADD_NOTI,
+                payload: {
+                    id: 'signin_demand',
+                    type: INFO,
+                }
             })
         }
+    }
+    const handleRemoveFavorites = () => {
+        dispatch(removeFromFavorites(props.item._id));
     }
     const addItemToCart = () => {
         dispatch(addToCart(props.item));
@@ -81,10 +86,18 @@ const CardItem = (props) => {
             <CardContent className={classes.cardContent}>
                 <Typography variant='body1' component='p'>{item.title}</Typography>
             </CardContent>
-            <CardActions className={classes.cardActions} onClick={addToFavorites}>
-                <IconButton className={classes.iconButton} aria-label="Add to favorites">
-                    <FavoriteBorderOutlinedIcon className={classes.icon}/>
-                </IconButton>
+            <CardActions className={classes.cardActions}>
+                {
+                    userInfo && isFavorited(userInfo, props.item._id)
+                    ?
+                    <IconButton className={classes.iconButton} aria-label="Remove from favorites" onClick={handleRemoveFavorites}>
+                        <FavoriteIcon color="secondary"/>
+                    </IconButton>
+                    :
+                    <IconButton className={classes.iconButton} aria-label="Add to favorites" onClick={handleAddFavorites}>
+                        <FavoriteBorderOutlinedIcon className={classes.icon}/>
+                    </IconButton>
+                }
                 <IconButton className={classes.iconButton} aria-label="Add to cart" onClick={addItemToCart}>
                     <AddShoppingCartIcon className={classes.icon} />
                 </IconButton>

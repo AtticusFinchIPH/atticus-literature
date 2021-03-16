@@ -9,7 +9,14 @@ const getToken = (user) => {
         lastName: user.lastName,
         nickName: user.nickName,
         email: user.email,
+        address: user.address,
+        city: user.city,
+        state: user.state,
+        country: user.country,
+        phone: user.phone,
         role: user.role,
+        favorites: user.favorites,
+        orders: user.orders,
     }, config.JWT_SECRET, {
         expiresIn: '48h'
     })

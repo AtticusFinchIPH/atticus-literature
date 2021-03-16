@@ -57,7 +57,7 @@ const FormPayment = ({handleBack, handleNext, activeStep}) => {
                     setPaymentProcessing(false);
                     setPaymentError(true);
                 }, 5000)
-                break;
+                return;
             default:
                 return;
         };
