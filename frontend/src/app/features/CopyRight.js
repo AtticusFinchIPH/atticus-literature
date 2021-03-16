@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 const useStyle = makeStyles((theme) => ({
   root: {
     position: 'fixed',
+    zIndex: "999",
     width: '100%', 
     bottom: '0px',
     color: theme.palette.text.main,
@@ -22,7 +23,7 @@ const Copyright = () => {
           AtticusFinchIPH
         </Link>{" "}
         {new Date().getFullYear()}
-        {"."}
+        {" - version 1.0.2"}
       </Typography>
     </div>
   );
