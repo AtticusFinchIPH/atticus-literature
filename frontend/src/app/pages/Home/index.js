@@ -91,7 +91,7 @@ const CardItem = (props) => {
                     userInfo && isFavorited(userInfo, props.item._id)
                     ?
                     <IconButton className={classes.iconButton} aria-label="Remove from favorites" onClick={handleRemoveFavorites}>
-                        <FavoriteIcon className={classes.icon}/>
+                        <FavoriteIcon color="secondary"/>
                     </IconButton>
                     :
                     <IconButton className={classes.iconButton} aria-label="Add to favorites" onClick={handleAddFavorites}>
