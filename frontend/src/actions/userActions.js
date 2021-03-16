@@ -5,8 +5,15 @@ import {
     USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNIN_FAIL, 
     USER_REGISTER_REQUEST, 
     USER_SIGNOUT,
-    CLEAR_USER_SIGNIN_ERRORS, 
+    CLEAR_USER_SIGNIN_ERRORS,
+    USER_ADD_FAVORITE_REQUEST,
+    USER_ADD_FAVORITE_SUCCESS,
+    USER_ADD_FAVORITE_FAIL,
+    USER_REMOVE_FAVORITE_REQUEST,
+    USER_REMOVE_FAVORITE_SUCCESS,
+    USER_REMOVE_FAVORITE_FAIL, 
 } from '../constants/userConstants';
+import { ADD_NOTI, ERROR } from '../constants/globalConstants';
 
 const authConfig = (userInfo) => {
     return {
@@ -19,9 +26,7 @@ const authConfig = (userInfo) => {
 const signin = ({email, password}) => async (dispatch) => {
     dispatch({ type: USER_SIGNIN_REQUEST, payload: { email, password } });
     try {
-        const { data } = await axios.post("/api/users/signin", { email, password });
-        const { _id, firstName, lastName, nickName, isAdmin, email: userEmail, token, } = data;
-        const userInfo = { _id, firstName, lastName, nickName, isAdmin, userEmail, token, };
+        const { data: userInfo } = await axios.post("/api/users/signin", { email, password });
         dispatch({ type: USER_SIGNIN_SUCCESS, payload: userInfo });
         Cookie.set('userInfo', JSON.stringify(userInfo));
     } catch (error) {
@@ -48,4 +53,46 @@ const clearUserSigninErros = () => (dispatch) => {
     dispatch({ type: CLEAR_USER_SIGNIN_ERRORS });
 }
 
-export { signin, register, signout, clearUserSigninErros }
+const addToFavorites = (productId) => async (dispatch, getState) => {
+    const { userSignin: { userInfo } } = getState();
+    dispatch({ type: USER_ADD_FAVORITE_REQUEST });
+    try {
+        const { data } = await axios.post(`/api/users/add_favorite`,
+            { productId },
+            authConfig(userInfo),
+        );
+        dispatch({ type: USER_ADD_FAVORITE_SUCCESS, payload: data });
+        Cookie.set('userInfo', JSON.stringify(data));
+    } catch (error) {
+        dispatch({ type: USER_ADD_FAVORITE_FAIL });
+        dispatch({
+            type: ADD_NOTI, payload: {
+                id: error.response?.data?.error,
+                type: ERROR,
+            }
+        })
+    }
+}
+
+const removeFromFavorites = (productId) => async (dispatch, getState) => {
+    const { userSignin: { userInfo } } = getState();
+    dispatch({ type: USER_REMOVE_FAVORITE_REQUEST });
+    try {
+        const { data } = await axios.post(`/api/users/remove_favorite`,
+            { productId },
+            authConfig(userInfo),
+        );
+        dispatch({ type: USER_REMOVE_FAVORITE_SUCCESS, payload: data });
+        Cookie.set('userInfo', JSON.stringify(data));
+    } catch (error) {
+        dispatch({ type: USER_REMOVE_FAVORITE_FAIL });
+        dispatch({
+            type: ADD_NOTI, payload: {
+                id: error.response?.data?.error,
+                type: ERROR,
+            }
+        })
+    }
+}
+
+export { signin, register, signout, clearUserSigninErros, addToFavorites, removeFromFavorites }

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { useIntl } from 'react-intl';
 import { Slide } from '@material-ui/core';
-import { ERROR, INFO, REMOVE_ERRORS, SUCCESS, WARNING } from '../../constants/globalConstants';
+import { ERROR, INFO, REMOVE_NOTIS, SUCCESS, WARNING } from '../../constants/globalConstants';
 
 const Notification = () => {
     const dispatch = useDispatch();
@@ -33,7 +33,7 @@ const Notification = () => {
                 })
             })
             dispatch({
-                type: REMOVE_ERRORS
+                type: REMOVE_NOTIS
             })
         }
     }, [notis])

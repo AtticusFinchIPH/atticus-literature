@@ -21,18 +21,24 @@ import authorAvatar from '../../../images/author-avatar.jpg';
 
 import CartOpenContext from '../../../contexts/CartOpenContext';
 import { addToCart, getBestsellers, getRecommendeds } from '../../../actions/productActions';
-import { ADD_ERROR, INFO } from '../../../constants/globalConstants';
+import { ADD_NOTI, INFO } from '../../../constants/globalConstants';
+import { addToFavorites, removeFromFavorites } from '../../../actions/userActions';
 
 const CARD_ITEM_HEIGHT = '450px';
 const CARD_ITEM_WIDTH = '200px';
 
+const isFavorited = (userInfo, productId) => {
+    const { favorites } = userInfo;
+    return favorites?.length > 0 && favorites.findIndex(favorite => favorite === productId) > -1;
+}
+
 const CardItem = (props) => {
     const classes = useStyle();
     const history = useHistory();
+    const dispatch = useDispatch();
     const [isShown, setIsShown] = useState(false);
     const { setCartOpen } = useContext(CartOpenContext);
     const { userInfo } = useSelector(state => state.userSignin);
-    const dispatch = useDispatch();
     const item = props.item;
     let priceDeclare;
     switch (item.currency) {
@@ -49,18 +55,21 @@ const CardItem = (props) => {
     const redirect = () => {
         history.push(`/product/${item._id}`);
     }
-    const addToFavorites = () => {
+    const handleAddFavorites = () => {
         if (userInfo) {
-            
+            dispatch(addToFavorites(props.item._id));
         } else {
             dispatch({
-                type: ADD_ERROR,
+                type: ADD_NOTI,
                 payload: {
                     id: 'signin_demand',
                     type: INFO,
                 }
             })
         }
+    }
+    const handleRemoveFavorites = () => {
+        dispatch(removeFromFavorites(props.item._id));
     }
     const addItemToCart = () => {
         dispatch(addToCart(props.item));
@@ -78,9 +87,17 @@ const CardItem = (props) => {
                 <Typography variant='body1' component='p'>{item.title}</Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
-                <IconButton className={classes.iconButton} aria-label="Add to favorites" onClick={addToFavorites}>
-                    <FavoriteBorderOutlinedIcon className={classes.icon}/>
-                </IconButton>
+                {
+                    userInfo && isFavorited(userInfo, props.item._id)
+                    ?
+                    <IconButton className={classes.iconButton} aria-label="Remove from favorites" onClick={handleRemoveFavorites}>
+                        <FavoriteIcon className={classes.icon}/>
+                    </IconButton>
+                    :
+                    <IconButton className={classes.iconButton} aria-label="Add to favorites" onClick={handleAddFavorites}>
+                        <FavoriteBorderOutlinedIcon className={classes.icon}/>
+                    </IconButton>
+                }
                 <IconButton className={classes.iconButton} aria-label="Add to cart" onClick={addItemToCart}>
                     <AddShoppingCartIcon className={classes.icon} />
                 </IconButton>

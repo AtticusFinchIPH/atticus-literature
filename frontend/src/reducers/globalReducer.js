@@ -1,5 +1,5 @@
 import { 
-    SWITCH_LANGUAGE, APPLY_VI, APPLY_EN, ADD_ERROR, REMOVE_ERRORS,
+    SWITCH_LANGUAGE, APPLY_VI, APPLY_EN, ADD_NOTI, REMOVE_NOTIS,
 } from '../constants/globalConstants';
 
 const langReducer = (state = 'en', action) => {
@@ -17,9 +17,9 @@ const langReducer = (state = 'en', action) => {
 
 const notisReducer = (state = [], action) => {
     switch (action.type) {
-        case ADD_ERROR:
+        case ADD_NOTI:
             return [...state, action.payload];
-        case REMOVE_ERRORS:
+        case REMOVE_NOTIS:
             return [];    
         default:
             return state;
