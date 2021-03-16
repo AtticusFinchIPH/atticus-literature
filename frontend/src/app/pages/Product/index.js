@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { Button, Container, Typography, TextField, IconButton, Collapse, Box } from '@material-ui/core';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import MinusIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
@@ -11,6 +12,8 @@ import Rating from '@material-ui/lab/Rating';
 import useStyle from './styles';
 import CartOpenContext from '../../../contexts/CartOpenContext';
 import { addMultipleToCart, getItemDetail } from '../../../actions/productActions';
+import { addToFavorites, removeFromFavorites } from '../../../actions/userActions';
+import { ADD_NOTI, INFO } from '../../../constants/globalConstants';
 
 const MINUS_INTRO_ICON = 'MINUS_INTRO_ICON';
 const MINUS_SHIPPING_ICON = 'MINUS_SHIPPING_ICON';
@@ -18,6 +21,11 @@ const MINUS_POLICY_ICON = 'MINUS_POLICY_ICON';
 const ADD_INTRO_ICON = 'ADD_INTRO_ICON';
 const ADD_SHIPPING_ICON = 'ADD_SHIPPING_ICON';
 const ADD_POLICY_ICON = 'ADD_POLICY_ICON';
+
+const isFavorited = (userInfo, productId) => {
+    const { favorites } = userInfo;
+    return favorites?.length > 0 && favorites.findIndex(favorite => favorite === productId) > -1;
+}
 
 const Product = () => {
     const classes = useStyle();
@@ -28,6 +36,7 @@ const Product = () => {
     const [expandedShipping, setExpandedShipping] = useState(false);
     const [expandedPolicy, setExpandedPolicy] = useState(false);
     const { setCartOpen } = useContext(CartOpenContext);
+    const { userInfo } = useSelector(state => state.userSignin);
     const viewingProduct = useSelector(state => state.viewingProduct);
     const { product, error } = viewingProduct;
     let priceDeclare;
@@ -43,6 +52,22 @@ const Product = () => {
                 priceDeclare = `$ ${product.price}`;
                 break;
         }
+    }
+    const handleAddFavorites = () => {
+        if (userInfo) {
+            dispatch(addToFavorites(product._id));
+        } else {
+            dispatch({
+                type: ADD_NOTI,
+                payload: {
+                    id: 'signin_demand',
+                    type: INFO,
+                }
+            })
+        }
+    }
+    const handleRemoveFavorites = () => {
+        dispatch(removeFromFavorites(product._id));
     }
     const addQuantity = (e) => {
         const newQuantity = e.target.value;
@@ -99,9 +124,17 @@ const Product = () => {
                 <Container className={classes.container} maxWidth='md'>
                     <div className={classes.gridImage}>
                         <img src={product.image} alt={product.title} className={classes.productImage}/>
-                        <IconButton className={classes.favoriteButton} aria-label="Add to favorites">
-                            <FavoriteBorderOutlinedIcon className={classes.icon}/>
-                        </IconButton>
+                        {
+                            userInfo && isFavorited(userInfo, product._id)
+                            ?
+                            <IconButton className={classes.favoriteButton} aria-label="Remove from favorites" onClick={handleRemoveFavorites}>
+                                <FavoriteIcon color="secondary"/>
+                            </IconButton>
+                            :
+                            <IconButton className={classes.favoriteButton} aria-label="Add to favorites" onClick={handleAddFavorites}>
+                                <FavoriteBorderOutlinedIcon className={classes.icon}/>
+                            </IconButton>
+                        }
                     </div>
                     <div className={classes.mainInfo}>
                         <div className={classes.mainInfoTitle}>
