@@ -23,6 +23,7 @@ import AboutUS from './pages/AboutUs';
 import PageNotFound from './pages/PageNotFound';
 import UnderConstruction from "./pages/UnderConstruction";
 import AuthPopup from './features/AuthPopup';
+import Notification from './features/Notification';
 
 function App() {
   const language = useSelector(state => state.language);
@@ -49,6 +50,7 @@ function App() {
             <CartBar />
             <RedirectBar />
             <AuthPopup /> 
+            <Notification />
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/product/:id" component={Product} />

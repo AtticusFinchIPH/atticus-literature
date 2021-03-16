@@ -1,7 +1,7 @@
 import { combineReducers, createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import Cookie from 'js-cookie';
-import { langReducer } from './reducers/globalReducer';
+import { langReducer, notisReducer } from './reducers/globalReducer';
 import { bestsellersReducer, bookGenresReducer, cartReducer, recommendedsReducer, storeReducer, viewingProductReducer } from './reducers/productReducers';
 import { orderFormShippingReducer, shippingAddressReducer } from './reducers/orderReducers';
 import { userSigninReducer } from './reducers/userReducers';
@@ -21,6 +21,7 @@ const initialState = {
     shippingAddress: shippingAddressObj,
     orderFormShipping: {},
     userSignin: { userInfo },
+    notis: [],
 };
 
 const reducer = combineReducers({
@@ -34,6 +35,7 @@ const reducer = combineReducers({
     shippingAddress: shippingAddressReducer,
     orderFormShipping: orderFormShippingReducer,
     userSignin: userSigninReducer,
+    notis: notisReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

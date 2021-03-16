@@ -2,9 +2,8 @@ import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import Swiper from 'react-id-swiper';
-import { useSnackbar } from 'notistack';
 import clsx from 'clsx';
 import { 
     Box, Container, Hidden, Paper, Typography, IconButton, Avatar,
@@ -22,6 +21,7 @@ import authorAvatar from '../../../images/author-avatar.jpg';
 
 import CartOpenContext from '../../../contexts/CartOpenContext';
 import { addToCart, getBestsellers, getRecommendeds } from '../../../actions/productActions';
+import { ADD_ERROR, INFO } from '../../../constants/globalConstants';
 
 const CARD_ITEM_HEIGHT = '450px';
 const CARD_ITEM_WIDTH = '200px';
@@ -29,9 +29,6 @@ const CARD_ITEM_WIDTH = '200px';
 const CardItem = (props) => {
     const classes = useStyle();
     const history = useHistory();
-    const intl = useIntl();
-    const signinTransl = intl.formatMessage({ id: 'signin_demand', defaultMessage: "Please sign in to use this functionality" });
-    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
     const [isShown, setIsShown] = useState(false);
     const { setCartOpen } = useContext(CartOpenContext);
     const { userInfo } = useSelector(state => state.userSignin);
@@ -54,15 +51,14 @@ const CardItem = (props) => {
     }
     const addToFavorites = () => {
         if (userInfo) {
-
+            
         } else {
-            enqueueSnackbar(signinTransl, {
-                variant: 'info',
-                anchorOrigin: {
-                    vertical: 'top',
-                    horizontal: 'center',
-                },
-                TransitionComponent: Slide,
+            dispatch({
+                type: ADD_ERROR,
+                payload: {
+                    id: 'signin_demand',
+                    type: INFO,
+                }
             })
         }
     }
