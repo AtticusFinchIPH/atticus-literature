@@ -75,7 +75,9 @@ Fixed last version issues & new features:
 - Build Notification feature.
 - Click issue showing sign in demand on "add to cart" button in Landing page.
 - Handle favorite in Lading, Bookstore, Product page when user sign in existed.
-- Fix FormPayment auto complete order.
+- Fix FormPayment auto complete order.<br>
+
+For more details, check on [Versions Manager](https://github.com/AtticusFinchIPH/atticus-literature/projects/2)
 
 ## Screenshots &#128248;
 ### Landing Page ###
@@ -104,4 +106,6 @@ In up comming version (or sub-version, 1.0.3), we will focus on dealing with the
 - Apply userInfo in Checkout, OrderProcess
 - Stories page
 - Use Github Action for CI/CD
-- Use Github Project for planning next features
+- Use Github Project for planning next features<br>
+
+For more details, check on [Tasks Manager](https://github.com/AtticusFinchIPH/atticus-literature/projects/1)
