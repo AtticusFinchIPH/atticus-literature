@@ -86,6 +86,7 @@ const en = defineMessages({
     Thank you so much!`,
     images_license: 'Images License',
     images_license_detail: 'Project uses free license images from: ',
+    page_creators: "Website's creator(s)",
 
     cart_ask_signin_title: 'Do you want to sign in/sign up first?',
     cart_ask_signin_text: 'Sign in to make your purchase process faster, making it easier to track and manage orders more proficiently.',
