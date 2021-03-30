@@ -77,6 +77,8 @@ Fixed last version issues & new features:
 - Reduce images size
 - Translate author in About Us
 
+For more details, check on [Versions Manager](https://github.com/AtticusFinchIPH/atticus-literature/projects/2)
+
 ## Screenshots &#128248;
 ### Landing Page ###
 ![al-home](https://user-images.githubusercontent.com/45216222/110588413-47c23a00-8175-11eb-9849-c43fe3b35d73.png)
@@ -104,3 +106,5 @@ In up comming version (or sub-version, 1.0.4), we will focus on dealing with the
 - Apply userInfo in Checkout, OrderProcess
 - Stories page
 - Use Github Action for CI/CD
+
+For more details, check on [Tasks Manager](https://github.com/AtticusFinchIPH/atticus-literature/projects/1)
