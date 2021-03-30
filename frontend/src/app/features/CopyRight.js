@@ -23,7 +23,7 @@ const Copyright = () => {
           AtticusFinchIPH
         </Link>{" "}
         {new Date().getFullYear()}
-        {" - version 1.0.2"}
+        {" - version 1.0.3"}
       </Typography>
     </div>
   );
