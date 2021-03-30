@@ -25,14 +25,14 @@ cd backend && npm install
 ```bash
 cd frontend && npm install
 ```
-3. Create a `.env` file in the 'backend' folder and copy the format of `.env.sample` file.
-- `.env.sample` file contains all the environment variables required for running the project.  
+3. Create a `.env` file in the 'backend' folder and copy the format of `.env.sample` file.  
+`.env.sample` file contains all the environment variables required for running the project.  
 
 4. In case you have [Concurrently](https://www.npmjs.com/package/concurrently) running in your system, start the react and node server together by running the following command:
 ```bash
 npm start
 ```
-If not, you can start node server first and then react by running the following commands in separate prompts:**
+If not, you can start node server first and then react by running the following commands in separate prompts:
 ```bash
 cd backend && npm start
 ```
@@ -51,6 +51,7 @@ docker-compose up
 ## Tech Stack &#128640;
 ### Frontend
 - [React.js](https://reactjs.org/)
+- [Redux](https://redux.js.org/)
 - [Material UI](https://material-ui.com/)
 ### Backend
 - [Node.js](https://nodejs.org/en/)
@@ -62,7 +63,7 @@ docker-compose up
 - [Stripe](https://stripe.com/)
 
 ## Current Version &#128293;
-In this version (1.0.2), we are able to access these features:
+In this version (1.0.3), we are able to access these features:
 - Landing page
 - Bookstore page
 - About Us page
@@ -72,12 +73,9 @@ In this version (1.0.2), we are able to access these features:
 - User Sign In, Sign up, Sign out<br>
 
 Fixed last version issues & new features:
-- Build Notification feature.
-- Click issue showing sign in demand on "add to cart" button in Landing page.
-- Handle favorite in Lading, Bookstore, Product page when user sign in existed.
-- Fix FormPayment auto complete order.<br>
-
-For more details, check on [Versions Manager](https://github.com/AtticusFinchIPH/atticus-literature/projects/2)
+- Use Github Project for planning next features
+- Reduce images size
+- Translate author in About Us
 
 ## Screenshots &#128248;
 ### Landing Page ###
@@ -101,11 +99,8 @@ For more details, check on [Versions Manager](https://github.com/AtticusFinchIPH
 
 
 ## What's Next? &#127993;
-In up comming version (or sub-version, 1.0.3), we will focus on dealing with these issues:
+In up comming version (or sub-version, 1.0.4), we will focus on dealing with these issues:
 - Order review for login user
 - Apply userInfo in Checkout, OrderProcess
 - Stories page
 - Use Github Action for CI/CD
-- Use Github Project for planning next features<br>
-
-For more details, check on [Tasks Manager](https://github.com/AtticusFinchIPH/atticus-literature/projects/1)
